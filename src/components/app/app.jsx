@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
-import Main from "../main/main";
+import React, {Component} from "react";
+import PropTypes from "prop-types";
+import Main from '../main/main';
 
 class App extends Component {
   constructor(props) {
@@ -8,13 +9,22 @@ class App extends Component {
   }
 
   render() {
-    // eslint-disable-next-line react/prop-types
-    const {promoMovieData} = this.props;
+    const {promoMovieData, movieTitles} = this.props;
 
     return (
-      <Main promoMovieData={promoMovieData}/>
+      <Main promoMovieData={promoMovieData} movieTitles={movieTitles}/>
     );
   }
 }
+
+App.propTypes = {
+  promoMovieData:
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      genre: PropTypes.string.isRequired,
+      year: PropTypes.number.isRequired,
+    }),
+  movieTitles: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default App;
