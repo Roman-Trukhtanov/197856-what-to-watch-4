@@ -6,13 +6,22 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.props = props;
+    this.onMovieCardTitleClick = this.onMovieCardTitleClick.bind(this);
+  }
+
+  onMovieCardTitleClick(evt) {
+    evt.preventDefault();
   }
 
   render() {
     const {promoMovieData, movieTitles} = this.props;
 
     return (
-      <Main promoMovieData={promoMovieData} movieTitles={movieTitles}/>
+      <Main
+        promoMovieData={promoMovieData}
+        movieTitles={movieTitles}
+        onMovieCardTitleClick={this.onMovieCardTitleClick}
+      />
     );
   }
 }
