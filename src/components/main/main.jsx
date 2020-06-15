@@ -10,6 +10,7 @@ class Main extends Component {
   render() {
     const {title, genre, year} = this.props.promoMovieData;
     const movieTitles = this.props.movieTitles;
+    const onMovieCardTitleClick = this.props.onMovieCardTitleClick;
 
     return (
       <React.Fragment>
@@ -115,7 +116,7 @@ class Main extends Component {
                         alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
                     </div>
                     <h3 className="small-movie-card__title">
-                      <a className="small-movie-card__link" href="movie-page.html">{movieTitle}</a>
+                      <a className="small-movie-card__link" href="movie-page.html" onClick={onMovieCardTitleClick}>{movieTitle}</a>
                     </h3>
                   </article>
                 );
@@ -154,6 +155,7 @@ Main.propTypes = {
       year: PropTypes.number.isRequired,
     }),
   movieTitles: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onMovieCardTitleClick: PropTypes.func.isRequired,
 };
 
 export default Main;
