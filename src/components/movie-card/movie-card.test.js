@@ -1,12 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
-
-const promoMovie = {
-  title: `The Grand Budapest Hotel`,
-  genre: `drama`,
-  year: 2014
-};
+import MovieCard from "./movie-card";
 
 const movieMock = [
   {
@@ -16,12 +10,14 @@ const movieMock = [
   },
 ];
 
-describe(`App component`, () => {
-  it(`Render App`, () => {
+describe(`MovieCard component`, () => {
+  it(`Render MovieCard`, () => {
     const tree = renderer
-      .create(<App
-        promoMovieData={promoMovie}
-        movies={movieMock}
+      .create(<MovieCard
+        movie={movieMock}
+        onMovieCardTitleClick={() => {}}
+        onMouseEnter={() => {}}
+        onMouseLeave={() => {}}
       />)
       .toJSON();
 

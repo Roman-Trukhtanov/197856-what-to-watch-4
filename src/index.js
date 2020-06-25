@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from "./components/app/app";
-import {
-  promoMovie,
-  movieTitles,
-} from "./data";
+import promoMovie from "./mocks/promo-movie";
+import movies from './mocks/movies';
 
 const rootElement = document.querySelector(`#root`);
 
 const init = () => {
   ReactDOM.render(
-      <App promoMovieData={promoMovie} movieTitles={movieTitles}/>,
+      <App
+        promoMovieData={promoMovie}
+        movies={movies}
+      />,
       rootElement
   );
 };

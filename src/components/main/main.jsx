@@ -1,7 +1,8 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import MovieList from "../movie-list/movie-list";
 
-class Main extends Component {
+class Main extends PureComponent {
   constructor(props) {
     super(props);
     this.props = props;
@@ -9,7 +10,7 @@ class Main extends Component {
 
   render() {
     const {title, genre, year} = this.props.promoMovieData;
-    const movieTitles = this.props.movieTitles;
+    const movies = this.props.movies;
     const onMovieCardTitleClick = this.props.onMovieCardTitleClick;
 
     return (
@@ -107,21 +108,10 @@ class Main extends Component {
               </li>
             </ul>
 
-            <div className="catalog__movies-list">
-              {movieTitles.map((movieTitle, index) => {
-                return (
-                  <article key={`movie_${index}`} className="small-movie-card catalog__movies-card">
-                    <div className="small-movie-card__image">
-                      <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                        alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
-                    </div>
-                    <h3 className="small-movie-card__title">
-                      <a className="small-movie-card__link" href="movie-page.html" onClick={onMovieCardTitleClick}>{movieTitle}</a>
-                    </h3>
-                  </article>
-                );
-              })}
-            </div>
+            <MovieList
+              movies={movies}
+              onMovieCardTitleClick={onMovieCardTitleClick}
+            />
 
             <div className="catalog__more">
               <button className="catalog__button" type="button">Show more</button>
@@ -154,7 +144,7 @@ Main.propTypes = {
       genre: PropTypes.string.isRequired,
       year: PropTypes.number.isRequired,
     }),
-  movieTitles: PropTypes.arrayOf(PropTypes.string).isRequired,
+  movies: PropTypes.array.isRequired,
   onMovieCardTitleClick: PropTypes.func.isRequired,
 };
 

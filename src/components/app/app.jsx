@@ -1,26 +1,29 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import Main from '../main/main';
 
-class App extends Component {
+class App extends PureComponent {
   constructor(props) {
     super(props);
     this.props = props;
-    this.onMovieCardTitleClick = this.onMovieCardTitleClick.bind(this);
+    this._handleMovieCardTitleClick = this._handleMovieCardTitleClick.bind(this);
   }
 
-  onMovieCardTitleClick(evt) {
+  _handleMovieCardTitleClick(evt) {
     evt.preventDefault();
   }
 
   render() {
-    const {promoMovieData, movieTitles} = this.props;
+    const {
+      promoMovieData,
+      movies
+    } = this.props;
 
     return (
       <Main
         promoMovieData={promoMovieData}
-        movieTitles={movieTitles}
-        onMovieCardTitleClick={this.onMovieCardTitleClick}
+        movies={movies}
+        onMovieCardTitleClick={this._handleMovieCardTitleClick}
       />
     );
   }
@@ -33,7 +36,7 @@ App.propTypes = {
       genre: PropTypes.string.isRequired,
       year: PropTypes.number.isRequired,
     }),
-  movieTitles: PropTypes.arrayOf(PropTypes.string).isRequired,
+  movies: PropTypes.array.isRequired,
 };
 
 export default App;
