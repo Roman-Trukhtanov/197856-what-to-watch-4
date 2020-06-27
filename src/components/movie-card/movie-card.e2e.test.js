@@ -2,16 +2,13 @@ import React from "react";
 import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import MovieCard from "./movie-card";
+import movies from "../../mocks/movies";
 
 configure({
   adapter: new Adapter(),
 });
 
-const moviesMock = {
-  id: 0,
-  title: `Кремниевая долина`,
-  preview: `http://placeimg.com/280/175/any`,
-};
+const movieMock = movies[0];
 
 const mockEvent = {
   preventDefault() {}
@@ -23,15 +20,9 @@ describe(`MovieCard component`, () => {
     const onMouseEnter = jest.fn();
     const onMouseLeave = jest.fn();
 
-    const movie = {
-      id: 0,
-      title: `Кремниевая долина`,
-      preview: `http://placeimg.com/280/175/any`,
-    };
-
     const MovieCardItem = shallow(
         <MovieCard
-          movie={moviesMock}
+          movie={movieMock}
           onMovieCardTitleClick={onMovieCardTitleClick}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
@@ -51,7 +42,7 @@ describe(`MovieCard component`, () => {
 
     expect(onMouseEnter).toHaveBeenCalledTimes(1);
 
-    expect(onMouseEnter.mock.calls[0][0]).toMatchObject(movie);
+    expect(onMouseEnter.mock.calls[0][0]).toMatchObject(movieMock);
 
     expect(onMouseLeave).toHaveBeenCalledTimes(1);
   });
