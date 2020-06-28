@@ -11,6 +11,7 @@ exports[`MovieList component Render MovieList 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="Кремниевая долина"
@@ -38,6 +39,7 @@ exports[`MovieList component Render MovieList 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="Форсаж"
@@ -65,6 +67,7 @@ exports[`MovieList component Render MovieList 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="Жажда скорости"
@@ -92,6 +95,7 @@ exports[`MovieList component Render MovieList 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="Гарри Поттер"
@@ -119,6 +123,7 @@ exports[`MovieList component Render MovieList 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="Спецназ"
@@ -146,6 +151,7 @@ exports[`MovieList component Render MovieList 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="Игра престолов"
@@ -173,6 +179,7 @@ exports[`MovieList component Render MovieList 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="Стрела"
@@ -200,6 +207,7 @@ exports[`MovieList component Render MovieList 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="Флэш"

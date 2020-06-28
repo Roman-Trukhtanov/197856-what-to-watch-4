@@ -30,10 +30,12 @@ describe(`MovieCard component`, () => {
     );
 
     const cardLink = MovieCardItem.find(`.small-movie-card__link`);
+    const cardImageWrap = MovieCardItem.find(`.small-movie-card__image`);
 
     cardLink.props().onClick();
+    cardImageWrap.props().onClick();
 
-    expect(onMovieCardTitleClick.mock.calls.length).toBe(1);
+    expect(onMovieCardTitleClick.mock.calls.length).toBe(2);
 
     const cardItem = MovieCardItem.find(`.small-movie-card`);
 

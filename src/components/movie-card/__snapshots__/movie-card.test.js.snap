@@ -8,9 +8,12 @@ exports[`MovieCard component Render MovieCard 1`] = `
 >
   <div
     className="small-movie-card__image"
+    onClick={[Function]}
   >
     <img
+      alt="Кремниевая долина"
       height="175"
+      src="http://placeimg.com/280/175/any"
       width="280"
     />
   </div>
@@ -21,7 +24,9 @@ exports[`MovieCard component Render MovieCard 1`] = `
       className="small-movie-card__link"
       href="movie-page.html"
       onClick={[Function]}
-    />
+    >
+      Кремниевая долина
+    </a>
   </h3>
 </article>
 `;
