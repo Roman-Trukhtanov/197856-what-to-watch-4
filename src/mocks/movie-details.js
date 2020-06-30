@@ -1,5 +1,5 @@
-export const movieInfo = {
-  0: {
+export const movieInfo = [
+  {
     id: 0,
     title: `The Grand Budapest Hotel`,
     genre: `drama`,
@@ -7,10 +7,10 @@ export const movieInfo = {
     coverSrc: `/img/bg-the-grand-budapest-hotel.jpg`,
     bigPosterSrc: `img/the-grand-budapest-hotel-poster.jpg`,
   }
-};
+];
 
-export const movieOverview = {
-  0: {
+export const movieOverview = [
+  {
     id: 0,
     score: 8.9,
     level: `Very good`,
@@ -22,4 +22,4 @@ export const movieOverview = {
     director: `Wes Andreson`,
     starring: `Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other`,
   }
-};
+];

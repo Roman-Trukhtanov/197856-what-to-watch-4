@@ -90,8 +90,8 @@ App.propTypes = {
       year: PropTypes.number.isRequired,
     }),
   movies: PropTypes.array.isRequired,
-  movieInfo: PropTypes.object.isRequired,
-  movieOverview: PropTypes.object.isRequired,
+  movieInfo: PropTypes.arrayOf(PropTypes.object).isRequired,
+  movieOverview: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default App;
