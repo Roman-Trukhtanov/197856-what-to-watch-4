@@ -51,6 +51,10 @@ describe(`MovieList component`, () => {
       .create(<MovieList
         movies={moviesMock}
         onMovieCardTitleClick={() => {}}
+        activePlayerId={0}
+        renderVideo={() => {}}
+        onMouseEnter={() => {}}
+        onMouseLeave={() => {}}
       />)
       .toJSON();
 
