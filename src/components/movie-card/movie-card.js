@@ -17,7 +17,7 @@ const MovieCard = (props) => {
       }}
       onMouseLeave={onMouseLeave}
     >
-      <div className="small-movie-card__image">
+      <div className="small-movie-card__image" onClick={onMovieCardTitleClick}>
         <img src={movie.preview}
           alt={movie.title} width="280" height="175"/>
       </div>

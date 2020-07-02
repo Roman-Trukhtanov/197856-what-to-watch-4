@@ -14,7 +14,7 @@ describe(`MovieCard component`, () => {
   it(`Render MovieCard`, () => {
     const tree = renderer
       .create(<MovieCard
-        movie={movieMock}
+        movie={movieMock[0]}
         onMovieCardTitleClick={() => {}}
         onMouseEnter={() => {}}
         onMouseLeave={() => {}}
