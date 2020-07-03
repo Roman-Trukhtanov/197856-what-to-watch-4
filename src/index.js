@@ -3,7 +3,12 @@ import ReactDOM from 'react-dom';
 import App from "./components/app/app";
 import promoMovie from "./mocks/promo-movie";
 import movies from './mocks/movies';
-import {movieInfo, movieOverview} from "./mocks/movie-details";
+import {
+  movieInfo,
+  moviesOverview,
+  moviesDetails,
+  moviesComments
+} from "./mocks/movies-data";
 
 const rootElement = document.querySelector(`#root`);
 
@@ -13,7 +18,9 @@ const init = () => {
         promoMovieData={promoMovie}
         movies={movies}
         movieInfo={movieInfo}
-        movieOverview={movieOverview}
+        moviesOverview={moviesOverview}
+        moviesDetails={moviesDetails}
+        moviesComments={moviesComments}
       />,
       rootElement
   );
