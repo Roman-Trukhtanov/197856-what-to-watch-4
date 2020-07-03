@@ -147,7 +147,7 @@ Main.propTypes = {
       genre: PropTypes.string.isRequired,
       year: PropTypes.number.isRequired,
     }),
-  movies: PropTypes.array.isRequired,
+  movies: PropTypes.arrayOf(PropTypes.object).isRequired,
   onMovieCardTitleClick: PropTypes.func.isRequired,
 };
 

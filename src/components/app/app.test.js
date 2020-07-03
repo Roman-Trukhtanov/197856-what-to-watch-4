@@ -1,7 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import App from "./app.jsx";
-import {movieInfo, movieOverview} from "../../mocks/movie-details";
+import {
+  movieInfo,
+  moviesOverview,
+  moviesDetails,
+  moviesComments
+} from "../../mocks/movies-data";
 
 const promoMovie = {
   title: `The Grand Budapest Hotel`,
@@ -24,7 +29,9 @@ describe(`App component`, () => {
         promoMovieData={promoMovie}
         movies={movieMock}
         movieInfo={movieInfo}
-        movieOverview={movieOverview}
+        moviesOverview={moviesOverview}
+        moviesDetails={moviesDetails}
+        moviesComments={moviesComments}
       />)
       .toJSON();
 

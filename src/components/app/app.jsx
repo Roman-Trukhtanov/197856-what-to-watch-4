@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import Main from '../main/main';
 import MovieScreen from "../movie-screen/movie-screen";
 import {ScreenType} from "../../data";
+import {GenreType} from "../../mocks/movies";
+
+const MAX_FILTERED_MOVIES = 4;
 
 class App extends PureComponent {
   constructor(props) {
@@ -28,13 +31,19 @@ class App extends PureComponent {
     this._changeScreen(ScreenType.MOVIE);
   }
 
+  _getFilteredMovies(movies, genre) {
+    return movies.filter((movie) => movie.genre === genre).slice(0, MAX_FILTERED_MOVIES);
+  }
+
   _renderScreen() {
     const {screen} = this.state;
     const {
       promoMovieData,
       movies,
       movieInfo,
-      movieOverview,
+      moviesOverview,
+      moviesDetails,
+      moviesComments,
     } = this.props;
 
     switch (screen) {
@@ -49,8 +58,12 @@ class App extends PureComponent {
       case ScreenType.MOVIE:
         return (
           <MovieScreen
+            movies={this._getFilteredMovies(movies, GenreType.THRILLER)}
             movieInfo={movieInfo[0]}
-            movieOverview={movieOverview[0]}
+            movieOverview={moviesOverview[0]}
+            movieDetails={moviesDetails[0]}
+            movieComments={moviesComments[0]}
+            onMovieCardTitleClick={this._handleMovieCardTitleClick}
           />
         );
     }
@@ -60,8 +73,11 @@ class App extends PureComponent {
 
   render() {
     const {
+      movies,
       movieInfo,
-      movieOverview,
+      moviesOverview,
+      moviesDetails,
+      moviesComments,
     } = this.props;
 
     return (
@@ -72,8 +88,12 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-component">
             <MovieScreen
+              movies={this._getFilteredMovies(movies, GenreType.FANTASY)}
               movieInfo={movieInfo[0]}
-              movieOverview={movieOverview[0]}
+              movieOverview={moviesOverview[0]}
+              movieDetails={moviesDetails[0]}
+              movieComments={moviesComments[0]}
+              onMovieCardTitleClick={this._handleMovieCardTitleClick}
             />
           </Route>
         </Switch>
@@ -91,7 +111,9 @@ App.propTypes = {
     }),
   movies: PropTypes.array.isRequired,
   movieInfo: PropTypes.arrayOf(PropTypes.object).isRequired,
-  movieOverview: PropTypes.arrayOf(PropTypes.object).isRequired,
+  moviesOverview: PropTypes.arrayOf(PropTypes.object).isRequired,
+  moviesDetails: PropTypes.arrayOf(PropTypes.object).isRequired,
+  moviesComments: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default App;
