@@ -19,6 +19,8 @@ describe(`MovieCard component`, () => {
     const onMovieCardTitleClick = jest.fn();
     const onMouseEnter = jest.fn();
     const onMouseLeave = jest.fn();
+    const renderVideo = jest.fn();
+    const activePlayerId = movieMock.id;
 
     const MovieCardItem = shallow(
         <MovieCard
@@ -26,6 +28,8 @@ describe(`MovieCard component`, () => {
           onMovieCardTitleClick={onMovieCardTitleClick}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
+          activePlayerId={activePlayerId}
+          renderVideo={renderVideo}
         />
     );
 
@@ -47,5 +51,7 @@ describe(`MovieCard component`, () => {
     expect(onMouseEnter.mock.calls[0][0]).toMatchObject(movieMock);
 
     expect(onMouseLeave).toHaveBeenCalledTimes(1);
+
+    expect(renderVideo).toHaveBeenCalledTimes(1);
   });
 });

@@ -18,6 +18,8 @@ describe(`MovieCard component`, () => {
         onMovieCardTitleClick={() => {}}
         onMouseEnter={() => {}}
         onMouseLeave={() => {}}
+        renderVideo={() => {}}
+        activePlayerId={0}
       />)
       .toJSON();
 

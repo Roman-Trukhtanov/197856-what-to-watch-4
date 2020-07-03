@@ -1,6 +1,9 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import MovieList from "../movie-list/movie-list";
+import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
+
+const MovieListWrapped = withVideoPlayer(MovieList);
 
 class Main extends PureComponent {
   constructor(props) {
@@ -108,7 +111,7 @@ class Main extends PureComponent {
               </li>
             </ul>
 
-            <MovieList
+            <MovieListWrapped
               movies={movies}
               onMovieCardTitleClick={onMovieCardTitleClick}
             />
