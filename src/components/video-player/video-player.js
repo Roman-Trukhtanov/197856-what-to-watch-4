@@ -89,7 +89,7 @@ class VideoPlayer extends PureComponent {
         style={this._getVideoStyles()}
         ref={this._videoRef}
       >
-        <source src={videoSrc} type={videoType}/>
+        <source src={videoSrc} type={videoType ? videoType : `video/mp4`}/>
       </video>
     );
   }

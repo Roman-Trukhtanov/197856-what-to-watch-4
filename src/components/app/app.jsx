@@ -1,10 +1,12 @@
 import React, {PureComponent} from "react";
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import Main from '../main/main';
 import MovieScreen from "../movie-screen/movie-screen";
-import {ScreenType} from "../../data";
+import {ScreenType} from "../../mocks/data";
 import {GenreType} from "../../mocks/movies";
+import {getFilteredMovies, getGenresList} from "../../utils";
 
 const MAX_FILTERED_MOVIES = 4;
 
@@ -31,10 +33,6 @@ class App extends PureComponent {
     this._changeScreen(ScreenType.MOVIE);
   }
 
-  _getFilteredMovies(movies, genre) {
-    return movies.filter((movie) => movie.genre === genre).slice(0, MAX_FILTERED_MOVIES);
-  }
-
   _renderScreen() {
     const {screen} = this.state;
     const {
@@ -44,6 +42,7 @@ class App extends PureComponent {
       moviesOverview,
       moviesDetails,
       moviesComments,
+      filteredMovies,
     } = this.props;
 
     switch (screen) {
@@ -51,14 +50,15 @@ class App extends PureComponent {
         return (
           <Main
             promoMovieData={promoMovieData}
-            movies={movies}
+            genres={getGenresList(movies)}
+            filteredMovies={filteredMovies}
             onMovieCardTitleClick={this._handleMovieCardTitleClick}
           />
         );
       case ScreenType.MOVIE:
         return (
           <MovieScreen
-            movies={this._getFilteredMovies(movies, GenreType.THRILLER)}
+            movies={getFilteredMovies(GenreType.THRILLERS, movies, MAX_FILTERED_MOVIES)}
             movieInfo={movieInfo[0]}
             movieOverview={moviesOverview[0]}
             movieDetails={moviesDetails[0]}
@@ -88,7 +88,7 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-component">
             <MovieScreen
-              movies={this._getFilteredMovies(movies, GenreType.FANTASY)}
+              movies={getFilteredMovies(GenreType.FANTASY, movies, MAX_FILTERED_MOVIES)}
               movieInfo={movieInfo[0]}
               movieOverview={moviesOverview[0]}
               movieDetails={moviesDetails[0]}
@@ -114,6 +114,11 @@ App.propTypes = {
   moviesOverview: PropTypes.arrayOf(PropTypes.object).isRequired,
   moviesDetails: PropTypes.arrayOf(PropTypes.object).isRequired,
   moviesComments: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filteredMovies: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  filteredMovies: state.filteredMovies,
+});
+
+export default connect(mapStateToProps, null)(App);
