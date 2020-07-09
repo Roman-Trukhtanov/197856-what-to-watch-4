@@ -4,7 +4,6 @@ import Adapter from "enzyme-adapter-react-16";
 import MovieNav from "./movie-nav";
 import {TabType} from "../../mocks/movies-data";
 
-
 configure({
   adapter: new Adapter(),
 });
