@@ -3,6 +3,7 @@ const BUCK_TRAILER_SRC = `https://upload.wikimedia.org/wikipedia/commons/transco
 const BUNNY_TRAILER_SRC = `https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4`;
 
 export const MAX_GENRES_AMOUNT = 10;
+export const MAX_VISIBLE_MOVIES_COUNT = 8;
 
 export const GenreType = {
   ALL_GENRES: `All Genres`,
@@ -79,6 +80,22 @@ export default [
     title: `Флэш`,
     genre: `Fantasy`,
     preview: `${PREVIEW_URL}/8`,
+    videoSrc: BUNNY_TRAILER_SRC,
+    videoType: `video/webm`,
+  },
+  {
+    id: 8,
+    title: `Шерлок`,
+    genre: `Dramas`,
+    preview: `${PREVIEW_URL}/9`,
+    videoSrc: BUCK_TRAILER_SRC,
+    videoType: `video/webm`,
+  },
+  {
+    id: 9,
+    title: `Доктор Хаус`,
+    genre: `Dramas`,
+    preview: `${PREVIEW_URL}/10`,
     videoSrc: BUNNY_TRAILER_SRC,
     videoType: `video/webm`,
   },

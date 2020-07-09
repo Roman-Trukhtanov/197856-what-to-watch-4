@@ -43,6 +43,7 @@ class App extends PureComponent {
       moviesDetails,
       moviesComments,
       filteredMovies,
+      movieCollectionNumber,
     } = this.props;
 
     switch (screen) {
@@ -52,6 +53,7 @@ class App extends PureComponent {
             promoMovieData={promoMovieData}
             genres={getGenresList(movies)}
             filteredMovies={filteredMovies}
+            movieCollectionNumber={movieCollectionNumber}
             onMovieCardTitleClick={this._handleMovieCardTitleClick}
           />
         );
@@ -115,10 +117,12 @@ App.propTypes = {
   moviesDetails: PropTypes.arrayOf(PropTypes.object).isRequired,
   moviesComments: PropTypes.arrayOf(PropTypes.object).isRequired,
   filteredMovies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  movieCollectionNumber: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   filteredMovies: state.filteredMovies,
+  movieCollectionNumber: state.movieCollectionNumber,
 });
 
 export default connect(mapStateToProps, null)(App);

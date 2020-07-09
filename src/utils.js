@@ -1,4 +1,4 @@
-import {GenreType, MAX_GENRES_AMOUNT} from "./mocks/movies";
+import {GenreType, MAX_GENRES_AMOUNT, MAX_VISIBLE_MOVIES_COUNT} from "./mocks/movies";
 
 export const extend = (currentObject, newObject) => {
   return Object.assign({}, currentObject, newObject);
@@ -26,4 +26,16 @@ export const getGenresList = (movies) => {
   }
 
   return genresList;
+};
+
+export const spliceMovies = (
+    collectionNumber = 1,
+    movies,
+    visibleMoviesCount = MAX_VISIBLE_MOVIES_COUNT
+) => {
+  return [...movies].splice(0, visibleMoviesCount * collectionNumber);
+};
+
+export const checkVisibleMovies = (movies, movieCollectionNumber) => {
+  return MAX_VISIBLE_MOVIES_COUNT * movieCollectionNumber < movies.length;
 };

@@ -72,6 +72,7 @@ describe(`Main component`, () => {
               filteredMovies={moviesMock}
               promoMovieData={promoMovie}
               genres={genres}
+              movieCollectionNumber={1}
               onMovieCardTitleClick={() => {}}
             />
           </Provider>
