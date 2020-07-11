@@ -2,16 +2,25 @@ const PREVIEW_URL = `http://placeimg.com/280/175/any`;
 const BUCK_TRAILER_SRC = `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`;
 const BUNNY_TRAILER_SRC = `https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4`;
 
+export const MAX_GENRES_AMOUNT = 10;
+
 export const GenreType = {
-  COMEDY: `comedy`,
-  THRILLER: `thriller`,
-  FANTASY: `fantasy`,
+  ALL_GENRES: `All Genres`,
+  COMEDIES: `Comedies`,
+  CRIME: `Crime`,
+  DOCUMENTARY: `Documentary`,
+  DRAMAS: `Dramas`,
+  THRILLERS: `Thrillers`,
+  HORROR: `Horror`,
+  ROMANCE: `Romance`,
+  FAMILY: `Family`,
+  FANTASY: `Fantasy`,
 };
 
 export default [
   {
     id: 0,
-    genre: `fantasy`,
+    genre: `Fantasy`,
     title: `Фантастические твари`,
     preview: `${PREVIEW_URL}/1`,
     videoSrc: BUCK_TRAILER_SRC,
@@ -20,7 +29,7 @@ export default [
   {
     id: 1,
     title: `Форсаж`,
-    genre: `thriller`,
+    genre: `Thrillers`,
     preview: `${PREVIEW_URL}/2`,
     videoSrc: BUNNY_TRAILER_SRC,
     videoType: `video/webm`,
@@ -28,7 +37,7 @@ export default [
   {
     id: 2,
     title: `Жажда скорости`,
-    genre: `thriller`,
+    genre: `Thrillers`,
     preview: `${PREVIEW_URL}/3`,
     videoSrc: BUCK_TRAILER_SRC,
     videoType: `video/mp4`,
@@ -36,7 +45,7 @@ export default [
   {
     id: 3,
     title: `Гарри Поттер`,
-    genre: `fantasy`,
+    genre: `Fantasy`,
     preview: `${PREVIEW_URL}/4`,
     videoSrc: BUNNY_TRAILER_SRC,
     videoType: `video/webm`,
@@ -44,7 +53,7 @@ export default [
   {
     id: 4,
     title: `Спецназ`,
-    genre: `thriller`,
+    genre: `Thrillers`,
     preview: `${PREVIEW_URL}/5`,
     videoSrc: BUCK_TRAILER_SRC,
     videoType: `video/mp4`,
@@ -52,7 +61,7 @@ export default [
   {
     id: 5,
     title: `Игра престолов`,
-    genre: `fantasy`,
+    genre: `Fantasy`,
     preview: `${PREVIEW_URL}/6`,
     videoSrc: BUNNY_TRAILER_SRC,
     videoType: `video/webm`,
@@ -60,7 +69,7 @@ export default [
   {
     id: 6,
     title: `Стрела`,
-    genre: `thriller`,
+    genre: `Thrillers`,
     preview: `${PREVIEW_URL}/7`,
     videoSrc: BUCK_TRAILER_SRC,
     videoType: `video/mp4`,
@@ -68,7 +77,7 @@ export default [
   {
     id: 7,
     title: `Флэш`,
-    genre: `fantasy`,
+    genre: `Fantasy`,
     preview: `${PREVIEW_URL}/8`,
     videoSrc: BUNNY_TRAILER_SRC,
     videoType: `video/webm`,
