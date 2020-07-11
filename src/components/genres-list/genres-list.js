@@ -19,7 +19,7 @@ const GenresList = (props) => {
         }`}>
           <a href="#" className="catalog__genres-link" onClick={(evt) => {
             evt.preventDefault();
-            onGenreLinkClick(genre);
+            onGenreLinkClick(currentGenre, genre);
           }}>{genre}</a>
         </li>
       ))}
@@ -40,9 +40,14 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onGenreLinkClick(genre) {
+  onGenreLinkClick(currentGenre, genre) {
+    if (currentGenre === genre) {
+      return;
+    }
+
     dispatch(ActionCreator.changeGenre(genre));
     dispatch(ActionCreator.setFilteredMovies(genre));
+    dispatch(ActionCreator.resetCollectionNumber());
   },
 });
 

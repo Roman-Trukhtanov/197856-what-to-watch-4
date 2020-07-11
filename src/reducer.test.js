@@ -32,6 +32,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(undefined, {})).toEqual({
     currentGenre: GenreType.ALL_GENRES,
     filteredMovies: allMovies,
+    movieCollectionNumber: 1,
   });
 });
 
@@ -52,6 +53,37 @@ it(`Reducer should change genre`, () => {
     payload: `Thrillers`,
   })).toEqual({
     currentGenre: `Thrillers`,
+  });
+});
+
+it(`Reducer should change movie collection number`, () => {
+  expect(reducer({
+    movieCollectionNumber: 1,
+  }, {
+    type: ActionType.INCREMENT_COLLECTION,
+    payload: 1,
+  })).toEqual({
+    movieCollectionNumber: 2,
+  });
+
+  expect(reducer({
+    movieCollectionNumber: 2,
+  }, {
+    type: ActionType.INCREMENT_COLLECTION,
+    payload: 2,
+  })).toEqual({
+    movieCollectionNumber: 4,
+  });
+});
+
+it(`Reducer should reset movie collection number`, () => {
+  expect(reducer({
+    movieCollectionNumber: 1,
+  }, {
+    type: ActionType.RESET_COLLECTION_NUMBER,
+    payload: 1,
+  })).toEqual({
+    movieCollectionNumber: 1,
   });
 });
 
