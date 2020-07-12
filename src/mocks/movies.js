@@ -26,6 +26,7 @@ export default [
     preview: `${PREVIEW_URL}/1`,
     videoSrc: BUCK_TRAILER_SRC,
     videoType: `video/mp4`,
+    isLoop: true,
   },
   {
     id: 1,
@@ -34,6 +35,7 @@ export default [
     preview: `${PREVIEW_URL}/2`,
     videoSrc: BUNNY_TRAILER_SRC,
     videoType: `video/webm`,
+    isLoop: true,
   },
   {
     id: 2,
@@ -42,6 +44,7 @@ export default [
     preview: `${PREVIEW_URL}/3`,
     videoSrc: BUCK_TRAILER_SRC,
     videoType: `video/mp4`,
+    isLoop: true,
   },
   {
     id: 3,
@@ -50,6 +53,7 @@ export default [
     preview: `${PREVIEW_URL}/4`,
     videoSrc: BUNNY_TRAILER_SRC,
     videoType: `video/webm`,
+    isLoop: true,
   },
   {
     id: 4,
@@ -58,6 +62,7 @@ export default [
     preview: `${PREVIEW_URL}/5`,
     videoSrc: BUCK_TRAILER_SRC,
     videoType: `video/mp4`,
+    isLoop: true,
   },
   {
     id: 5,
@@ -66,6 +71,7 @@ export default [
     preview: `${PREVIEW_URL}/6`,
     videoSrc: BUNNY_TRAILER_SRC,
     videoType: `video/webm`,
+    isLoop: true,
   },
   {
     id: 6,
@@ -74,6 +80,7 @@ export default [
     preview: `${PREVIEW_URL}/7`,
     videoSrc: BUCK_TRAILER_SRC,
     videoType: `video/mp4`,
+    isLoop: true,
   },
   {
     id: 7,
@@ -82,6 +89,7 @@ export default [
     preview: `${PREVIEW_URL}/8`,
     videoSrc: BUNNY_TRAILER_SRC,
     videoType: `video/webm`,
+    isLoop: true,
   },
   {
     id: 8,
@@ -90,6 +98,7 @@ export default [
     preview: `${PREVIEW_URL}/9`,
     videoSrc: BUCK_TRAILER_SRC,
     videoType: `video/webm`,
+    isLoop: true,
   },
   {
     id: 9,
@@ -98,5 +107,6 @@ export default [
     preview: `${PREVIEW_URL}/10`,
     videoSrc: BUNNY_TRAILER_SRC,
     videoType: `video/webm`,
+    isLoop: true,
   },
 ];

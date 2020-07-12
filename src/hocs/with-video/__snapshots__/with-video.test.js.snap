@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withAudio is rendered correctly 1`] = `
+<div>
+  <video
+    controls={false}
+    loop={true}
+    playsInline={true}
+    poster="http://placeimg.com/280/175/any/1"
+    preload="auto"
+    style={
+      Object {
+        "height": "100%",
+        "objectFit": "cover",
+        "width": "100%",
+      }
+    }
+  >
+    <source
+      src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+      type="video/mp4"
+    />
+  </video>
+</div>
+`;

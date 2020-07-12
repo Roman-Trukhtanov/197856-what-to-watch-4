@@ -1,5 +1,6 @@
 import {reducer, ActionCreator, ActionType} from "./reducer.js";
 import allMovies, {GenreType} from "./mocks/movies";
+import {ScreenType} from "./mocks/data";
 
 const moviesMock = [
   {
@@ -30,9 +31,30 @@ const moviesMock = [
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(undefined, {})).toEqual({
+    screen: ScreenType.MAIN,
     currentGenre: GenreType.ALL_GENRES,
     filteredMovies: allMovies,
     movieCollectionNumber: 1,
+  });
+});
+
+it(`Reducer should change screen`, () => {
+  expect(reducer({
+    screen: ScreenType.MAIN,
+  }, {
+    type: ActionType.CHANGE_SCREEN,
+    payload: `Movie`,
+  })).toEqual({
+    screen: `Movie`,
+  });
+
+  expect(reducer({
+    screen: ScreenType.MOVIE,
+  }, {
+    type: ActionType.CHANGE_SCREEN,
+    payload: `Main`,
+  })).toEqual({
+    screen: `Main`,
   });
 });
 
@@ -88,6 +110,20 @@ it(`Reducer should reset movie collection number`, () => {
 });
 
 describe(`Action creators work correctly`, () => {
+  it(`Action creator for changing screen returns default screen`, () => {
+    expect(ActionCreator.changeScreen()).toEqual({
+      type: ActionType.CHANGE_SCREEN,
+      payload: ScreenType.MAIN,
+    });
+  });
+
+  it(`Action creator for changing screen returns any screen`, () => {
+    expect(ActionCreator.changeScreen(ScreenType.MOVIE)).toEqual({
+      type: ActionType.CHANGE_SCREEN,
+      payload: ScreenType.MOVIE,
+    });
+  });
+
   it(`Action creator for changing genre returns default genre`, () => {
     expect(ActionCreator.changeGenre()).toEqual({
       type: ActionType.CHANGE_GENRE,

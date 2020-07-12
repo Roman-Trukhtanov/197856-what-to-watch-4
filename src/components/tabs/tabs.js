@@ -1,4 +1,4 @@
-import React, {Fragment, PureComponent} from "react";
+import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import {TabType} from "../../mocks/movies-data";
 import OverviewTab from "../overview-tab/overview-tab";
@@ -6,39 +6,17 @@ import DetailsTab from "../details-tab/details-tab";
 import ReviewsTab from "../reviews-tab/reviews-tab";
 import MovieNav from "../movie-nav/movie-nav";
 
-class Tabs extends PureComponent {
-  constructor(props) {
-    super(props);
+const Tabs = (props) => {
+  const {
+    movieOverview,
+    movieDetails,
+    movieComments,
+    onItemClick,
+    activeItem,
+  } = props;
 
-    this.state = {
-      currentTab: TabType.OVERVIEW,
-    };
-
-    this._handleMovieNavItemClick = this._handleMovieNavItemClick.bind(this);
-  }
-
-  _changeTab(tabType) {
-    this.setState({
-      currentTab: tabType,
-    });
-  }
-
-  _handleMovieNavItemClick(evt, tabType) {
-    evt.preventDefault();
-
-    this._changeTab(tabType);
-  }
-
-  _renderTab() {
-    const {currentTab} = this.state;
-
-    const {
-      movieOverview,
-      movieDetails,
-      movieComments,
-    } = this.props;
-
-    switch (currentTab) {
+  const renderTab = () => {
+    switch (activeItem) {
       case TabType.OVERVIEW:
         return (
           <OverviewTab
@@ -60,28 +38,26 @@ class Tabs extends PureComponent {
     }
 
     return null;
-  }
+  };
 
-  render() {
-    const {currentTab} = this.state;
+  return (
+    <Fragment>
+      <MovieNav
+        currentTab={activeItem}
+        onNavItemClick={onItemClick}
+      />
 
-    return (
-      <Fragment>
-        <MovieNav
-          currentTab={currentTab}
-          onNavItemClick={this._handleMovieNavItemClick}
-        />
-
-        {this._renderTab()}
-      </Fragment>
-    );
-  }
-}
+      {renderTab()}
+    </Fragment>
+  );
+};
 
 Tabs.propTypes = {
   movieOverview: PropTypes.object.isRequired,
   movieDetails: PropTypes.object.isRequired,
   movieComments: PropTypes.object.isRequired,
+  onItemClick: PropTypes.func.isRequired,
+  activeItem: PropTypes.string.isRequired,
 };
 
 export default Tabs;

@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
+import {ActionCreator} from "../../reducer";
 import Main from '../main/main';
 import MovieScreen from "../movie-screen/movie-screen";
 import {ScreenType} from "../../mocks/data";
@@ -11,31 +12,9 @@ import {getFilteredMovies, getGenresList} from "../../utils";
 const MAX_FILTERED_MOVIES = 4;
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.props = props;
-    this._handleMovieCardTitleClick = this._handleMovieCardTitleClick.bind(this);
-
-    this.state = {
-      screen: ScreenType.MAIN,
-    };
-  }
-
-  _changeScreen(screenType) {
-    this.setState({
-      screen: screenType,
-    });
-  }
-
-  _handleMovieCardTitleClick(evt) {
-    evt.preventDefault();
-
-    this._changeScreen(ScreenType.MOVIE);
-  }
-
   _renderScreen() {
-    const {screen} = this.state;
     const {
+      screen,
       promoMovieData,
       movies,
       movieInfo,
@@ -44,6 +23,7 @@ class App extends PureComponent {
       moviesComments,
       filteredMovies,
       movieCollectionNumber,
+      onMovieCardTitleClick,
     } = this.props;
 
     switch (screen) {
@@ -54,7 +34,7 @@ class App extends PureComponent {
             genres={getGenresList(movies)}
             filteredMovies={filteredMovies}
             movieCollectionNumber={movieCollectionNumber}
-            onMovieCardTitleClick={this._handleMovieCardTitleClick}
+            onMovieCardTitleClick={onMovieCardTitleClick}
           />
         );
       case ScreenType.MOVIE:
@@ -65,7 +45,7 @@ class App extends PureComponent {
             movieOverview={moviesOverview[0]}
             movieDetails={moviesDetails[0]}
             movieComments={moviesComments[0]}
-            onMovieCardTitleClick={this._handleMovieCardTitleClick}
+            onMovieCardTitleClick={onMovieCardTitleClick}
           />
         );
     }
@@ -80,6 +60,7 @@ class App extends PureComponent {
       moviesOverview,
       moviesDetails,
       moviesComments,
+      onMovieCardTitleClick,
     } = this.props;
 
     return (
@@ -95,7 +76,7 @@ class App extends PureComponent {
               movieOverview={moviesOverview[0]}
               movieDetails={moviesDetails[0]}
               movieComments={moviesComments[0]}
-              onMovieCardTitleClick={this._handleMovieCardTitleClick}
+              onMovieCardTitleClick={onMovieCardTitleClick}
             />
           </Route>
         </Switch>
@@ -105,6 +86,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
+  screen: PropTypes.string.isRequired,
   promoMovieData:
     PropTypes.shape({
       title: PropTypes.string.isRequired,
@@ -118,11 +100,19 @@ App.propTypes = {
   moviesComments: PropTypes.arrayOf(PropTypes.object).isRequired,
   filteredMovies: PropTypes.arrayOf(PropTypes.object).isRequired,
   movieCollectionNumber: PropTypes.number.isRequired,
+  onMovieCardTitleClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  screen: state.screen,
   filteredMovies: state.filteredMovies,
   movieCollectionNumber: state.movieCollectionNumber,
 });
 
-export default connect(mapStateToProps, null)(App);
+const mapDispatchToProps = (dispatch) => ({
+  onMovieCardTitleClick() {
+    dispatch(ActionCreator.changeScreen(ScreenType.MOVIE));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

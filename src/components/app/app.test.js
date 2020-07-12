@@ -9,6 +9,7 @@ import {
   moviesDetails,
   moviesComments
 } from "../../mocks/movies-data";
+import {ScreenType} from "../../mocks/data";
 
 const mockStore = configureStore([]);
 
@@ -29,8 +30,10 @@ const movieMock = [
 describe(`App component`, () => {
   it(`Render App`, () => {
     const store = mockStore({
+      screen: ScreenType.MAIN,
       currentGenre: `All Genres`,
       filteredMovies: movieMock,
+      movieCollectionNumber: 1,
     });
 
     const tree = renderer

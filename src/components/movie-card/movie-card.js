@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import PropTypes from "prop-types";
 
 const MovieCard = (props) => {
@@ -45,4 +45,4 @@ MovieCard.propTypes = {
   activePlayerId: PropTypes.number.isRequired,
 };
 
-export default MovieCard;
+export default memo(MovieCard);

@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import Tabs from "../tabs/tabs";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
 import MovieList from "../movie-list/movie-list";
+import withActiveItem from "../../hocs/with-active-item/with-active-item";
+import {TabType} from "../../mocks/movies-data";
 
 const MovieListWrapped = withVideoPlayer(MovieList);
+const TabsWrapped = withActiveItem(Tabs);
 
 const MovieScreen = (props) => {
   const {
@@ -81,10 +84,11 @@ const MovieScreen = (props) => {
             </div>
 
             <div className="movie-card__desc">
-              <Tabs
+              <TabsWrapped
                 movieOverview={movieOverview}
                 movieDetails={movieDetails}
                 movieComments={movieComments}
+                defaultItem={TabType.OVERVIEW}
               />
             </div>
           </div>

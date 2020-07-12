@@ -14,6 +14,8 @@ describe(`Tabs component`, () => {
         movieOverview={moviesOverview[0]}
         movieDetails={moviesDetails[0]}
         movieComments={moviesComments[0]}
+        onItemClick={() => {}}
+        activeItem={``}
       />)
       .toJSON();
 
