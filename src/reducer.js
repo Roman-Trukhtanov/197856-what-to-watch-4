@@ -1,6 +1,6 @@
 import {extend, getFilteredMovies} from "./utils";
-import allMovies, {GenreType} from "./mocks/movies";
-import {ScreenType} from "./mocks/data";
+import allMovies from "./mocks/movies";
+import {GenreType, ScreenType} from "./mocks/const";
 
 const DEFAULT_COLLECTION_NUMBER = 1;
 

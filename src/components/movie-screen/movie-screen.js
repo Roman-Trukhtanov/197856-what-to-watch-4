@@ -6,7 +6,7 @@ import MovieList from "../movie-list/movie-list";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
 import Header from "../header/header";
 import Footer from "../footer/footer";
-import {TabType} from "../../mocks/movies-data";
+import {TabType} from "../../mocks/const";
 
 const MovieListWrapped = withVideoPlayer(MovieList);
 const TabsWrapped = withActiveItem(Tabs);
@@ -14,9 +14,7 @@ const TabsWrapped = withActiveItem(Tabs);
 const MovieScreen = (props) => {
   const {
     movies,
-    movieInfo,
-    movieOverview,
-    movieDetails,
+    movie,
     movieComments,
     onMovieCardTitleClick,
   } = props;
@@ -26,7 +24,7 @@ const MovieScreen = (props) => {
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src={movieInfo.coverSrc} alt="The Grand Budapest Hotel"/>
+            <img src={movie.coverSrc} alt="The Grand Budapest Hotel"/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -35,10 +33,10 @@ const MovieScreen = (props) => {
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{movieInfo.title}</h2>
+              <h2 className="movie-card__title">{movie.title}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{movieInfo.genre}</span>
-                <span className="movie-card__year">{movieInfo.releaseYear}</span>
+                <span className="movie-card__genre">{movie.genre}</span>
+                <span className="movie-card__year">{movie.details.releaseYear}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -64,8 +62,8 @@ const MovieScreen = (props) => {
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
               <img
-                src={movieInfo.bigPosterSrc}
-                alt={movieInfo.title}
+                src={movie.bigPosterSrc}
+                alt={movie.title}
                 width="218"
                 height="327"
               />
@@ -73,8 +71,7 @@ const MovieScreen = (props) => {
 
             <div className="movie-card__desc">
               <TabsWrapped
-                movieOverview={movieOverview}
-                movieDetails={movieDetails}
+                movie={movie}
                 movieComments={movieComments}
                 defaultItem={TabType.OVERVIEW}
               />
@@ -103,16 +100,16 @@ const MovieScreen = (props) => {
 
 MovieScreen.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object).isRequired,
-  movieInfo: PropTypes.shape({
+  movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    releaseYear: PropTypes.number.isRequired,
     coverSrc: PropTypes.string.isRequired,
     bigPosterSrc: PropTypes.string.isRequired,
+    details: PropTypes.shape({
+      releaseYear: PropTypes.number.isRequired,
+    }).isRequired,
   }).isRequired,
-  movieOverview: PropTypes.object.isRequired,
-  movieDetails: PropTypes.object.isRequired,
   movieComments: PropTypes.object.isRequired,
   onMovieCardTitleClick: PropTypes.func.isRequired,
 };

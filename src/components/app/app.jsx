@@ -5,8 +5,7 @@ import PropTypes from "prop-types";
 import {ActionCreator} from "../../reducer";
 import Main from '../main/main';
 import MovieScreen from "../movie-screen/movie-screen";
-import {ScreenType} from "../../mocks/data";
-import {GenreType} from "../../mocks/movies";
+import {GenreType, ScreenType} from "../../mocks/const";
 import {getFilteredMovies, getGenresList} from "../../utils";
 
 const MAX_FILTERED_MOVIES = 4;
@@ -17,10 +16,7 @@ class App extends PureComponent {
       screen,
       promoMovieData,
       movies,
-      movieInfo,
-      moviesOverview,
-      moviesDetails,
-      moviesComments,
+      movieComments,
       filteredMovies,
       movieCollectionNumber,
       onMovieCardTitleClick,
@@ -41,10 +37,8 @@ class App extends PureComponent {
         return (
           <MovieScreen
             movies={getFilteredMovies(GenreType.THRILLERS, movies, MAX_FILTERED_MOVIES)}
-            movieInfo={movieInfo[0]}
-            movieOverview={moviesOverview[0]}
-            movieDetails={moviesDetails[0]}
-            movieComments={moviesComments[0]}
+            movie={movies[0]}
+            movieComments={movieComments[0]}
             onMovieCardTitleClick={onMovieCardTitleClick}
           />
         );
@@ -56,10 +50,7 @@ class App extends PureComponent {
   render() {
     const {
       movies,
-      movieInfo,
-      moviesOverview,
-      moviesDetails,
-      moviesComments,
+      movieComments,
       onMovieCardTitleClick,
     } = this.props;
 
@@ -72,10 +63,8 @@ class App extends PureComponent {
           <Route exact path="/dev-component">
             <MovieScreen
               movies={getFilteredMovies(GenreType.FANTASY, movies, MAX_FILTERED_MOVIES)}
-              movieInfo={movieInfo[0]}
-              movieOverview={moviesOverview[0]}
-              movieDetails={moviesDetails[0]}
-              movieComments={moviesComments[0]}
+              movie={movies[0]}
+              movieComments={movieComments[0]}
               onMovieCardTitleClick={onMovieCardTitleClick}
             />
           </Route>
@@ -94,10 +83,7 @@ App.propTypes = {
       year: PropTypes.number.isRequired,
     }),
   movies: PropTypes.array.isRequired,
-  movieInfo: PropTypes.arrayOf(PropTypes.object).isRequired,
-  moviesOverview: PropTypes.arrayOf(PropTypes.object).isRequired,
-  moviesDetails: PropTypes.arrayOf(PropTypes.object).isRequired,
-  moviesComments: PropTypes.arrayOf(PropTypes.object).isRequired,
+  movieComments: PropTypes.arrayOf(PropTypes.object).isRequired,
   filteredMovies: PropTypes.arrayOf(PropTypes.object).isRequired,
   movieCollectionNumber: PropTypes.number.isRequired,
   onMovieCardTitleClick: PropTypes.func.isRequired,

@@ -1,4 +1,4 @@
-import {GenreType, MAX_GENRES_AMOUNT, MAX_VISIBLE_MOVIES_COUNT} from "./mocks/movies";
+import {GenreType, MAX_GENRES_AMOUNT, MAX_VISIBLE_MOVIES_COUNT} from "./mocks/const";
 
 export const extend = (currentObject, newObject) => {
   return Object.assign({}, currentObject, newObject);

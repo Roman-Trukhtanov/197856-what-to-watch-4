@@ -21,7 +21,7 @@ exports[`MovieList component Render MovieList 1`] = `
         href="movie-page.html"
         onClick={[Function]}
       >
-        Кремниевая долина
+        Фантастические твари
       </a>
     </h3>
   </article>
@@ -37,7 +37,7 @@ exports[`MovieList component Render MovieList 1`] = `
       <img
         alt="Форсаж"
         height="175"
-        src="http://placeimg.com/280/175/any"
+        src="http://placeimg.com/280/175/any/1"
         width="280"
       />
     </div>
@@ -65,7 +65,7 @@ exports[`MovieList component Render MovieList 1`] = `
       <img
         alt="Жажда скорости"
         height="175"
-        src="http://placeimg.com/280/175/any"
+        src="http://placeimg.com/280/175/any/2"
         width="280"
       />
     </div>
@@ -93,7 +93,7 @@ exports[`MovieList component Render MovieList 1`] = `
       <img
         alt="Гарри Поттер"
         height="175"
-        src="http://placeimg.com/280/175/any"
+        src="http://placeimg.com/280/175/any/3"
         width="280"
       />
     </div>
@@ -121,7 +121,7 @@ exports[`MovieList component Render MovieList 1`] = `
       <img
         alt="Спецназ"
         height="175"
-        src="http://placeimg.com/280/175/any"
+        src="http://placeimg.com/280/175/any/4"
         width="280"
       />
     </div>
@@ -149,7 +149,7 @@ exports[`MovieList component Render MovieList 1`] = `
       <img
         alt="Игра престолов"
         height="175"
-        src="http://placeimg.com/280/175/any"
+        src="http://placeimg.com/280/175/any/5"
         width="280"
       />
     </div>
@@ -177,7 +177,7 @@ exports[`MovieList component Render MovieList 1`] = `
       <img
         alt="Стрела"
         height="175"
-        src="http://placeimg.com/280/175/any"
+        src="http://placeimg.com/280/175/any/6"
         width="280"
       />
     </div>
@@ -205,7 +205,7 @@ exports[`MovieList component Render MovieList 1`] = `
       <img
         alt="Флэш"
         height="175"
-        src="http://placeimg.com/280/175/any"
+        src="http://placeimg.com/280/175/any/7"
         width="280"
       />
     </div>
@@ -218,6 +218,62 @@ exports[`MovieList component Render MovieList 1`] = `
         onClick={[Function]}
       >
         Флэш
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div
+      className="small-movie-card__image"
+      onClick={[Function]}
+    >
+      <img
+        alt="Шерлок"
+        height="175"
+        src="http://placeimg.com/280/175/any/8"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+        onClick={[Function]}
+      >
+        Шерлок
+      </a>
+    </h3>
+  </article>
+  <article
+    className="small-movie-card catalog__movies-card"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div
+      className="small-movie-card__image"
+      onClick={[Function]}
+    >
+      <img
+        alt="Доктор Хаус"
+        height="175"
+        src="http://placeimg.com/280/175/any/9"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+    >
+      <a
+        className="small-movie-card__link"
+        href="movie-page.html"
+        onClick={[Function]}
+      >
+        Доктор Хаус
       </a>
     </h3>
   </article>

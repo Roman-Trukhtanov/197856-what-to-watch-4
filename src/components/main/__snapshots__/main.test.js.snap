@@ -200,9 +200,9 @@ Array [
             onClick={[Function]}
           >
             <img
-              alt="Кремниевая долина"
+              alt="Фантастические твари"
               height="175"
-              src="http://placeimg.com/280/175/any"
+              src="http://placeimg.com/280/175/any/0"
               width="280"
             />
           </div>
@@ -214,7 +214,7 @@ Array [
               href="movie-page.html"
               onClick={[Function]}
             >
-              Кремниевая долина
+              Фантастические твари
             </a>
           </h3>
         </article>
@@ -230,7 +230,7 @@ Array [
             <img
               alt="Форсаж"
               height="175"
-              src="http://placeimg.com/280/175/any"
+              src="http://placeimg.com/280/175/any/1"
               width="280"
             />
           </div>
@@ -258,7 +258,7 @@ Array [
             <img
               alt="Жажда скорости"
               height="175"
-              src="http://placeimg.com/280/175/any"
+              src="http://placeimg.com/280/175/any/2"
               width="280"
             />
           </div>
@@ -286,7 +286,7 @@ Array [
             <img
               alt="Гарри Поттер"
               height="175"
-              src="http://placeimg.com/280/175/any"
+              src="http://placeimg.com/280/175/any/3"
               width="280"
             />
           </div>
@@ -314,7 +314,7 @@ Array [
             <img
               alt="Спецназ"
               height="175"
-              src="http://placeimg.com/280/175/any"
+              src="http://placeimg.com/280/175/any/4"
               width="280"
             />
           </div>
@@ -342,7 +342,7 @@ Array [
             <img
               alt="Игра престолов"
               height="175"
-              src="http://placeimg.com/280/175/any"
+              src="http://placeimg.com/280/175/any/5"
               width="280"
             />
           </div>
@@ -370,7 +370,7 @@ Array [
             <img
               alt="Стрела"
               height="175"
-              src="http://placeimg.com/280/175/any"
+              src="http://placeimg.com/280/175/any/6"
               width="280"
             />
           </div>
@@ -398,7 +398,7 @@ Array [
             <img
               alt="Флэш"
               height="175"
-              src="http://placeimg.com/280/175/any"
+              src="http://placeimg.com/280/175/any/7"
               width="280"
             />
           </div>
@@ -414,6 +414,17 @@ Array [
             </a>
           </h3>
         </article>
+      </div>
+      <div
+        className="catalog__more"
+      >
+        <button
+          className="catalog__button"
+          onClick={[Function]}
+          type="button"
+        >
+          Show more
+        </button>
       </div>
     </section>
     <footer

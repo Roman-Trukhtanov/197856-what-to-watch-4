@@ -18,7 +18,7 @@ exports[`MovieCard component Render MovieCard 1`] = `
       href="movie-page.html"
       onClick={[Function]}
     >
-      Кремниевая долина
+      Фантастические твари
     </a>
   </h3>
 </article>

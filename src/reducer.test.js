@@ -1,6 +1,6 @@
 import {reducer, ActionCreator, ActionType} from "./reducer.js";
-import allMovies, {GenreType} from "./mocks/movies";
-import {ScreenType} from "./mocks/data";
+import allMovies from "./mocks/movies";
+import {GenreType, ScreenType} from "./mocks/const";
 
 const moviesMock = [
   {

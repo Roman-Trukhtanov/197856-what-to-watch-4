@@ -13,12 +13,16 @@ const videoMock = movies[0];
 
 describe(`VideoPlayer component`, () => {
   it(`should contain the playback state`, () => {
+
+    const {previewVideo} = videoMock;
+
     const VideoPlayerMount = shallow(<VideoPlayerWrapped
       isPlaying={true}
-      videoType={videoMock.videoType}
-      videoSrc={videoMock.videoSrc}
-      preview={videoMock.preview}
-      isLoop={videoMock.isLoop}
+      videoType={previewVideo.type}
+      videoSrc={previewVideo.src}
+      previewImgSrc={videoMock.previewImgSrc}
+      isLoop={previewVideo.isLoop}
+      isMute={previewVideo.isMute}
     />, {
       disableLifecycleMethods: true,
     });
@@ -27,12 +31,15 @@ describe(`VideoPlayer component`, () => {
   });
 
   it(`should contain the pause state`, () => {
+    const {previewVideo} = videoMock;
+
     const VideoPlayerMount = shallow(<VideoPlayerWrapped
       isPlaying={false}
-      videoType={videoMock.videoType}
-      videoSrc={videoMock.videoSrc}
-      preview={videoMock.preview}
-      isLoop={videoMock.isLoop}
+      videoType={previewVideo.type}
+      videoSrc={previewVideo.src}
+      previewImgSrc={videoMock.previewImgSrc}
+      isLoop={previewVideo.isLoop}
+      isMute={previewVideo.isMute}
     />, {
       disableLifecycleMethods: true,
     });

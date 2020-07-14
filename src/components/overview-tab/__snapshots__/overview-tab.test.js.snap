@@ -8,7 +8,7 @@ Array [
     <div
       className="movie-rating__score"
     >
-      8.9
+      9.1
     </div>
     <p
       className="movie-rating__meta"
@@ -45,7 +45,7 @@ Array [
       className="movie-card__starring"
     >
       <strong>
-        Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other
+        Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other
       </strong>
     </p>
   </div>,

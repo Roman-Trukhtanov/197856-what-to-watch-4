@@ -2,7 +2,9 @@ import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 
 const DetailsTab = (props) => {
-  const {movieDetails} = props;
+  const {movie} = props;
+
+  const {details} = movie;
 
   return (
     <div className="movie-card__text movie-card__row">
@@ -14,10 +16,10 @@ const DetailsTab = (props) => {
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Starring</strong>
           <span className="movie-card__details-value">
-            {movieDetails.starring.map((item, index) => (
-              <Fragment key={`starring_${movieDetails.id}_${index}`}>
+            {details.starring.map((item, index) => (
+              <Fragment key={`starring_${movie.id}_${index}`}>
                 {item.trim()}
-                {index !== movieDetails.starring.length - 1 && <br/>}
+                {index !== details.starring.length - 1 && <br/>}
               </Fragment>
             ))}
           </span>
@@ -27,15 +29,15 @@ const DetailsTab = (props) => {
       <div className="movie-card__text-col">
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Run Time</strong>
-          <span className="movie-card__details-value">{movieDetails.runTime}</span>
+          <span className="movie-card__details-value">{details.runTime}</span>
         </p>
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Genre</strong>
-          <span className="movie-card__details-value">{movieDetails.genre}</span>
+          <span className="movie-card__details-value">{movie.genre}</span>
         </p>
         <p className="movie-card__details-item">
           <strong className="movie-card__details-name">Released</strong>
-          <span className="movie-card__details-value">{movieDetails.releaseYear}</span>
+          <span className="movie-card__details-value">{details.releaseYear}</span>
         </p>
       </div>
     </div>
@@ -43,12 +45,14 @@ const DetailsTab = (props) => {
 };
 
 DetailsTab.propTypes = {
-  movieDetails: PropTypes.shape({
+  movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
     genre: PropTypes.string.isRequired,
-    releaseYear: PropTypes.number.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
-    runTime: PropTypes.string.isRequired,
+    details: PropTypes.shape({
+      releaseYear: PropTypes.number.isRequired,
+      starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+      runTime: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
 };
 

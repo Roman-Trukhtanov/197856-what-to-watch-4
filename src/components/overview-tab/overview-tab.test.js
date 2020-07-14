@@ -1,13 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import OverviewTab from "./overview-tab";
-import {moviesOverview} from "../../mocks/movies-data";
+import moviesData from "../../mocks/movies";
 
 describe(`OverviewTab component`, () => {
   it(`Render OverviewTab`, () => {
     const tree = renderer
       .create(<OverviewTab
-        movieOverview={moviesOverview[0]}
+        movie={moviesData[0]}
       />)
       .toJSON();
 

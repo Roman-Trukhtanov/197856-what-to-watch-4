@@ -2,9 +2,9 @@ import React from "react";
 import renderer from "react-test-renderer";
 import PropTypes from "prop-types";
 import withVideo from "./with-video.js";
-import movies from "../../mocks/movies";
+import moviesData from "../../mocks/movies";
 
-const videoMock = movies[0];
+const videoMock = moviesData[0];
 
 const MockComponent = (props) => {
   const {children} = props;
@@ -26,13 +26,16 @@ MockComponent.propTypes = {
 const MockComponentWrapped = withVideo(MockComponent);
 
 it(`withAudio is rendered correctly`, () => {
+  const {previewVideo} = videoMock;
+
   const tree = renderer.create((
     <MockComponentWrapped
       isPlaying={true}
-      videoType={videoMock.videoType}
-      videoSrc={videoMock.videoSrc}
-      preview={videoMock.preview}
-      isLoop={videoMock.isLoop}
+      videoType={previewVideo.type}
+      videoSrc={previewVideo.src}
+      previewImgSrc={videoMock.previewImgSrc}
+      isLoop={previewVideo.isLoop}
+      isMute={previewVideo.isMute}
     />
   ), {
     createNodeMock() {

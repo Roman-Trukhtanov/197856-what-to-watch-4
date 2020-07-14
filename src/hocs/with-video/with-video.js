@@ -40,10 +40,10 @@ const withVideo = (Component) => {
     }
 
     componentDidMount() {
-      const {isPlaying} = this.props;
+      const {isPlaying, isMute} = this.props;
       const video = this._videoRef.current;
 
-      video.muted = true;
+      video.muted = isMute || false;
 
       video.addEventListener(`play`, this._onPlay);
       video.addEventListener(`pause`, this._onPause);
@@ -78,7 +78,7 @@ const withVideo = (Component) => {
       const {
         videoSrc,
         videoType,
-        preview,
+        previewImgSrc,
         isLoop,
       } = this.props;
 
@@ -89,7 +89,7 @@ const withVideo = (Component) => {
           <video
             playsInline
             preload={`auto`}
-            poster={preview}
+            poster={previewImgSrc}
             loop={isLoop ? isLoop : false}
             controls={false}
             style={this._getVideoStyles()}
@@ -106,8 +106,9 @@ const withVideo = (Component) => {
     isPlaying: PropTypes.bool.isRequired,
     videoType: PropTypes.string.isRequired,
     videoSrc: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
+    previewImgSrc: PropTypes.string.isRequired,
     isLoop: PropTypes.bool.isRequired,
+    isMute: PropTypes.bool.isRequired,
   };
 
   return WithVideo;

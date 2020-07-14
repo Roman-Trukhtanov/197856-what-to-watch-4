@@ -26,18 +26,21 @@ const withVideoPlayer = (Component) => {
       });
     }
 
-    _renderVideo(movies) {
+    _renderVideo(movie, videoData) {
       const {activePlayerId} = this.state;
 
-      const {id, videoType, videoSrc, preview, isLoop} = movies;
+      const {id, previewImgSrc} = movie;
+
+      const {type: videoType, src: videoSrc, isLoop, isMute} = videoData;
 
       return (
         <VideoPlayerWrapped
           isPlaying={id === activePlayerId}
           videoType={videoType}
           videoSrc={videoSrc}
-          preview={preview}
+          previewImgSrc={previewImgSrc}
           isLoop={isLoop}
+          isMute={isMute}
         />
       );
     }

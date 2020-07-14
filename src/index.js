@@ -2,16 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from "./components/app/app";
 import promoMovie from "./mocks/promo-movie";
-import movies from './mocks/movies';
+import moviesData from './mocks/movies';
 import {createStore} from "redux";
 import {reducer} from "./reducer";
 import {Provider} from "react-redux";
 import {
-  movieInfo,
-  moviesOverview,
-  moviesDetails,
-  moviesComments
-} from "./mocks/movies-data";
+  movieComments
+} from "./mocks/movie-comments";
 
 const rootElement = document.querySelector(`#root`);
 
@@ -25,11 +22,8 @@ const init = () => {
       <Provider store={store}>
         <App
           promoMovieData={promoMovie}
-          movies={movies}
-          movieInfo={movieInfo}
-          moviesOverview={moviesOverview}
-          moviesDetails={moviesDetails}
-          moviesComments={moviesComments}
+          movies={moviesData}
+          movieComments={movieComments}
         />
       </Provider>,
       rootElement
