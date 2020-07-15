@@ -1,13 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import ReviewsTab from "./reviews-tab";
-import {moviesComments} from "../../mocks/movies-data";
+import {movieComments} from "../../mocks/movie-comments";
 
 describe(`ReviewsTab component`, () => {
   it(`Render ReviewsTab`, () => {
     const tree = renderer
       .create(<ReviewsTab
-        movieComments={moviesComments[0]}
+        movieComments={movieComments[0]}
       />)
       .toJSON();
 

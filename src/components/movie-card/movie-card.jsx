@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import PropTypes from "prop-types";
 
 const MovieCard = (props) => {
@@ -11,6 +11,8 @@ const MovieCard = (props) => {
     activePlayerId,
   } = props;
 
+  const {previewVideo} = movie;
+
   return (
     <article
       className="small-movie-card catalog__movies-card"
@@ -21,8 +23,8 @@ const MovieCard = (props) => {
     >
       <div className="small-movie-card__image" onClick={onMovieCardTitleClick}>
         {activePlayerId === movie.id
-          ? renderVideo(movie)
-          : <img src={movie.preview} alt={movie.title} width="280" height="175"/>
+          ? renderVideo(movie, previewVideo)
+          : <img src={movie.previewImgSrc} alt={movie.title} width="280" height="175"/>
         }
       </div>
       <h3 className="small-movie-card__title">
@@ -39,10 +41,11 @@ MovieCard.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
+    previewImgSrc: PropTypes.string.isRequired,
+    previewVideo: PropTypes.object.isRequired,
   }).isRequired,
   renderVideo: PropTypes.func.isRequired,
   activePlayerId: PropTypes.number.isRequired,
 };
 
-export default MovieCard;
+export default memo(MovieCard);

@@ -14,10 +14,10 @@ const MovieList = (props) => {
 
   return (
     <div className="catalog__movies-list">
-      {movies.map((movie, index) => {
+      {movies.map((movie) => {
         return (
           <MovieCard
-            key={`movie_${index}`}
+            key={`movie_${movie.id}`}
             movie={movie}
             activePlayerId={activePlayerId}
             onMovieCardTitleClick={onMovieCardTitleClick}

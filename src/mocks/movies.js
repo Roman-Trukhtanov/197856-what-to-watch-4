@@ -2,101 +2,103 @@ const PREVIEW_URL = `http://placeimg.com/280/175/any`;
 const BUCK_TRAILER_SRC = `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`;
 const BUNNY_TRAILER_SRC = `https://www.radiantmediaplayer.com/media/big-buck-bunny-360p.mp4`;
 
-export const MAX_GENRES_AMOUNT = 10;
-export const MAX_VISIBLE_MOVIES_COUNT = 8;
+const mockVideos = [
+  {
+    src: BUCK_TRAILER_SRC,
+    type: `video/mp4`,
+  },
+  {
+    src: BUNNY_TRAILER_SRC,
+    type: `video/webm`,
+  }
+];
 
-export const GenreType = {
-  ALL_GENRES: `All Genres`,
-  COMEDIES: `Comedies`,
-  CRIME: `Crime`,
-  DOCUMENTARY: `Documentary`,
-  DRAMAS: `Dramas`,
-  THRILLERS: `Thrillers`,
-  HORROR: `Horror`,
-  ROMANCE: `Romance`,
-  FAMILY: `Family`,
-  FANTASY: `Fantasy`,
+const getMovieItemData = ({title, genre}, index) => {
+  return {
+    id: index,
+    title,
+    genre,
+    coverSrc: `/img/bg-the-grand-budapest-hotel.jpg`,
+    bigPosterSrc: `img/the-grand-budapest-hotel-poster.jpg`,
+    previewImgSrc: `${PREVIEW_URL}/${index}`,
+    previewVideo: {
+      src: mockVideos[index % mockVideos.length].src,
+      type: mockVideos[index % mockVideos.length].type,
+      isLoop: true,
+      isMute: true,
+    },
+    details: {
+      rate: 9.1,
+      releaseYear: 2014,
+      ratingCount: 240,
+      level: `Very good`,
+      director: `Wes Andreson`,
+      runTime: `1h 39m`,
+      description: [
+        `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
+        `Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.`
+      ],
+      starring: [
+        `Bill Murray`,
+        `Edward Norton`,
+        `Jude Law`,
+        `Willem Dafoe`,
+        `Saoirse Ronan`,
+        `Tony Revoloru`,
+        `Tilda Swinton`,
+        `Tom Wilkinson`,
+        `Owen Wilkinson`,
+        `Adrien Brody`,
+        `Ralph Fiennes`,
+        `Jeff Goldblum`
+      ],
+    },
+  };
 };
 
-export default [
+const movies = [
   {
-    id: 0,
     genre: `Fantasy`,
     title: `Фантастические твари`,
-    preview: `${PREVIEW_URL}/1`,
-    videoSrc: BUCK_TRAILER_SRC,
-    videoType: `video/mp4`,
   },
   {
-    id: 1,
     title: `Форсаж`,
     genre: `Thrillers`,
-    preview: `${PREVIEW_URL}/2`,
-    videoSrc: BUNNY_TRAILER_SRC,
-    videoType: `video/webm`,
   },
   {
-    id: 2,
     title: `Жажда скорости`,
     genre: `Thrillers`,
-    preview: `${PREVIEW_URL}/3`,
-    videoSrc: BUCK_TRAILER_SRC,
-    videoType: `video/mp4`,
   },
   {
-    id: 3,
     title: `Гарри Поттер`,
     genre: `Fantasy`,
-    preview: `${PREVIEW_URL}/4`,
-    videoSrc: BUNNY_TRAILER_SRC,
-    videoType: `video/webm`,
   },
   {
-    id: 4,
     title: `Спецназ`,
     genre: `Thrillers`,
-    preview: `${PREVIEW_URL}/5`,
-    videoSrc: BUCK_TRAILER_SRC,
-    videoType: `video/mp4`,
   },
   {
-    id: 5,
     title: `Игра престолов`,
     genre: `Fantasy`,
-    preview: `${PREVIEW_URL}/6`,
-    videoSrc: BUNNY_TRAILER_SRC,
-    videoType: `video/webm`,
   },
   {
-    id: 6,
     title: `Стрела`,
     genre: `Thrillers`,
-    preview: `${PREVIEW_URL}/7`,
-    videoSrc: BUCK_TRAILER_SRC,
-    videoType: `video/mp4`,
   },
   {
-    id: 7,
     title: `Флэш`,
     genre: `Fantasy`,
-    preview: `${PREVIEW_URL}/8`,
-    videoSrc: BUNNY_TRAILER_SRC,
-    videoType: `video/webm`,
   },
   {
-    id: 8,
     title: `Шерлок`,
     genre: `Dramas`,
-    preview: `${PREVIEW_URL}/9`,
-    videoSrc: BUCK_TRAILER_SRC,
-    videoType: `video/webm`,
   },
   {
-    id: 9,
     title: `Доктор Хаус`,
     genre: `Dramas`,
-    preview: `${PREVIEW_URL}/10`,
-    videoSrc: BUNNY_TRAILER_SRC,
-    videoType: `video/webm`,
   },
 ];
+
+const moviesData = movies.map((movie, index) => getMovieItemData(movie, index));
+
+export default moviesData;

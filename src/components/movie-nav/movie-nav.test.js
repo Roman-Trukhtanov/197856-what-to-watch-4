@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import MovieNav from "./movie-nav";
-import {TabType} from "../../mocks/movies-data";
+import {TabType} from "../../mocks/const";
 
 describe(`MovieNav component`, () => {
   it(`Render MovieNav`, () => {

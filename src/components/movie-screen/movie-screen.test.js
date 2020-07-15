@@ -1,24 +1,19 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import MovieScreen from "./movie-screen";
-import movies from "../../mocks/movies";
+import moviesData from "../../mocks/movies";
 import {
-  movieInfo,
-  moviesOverview,
-  moviesDetails,
-  moviesComments,
-} from "../../mocks/movies-data";
-import {GenreType} from "../../mocks/movies";
+  movieComments,
+} from "../../mocks/movie-comments";
+import {GenreType} from "../../mocks/const";
 
 describe(`MovieScreen component`, () => {
   it(`Render MovieScreen`, () => {
     const tree = renderer
       .create(<MovieScreen
-        movies={movies.filter((movie) => movie.genre === GenreType.FANTASY)}
-        movieInfo={movieInfo[0]}
-        movieOverview={moviesOverview[0]}
-        movieDetails={moviesDetails[0]}
-        movieComments={moviesComments[0]}
+        movies={moviesData.filter((movie) => movie.genre === GenreType.FANTASY)}
+        movie={moviesData[0]}
+        movieComments={movieComments[0]}
         onMovieCardTitleClick={() => {}}
       />)
       .toJSON();

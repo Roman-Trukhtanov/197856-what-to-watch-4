@@ -1,9 +1,11 @@
 import {extend, getFilteredMovies} from "./utils";
-import allMovies, {GenreType} from "./mocks/movies";
+import allMovies from "./mocks/movies";
+import {GenreType, ScreenType} from "./mocks/const";
 
 const DEFAULT_COLLECTION_NUMBER = 1;
 
 const initialState = {
+  screen: ScreenType.MAIN,
   currentGenre: GenreType.ALL_GENRES,
   filteredMovies: allMovies,
   movieCollectionNumber: DEFAULT_COLLECTION_NUMBER,
@@ -14,9 +16,16 @@ const ActionType = {
   SET_FILTERED_MOVIES: `SET_FILTERED_MOVIES`,
   INCREMENT_COLLECTION: `INCREMENT_COLLECTION`,
   RESET_COLLECTION_NUMBER: `RESET_COLLECTION_NUMBER`,
+  CHANGE_SCREEN: `CHANGE_SCREEN`,
 };
 
 const ActionCreator = {
+  changeScreen(screen = ScreenType.MAIN) {
+    return {
+      type: ActionType.CHANGE_SCREEN,
+      payload: screen,
+    };
+  },
   changeGenre(genre = GenreType.ALL_GENRES) {
     return {
       type: ActionType.CHANGE_GENRE,
@@ -60,6 +69,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.RESET_COLLECTION_NUMBER:
       return extend(state, {
         movieCollectionNumber: action.payload,
+      });
+    case ActionType.CHANGE_SCREEN:
+      return extend(state, {
+        screen: action.payload,
       });
   }
 

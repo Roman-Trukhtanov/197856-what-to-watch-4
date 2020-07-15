@@ -86,7 +86,7 @@ exports[`DetailsTab component Render DetailsTab 1`] = `
       <span
         className="movie-card__details-value"
       >
-        Comedy
+        Fantasy
       </span>
     </p>
     <p

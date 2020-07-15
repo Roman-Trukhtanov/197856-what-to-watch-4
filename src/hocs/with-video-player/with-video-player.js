@@ -1,5 +1,8 @@
 import React, {PureComponent} from "react";
 import VideoPlayer from "../../components/video-player/video-player";
+import withVideo from "../with-video/with-video";
+
+const VideoPlayerWrapped = withVideo(VideoPlayer);
 
 const withVideoPlayer = (Component) => {
   class WithVideoPlayer extends PureComponent {
@@ -23,17 +26,21 @@ const withVideoPlayer = (Component) => {
       });
     }
 
-    _renderVideo(movies) {
+    _renderVideo(movie, videoData) {
       const {activePlayerId} = this.state;
 
-      const {id, videoType, videoSrc, preview} = movies;
+      const {id, previewImgSrc} = movie;
+
+      const {type: videoType, src: videoSrc, isLoop, isMute} = videoData;
 
       return (
-        <VideoPlayer
+        <VideoPlayerWrapped
           isPlaying={id === activePlayerId}
           videoType={videoType}
           videoSrc={videoSrc}
-          preview={preview}
+          previewImgSrc={previewImgSrc}
+          isLoop={isLoop}
+          isMute={isMute}
         />
       );
     }

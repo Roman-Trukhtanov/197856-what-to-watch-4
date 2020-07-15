@@ -3,15 +3,18 @@ import PropTypes from 'prop-types';
 import Tabs from "../tabs/tabs";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
 import MovieList from "../movie-list/movie-list";
+import withActiveItem from "../../hocs/with-active-item/with-active-item";
+import Header from "../header/header";
+import Footer from "../footer/footer";
+import {TabType} from "../../mocks/const";
 
 const MovieListWrapped = withVideoPlayer(MovieList);
+const TabsWrapped = withActiveItem(Tabs);
 
 const MovieScreen = (props) => {
   const {
     movies,
-    movieInfo,
-    movieOverview,
-    movieDetails,
+    movie,
     movieComments,
     onMovieCardTitleClick,
   } = props;
@@ -21,33 +24,19 @@ const MovieScreen = (props) => {
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src={movieInfo.coverSrc} alt="The Grand Budapest Hotel"/>
+            <img src={movie.coverSrc} alt="The Grand Budapest Hotel"/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <header className="page-header movie-card__head">
-            <div className="logo">
-              <a href="main.html" className="logo__link">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
-
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-              </div>
-            </div>
-          </header>
+          <Header/>
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{movieInfo.title}</h2>
+              <h2 className="movie-card__title">{movie.title}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{movieInfo.genre}</span>
-                <span className="movie-card__year">{movieInfo.releaseYear}</span>
+                <span className="movie-card__genre">{movie.genre}</span>
+                <span className="movie-card__year">{movie.details.releaseYear}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -73,18 +62,18 @@ const MovieScreen = (props) => {
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
               <img
-                src={movieInfo.bigPosterSrc}
-                alt={movieInfo.title}
+                src={movie.bigPosterSrc}
+                alt={movie.title}
                 width="218"
                 height="327"
               />
             </div>
 
             <div className="movie-card__desc">
-              <Tabs
-                movieOverview={movieOverview}
-                movieDetails={movieDetails}
+              <TabsWrapped
+                movie={movie}
                 movieComments={movieComments}
+                defaultItem={TabType.OVERVIEW}
               />
             </div>
           </div>
@@ -103,19 +92,7 @@ const MovieScreen = (props) => {
           </div>
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer/>
       </div>
     </Fragment>
   );
@@ -123,16 +100,16 @@ const MovieScreen = (props) => {
 
 MovieScreen.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object).isRequired,
-  movieInfo: PropTypes.shape({
+  movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    releaseYear: PropTypes.number.isRequired,
     coverSrc: PropTypes.string.isRequired,
     bigPosterSrc: PropTypes.string.isRequired,
+    details: PropTypes.shape({
+      releaseYear: PropTypes.number.isRequired,
+    }).isRequired,
   }).isRequired,
-  movieOverview: PropTypes.object.isRequired,
-  movieDetails: PropTypes.object.isRequired,
   movieComments: PropTypes.object.isRequired,
   onMovieCardTitleClick: PropTypes.func.isRequired,
 };

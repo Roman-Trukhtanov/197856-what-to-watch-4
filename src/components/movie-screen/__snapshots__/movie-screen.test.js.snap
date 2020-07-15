@@ -29,7 +29,6 @@ Array [
         >
           <a
             className="logo__link"
-            href="main.html"
           >
             <span
               className="logo__letter logo__letter--1"
@@ -72,7 +71,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            The Grand Budapest Hotel
+            Фантастические твари
           </h2>
           <p
             className="movie-card__meta"
@@ -80,7 +79,7 @@ Array [
             <span
               className="movie-card__genre"
             >
-              drama
+              Fantasy
             </span>
             <span
               className="movie-card__year"
@@ -145,7 +144,7 @@ Array [
           className="movie-card__poster movie-card__poster--big"
         >
           <img
-            alt="The Grand Budapest Hotel"
+            alt="Фантастические твари"
             height="327"
             src="img/the-grand-budapest-hotel-poster.jpg"
             width="218"
@@ -201,7 +200,7 @@ Array [
             <div
               className="movie-rating__score"
             >
-              8.9
+              9.1
             </div>
             <p
               className="movie-rating__meta"
@@ -238,7 +237,7 @@ Array [
               className="movie-card__starring"
             >
               <strong>
-                Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other
+                Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other
               </strong>
             </p>
           </div>
@@ -275,7 +274,7 @@ Array [
               <img
                 alt="Фантастические твари"
                 height="175"
-                src="http://placeimg.com/280/175/any/1"
+                src="http://placeimg.com/280/175/any/0"
                 width="280"
               />
             </div>
@@ -303,7 +302,7 @@ Array [
               <img
                 alt="Гарри Поттер"
                 height="175"
-                src="http://placeimg.com/280/175/any/4"
+                src="http://placeimg.com/280/175/any/3"
                 width="280"
               />
             </div>
@@ -331,7 +330,7 @@ Array [
               <img
                 alt="Игра престолов"
                 height="175"
-                src="http://placeimg.com/280/175/any/6"
+                src="http://placeimg.com/280/175/any/5"
                 width="280"
               />
             </div>
@@ -359,7 +358,7 @@ Array [
               <img
                 alt="Флэш"
                 height="175"
-                src="http://placeimg.com/280/175/any/8"
+                src="http://placeimg.com/280/175/any/7"
                 width="280"
               />
             </div>
@@ -386,7 +385,6 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
-          href="main.html"
         >
           <span
             className="logo__letter logo__letter--1"

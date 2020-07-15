@@ -3,12 +3,9 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import App from "./app.jsx";
-import {
-  movieInfo,
-  moviesOverview,
-  moviesDetails,
-  moviesComments
-} from "../../mocks/movies-data";
+import moviesData from "../../mocks/movies";
+import {movieComments} from "../../mocks/movie-comments";
+import {ScreenType} from "../../mocks/const";
 
 const mockStore = configureStore([]);
 
@@ -18,19 +15,13 @@ const promoMovie = {
   year: 2014
 };
 
-const movieMock = [
-  {
-    id: 0,
-    title: `Кремниевая долина`,
-    preview: `http://placeimg.com/280/175/any`,
-  },
-];
-
 describe(`App component`, () => {
   it(`Render App`, () => {
     const store = mockStore({
+      screen: ScreenType.MAIN,
       currentGenre: `All Genres`,
-      filteredMovies: movieMock,
+      filteredMovies: moviesData,
+      movieCollectionNumber: 1,
     });
 
     const tree = renderer
@@ -38,11 +29,8 @@ describe(`App component`, () => {
           <Provider store={store}>
             <App
               promoMovieData={promoMovie}
-              movies={movieMock}
-              movieInfo={movieInfo}
-              moviesOverview={moviesOverview}
-              moviesDetails={moviesDetails}
-              moviesComments={moviesComments}
+              movies={moviesData}
+              movieComments={movieComments}
             />
           </Provider>
       ).toJSON();

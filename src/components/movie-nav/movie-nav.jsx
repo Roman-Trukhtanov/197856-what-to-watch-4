@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {tabs} from "../../mocks/movies-data";
+import {TabType} from "../../mocks/const";
 
 const MovieNav = (props) => {
   const {
@@ -11,7 +11,7 @@ const MovieNav = (props) => {
   return (
     <nav className="movie-nav movie-card__nav">
       <ul className="movie-nav__list">
-        {tabs.map((tabType, index) => (
+        {Object.values(TabType).map((tabType, index) => (
           <li
             key={`tab-type-${index}`}
             className={`movie-nav__item ${
