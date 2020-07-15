@@ -4,9 +4,13 @@ export const MAX_VISIBLE_MOVIES_COUNT = 8;
 
 export const OVERVIEW_STARRING_COUNT = 4;
 
+export const MINUTES_IN_HOUR = 60;
+export const SECONDS_IN_MINUTE = 60;
+
 export const ScreenType = {
   MAIN: `main`,
   MOVIE: `movie`,
+  PLAYER: `player`,
 };
 
 export const GenreType = {

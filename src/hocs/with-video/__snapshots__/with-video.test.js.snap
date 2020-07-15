@@ -3,6 +3,7 @@
 exports[`withAudio is rendered correctly 1`] = `
 <div>
   <video
+    className=""
     controls={false}
     loop={true}
     playsInline={true}

@@ -5,6 +5,7 @@ import {GenreType, ScreenType} from "./mocks/const";
 const DEFAULT_COLLECTION_NUMBER = 1;
 
 const initialState = {
+  prevScreen: ``,
   screen: ScreenType.MAIN,
   currentGenre: GenreType.ALL_GENRES,
   filteredMovies: allMovies,
@@ -72,6 +73,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.CHANGE_SCREEN:
       return extend(state, {
+        prevScreen: state.screen,
         screen: action.payload,
       });
   }

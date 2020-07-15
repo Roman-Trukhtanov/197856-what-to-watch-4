@@ -21,6 +21,13 @@ const getMovieItemData = ({title, genre}, index) => {
     coverSrc: `/img/bg-the-grand-budapest-hotel.jpg`,
     bigPosterSrc: `img/the-grand-budapest-hotel-poster.jpg`,
     previewImgSrc: `${PREVIEW_URL}/${index}`,
+    fullVideo: {
+      className: `player__video`,
+      src: mockVideos[index % mockVideos.length].src,
+      type: mockVideos[index % mockVideos.length].type,
+      isLoop: false,
+      isMute: false,
+    },
     previewVideo: {
       src: mockVideos[index % mockVideos.length].src,
       type: mockVideos[index % mockVideos.length].type,

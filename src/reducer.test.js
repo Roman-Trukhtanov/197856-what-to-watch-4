@@ -31,6 +31,7 @@ const moviesMock = [
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(undefined, {})).toEqual({
+    prevScreen: ``,
     screen: ScreenType.MAIN,
     currentGenre: GenreType.ALL_GENRES,
     filteredMovies: allMovies,
@@ -45,6 +46,7 @@ it(`Reducer should change screen`, () => {
     type: ActionType.CHANGE_SCREEN,
     payload: `Movie`,
   })).toEqual({
+    prevScreen: ScreenType.MAIN,
     screen: `Movie`,
   });
 
@@ -54,6 +56,7 @@ it(`Reducer should change screen`, () => {
     type: ActionType.CHANGE_SCREEN,
     payload: `Main`,
   })).toEqual({
+    prevScreen: ScreenType.MOVIE,
     screen: `Main`,
   });
 });

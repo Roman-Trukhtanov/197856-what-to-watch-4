@@ -9,6 +9,7 @@ exports[`Header component Render Header 1`] = `
   >
     <a
       className="logo__link"
+      href="/"
     >
       <span
         className="logo__letter logo__letter--1"

@@ -31,16 +31,11 @@ const withVideoPlayer = (Component) => {
 
       const {id, previewImgSrc} = movie;
 
-      const {type: videoType, src: videoSrc, isLoop, isMute} = videoData;
-
       return (
         <VideoPlayerWrapped
           isPlaying={id === activePlayerId}
-          videoType={videoType}
-          videoSrc={videoSrc}
           previewImgSrc={previewImgSrc}
-          isLoop={isLoop}
-          isMute={isMute}
+          videoData={videoData}
         />
       );
     }

@@ -10,15 +10,17 @@ const videoMock = moviesData[0];
 configure({adapter: new Adapter()});
 
 const Player = (props) => {
-  const {children} = props;
+  const {onPlayBtnClick, children} = props;
   return (
     <div>
+      <button type="button" onClick={onPlayBtnClick}/>
       {children}
     </div>
   );
 };
 
 Player.propTypes = {
+  onPlayBtnClick: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
@@ -30,15 +32,12 @@ it(`Checks that after 1 second the video started`, () => {
 
   const PlayerWrapped = withVideo(Player);
 
-  const {previewVideo} = videoMock;
+  const {previewVideo, previewImgSrc} = videoMock;
 
   const wrapper = mount(<PlayerWrapped
     isPlaying={true}
-    videoType={previewVideo.type}
-    videoSrc={previewVideo.src}
-    previewImgSrc={videoMock.previewImgSrc}
-    isLoop={previewVideo.isLoop}
-    isMute={previewVideo.isMute}
+    previewImgSrc={previewImgSrc}
+    videoData={previewVideo}
   />);
 
   window.HTMLMediaElement.prototype.play = () => {};
@@ -57,15 +56,12 @@ it(`Checks that after 1 second the video did not play`, () => {
 
   const PlayerWrapped = withVideo(Player);
 
-  const {previewVideo} = videoMock;
+  const {previewVideo, previewImgSrc} = videoMock;
 
   const wrapper = mount(<PlayerWrapped
     isPlaying={false}
-    videoType={previewVideo.type}
-    videoSrc={previewVideo.src}
-    previewImgSrc={videoMock.previewImgSrc}
-    isLoop={previewVideo.isLoop}
-    isMute={previewVideo.isMute}
+    previewImgSrc={previewImgSrc}
+    videoData={previewVideo}
   />);
 
   window.HTMLMediaElement.prototype.play = () => {};
@@ -77,4 +73,52 @@ it(`Checks that after 1 second the video did not play`, () => {
   jest.advanceTimersByTime(1000);
 
   expect(_videoRef.current.play).toHaveBeenCalledTimes(0);
+});
+
+it(`Checks that HOC's callback turn on video (play)`, () => {
+  const PlayerWrapped = withVideo(Player);
+
+  const {previewVideo, previewImgSrc} = videoMock;
+
+  const wrapper = mount(<PlayerWrapped
+    isPlaying={false}
+    previewImgSrc={previewImgSrc}
+    videoData={previewVideo}
+  />);
+
+  window.HTMLMediaElement.prototype.play = () => {};
+
+  const {_videoRef} = wrapper.instance();
+
+  jest.spyOn(_videoRef.current, `play`);
+
+  wrapper.instance().componentDidMount();
+
+  wrapper.find(`button`).simulate(`click`);
+
+  expect(_videoRef.current.play).toHaveBeenCalledTimes(1);
+});
+
+it(`Checks that HOC's callback turn off video (pause)`, () => {
+  const PlayerWrapped = withVideo(Player);
+
+  const {previewVideo, previewImgSrc} = videoMock;
+
+  const wrapper = mount(<PlayerWrapped
+    isPlaying={true}
+    previewImgSrc={previewImgSrc}
+    videoData={previewVideo}
+  />);
+
+  window.HTMLMediaElement.prototype.pause = () => {};
+
+  const {_videoRef} = wrapper.instance();
+
+  jest.spyOn(_videoRef.current, `pause`);
+
+  wrapper.instance().componentDidMount();
+
+  wrapper.find(`button`).simulate(`click`);
+
+  expect(_videoRef.current.pause).toHaveBeenCalledTimes(1);
 });

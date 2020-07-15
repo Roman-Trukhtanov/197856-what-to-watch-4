@@ -1,4 +1,10 @@
-import {GenreType, MAX_GENRES_AMOUNT, MAX_VISIBLE_MOVIES_COUNT} from "./mocks/const";
+import {
+  GenreType,
+  MAX_GENRES_AMOUNT,
+  MAX_VISIBLE_MOVIES_COUNT,
+  MINUTES_IN_HOUR,
+  SECONDS_IN_MINUTE
+} from "./mocks/const";
 
 export const extend = (currentObject, newObject) => {
   return Object.assign({}, currentObject, newObject);
@@ -38,4 +44,22 @@ export const spliceMovies = (
 
 export const checkVisibleMovies = (movies, movieCollectionNumber) => {
   return MAX_VISIBLE_MOVIES_COUNT * movieCollectionNumber < movies.length;
+};
+
+export const getStringTime = (secValue = 0) => {
+  let hours = Math.floor(secValue / SECONDS_IN_MINUTE / MINUTES_IN_HOUR);
+  let minutes = Math.floor(secValue / SECONDS_IN_MINUTE % MINUTES_IN_HOUR);
+  let seconds = Math.floor(secValue % SECONDS_IN_MINUTE);
+
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  if (seconds < 10) {
+    seconds = `0${seconds}`;
+  }
+
+  return `${hours}:${minutes}:${seconds}`;
 };
