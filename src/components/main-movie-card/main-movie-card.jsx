@@ -1,9 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Header from "../header/header";
+import PlayBtn from "../play-btn/play-btn";
 
 const MainMovieCard = (props) => {
-  const {title, genre, year} = props;
+  const {
+    title,
+    genre,
+    year,
+  } = props;
 
   return (
     <section className="movie-card">
@@ -29,12 +34,7 @@ const MainMovieCard = (props) => {
             </p>
 
             <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button">
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref="#play-s"/>
-                </svg>
-                <span>Play</span>
-              </button>
+              <PlayBtn/>
               <button className="btn btn--list movie-card__button" type="button">
                 <svg viewBox="0 0 19 20" width="19" height="20">
                   <use xlinkHref="#add"/>

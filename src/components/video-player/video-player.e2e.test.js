@@ -18,11 +18,8 @@ describe(`VideoPlayer component`, () => {
 
     const VideoPlayerMount = shallow(<VideoPlayerWrapped
       isPlaying={true}
-      videoType={previewVideo.type}
-      videoSrc={previewVideo.src}
       previewImgSrc={videoMock.previewImgSrc}
-      isLoop={previewVideo.isLoop}
-      isMute={previewVideo.isMute}
+      videoData={previewVideo}
     />, {
       disableLifecycleMethods: true,
     });
@@ -35,11 +32,8 @@ describe(`VideoPlayer component`, () => {
 
     const VideoPlayerMount = shallow(<VideoPlayerWrapped
       isPlaying={false}
-      videoType={previewVideo.type}
-      videoSrc={previewVideo.src}
       previewImgSrc={videoMock.previewImgSrc}
-      isLoop={previewVideo.isLoop}
-      isMute={previewVideo.isMute}
+      videoData={previewVideo}
     />, {
       disableLifecycleMethods: true,
     });

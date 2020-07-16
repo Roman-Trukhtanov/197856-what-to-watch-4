@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FullVideoPlayer component Render FullVideoPlayer 1`] = `
+<div
+  className="player"
+>
+  <div
+    className="player__video-wrap"
+    onClick={[Function]}
+    style={
+      Object {
+        "height": "100%",
+        "width": "100%",
+      }
+    }
+  >
+    <video />
+  </div>
+  <button
+    className="player__exit"
+    onClick={[Function]}
+    type="button"
+  >
+    Exit
+  </button>
+  <div
+    className="player__controls"
+  >
+    <div
+      className="player__controls-row"
+    >
+      <div
+        className="player__time"
+      >
+        <progress
+          className="player__progress"
+          max="100"
+          value={30}
+        />
+        <div
+          className="player__toggler"
+          style={
+            Object {
+              "left": "30%",
+            }
+          }
+        >
+          Toggler
+        </div>
+      </div>
+      <div
+        className="player__time-value"
+      >
+        00:01:40
+      </div>
+    </div>
+    <div
+      className="player__controls-row"
+    >
+      <button
+        className="player__play"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          height="21"
+          viewBox="0 0 14 21"
+          width="14"
+        >
+          <use
+            xlinkHref="#pause"
+          />
+        </svg>
+        <span>
+          Pause
+        </span>
+      </button>
+      <div
+        className="player__name"
+      >
+        Some title
+      </div>
+      <button
+        className="player__full-screen"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          height="27"
+          viewBox="0 0 27 27"
+          width="27"
+        >
+          <use
+            xlinkHref="#full-screen"
+          />
+        </svg>
+        <span>
+          Full screen
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;

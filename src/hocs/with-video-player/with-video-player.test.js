@@ -14,16 +14,13 @@ const MockComponent = () => {
 const MockComponentWrapped = withVideoPlayer(MockComponent);
 
 it(`withVideoPlayer is rendered correctly`, () => {
-  const {previewVideo} = videoMock;
+  const {previewVideo, previewImgSrc} = videoMock;
 
   const tree = renderer.create((
     <MockComponentWrapped
       isPlaying={true}
-      videoType={previewVideo.type}
-      videoSrc={previewVideo.src}
-      previewImgSrc={videoMock.previewImgSrc}
-      isLoop={previewVideo.isLoop}
-      isMute={previewVideo.isMute}
+      previewImgSrc={previewImgSrc}
+      videoData={previewVideo}
     />
   ), {
     createNodeMock() {

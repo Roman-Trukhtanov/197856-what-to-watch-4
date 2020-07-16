@@ -7,6 +7,10 @@ import Main from '../main/main';
 import MovieScreen from "../movie-screen/movie-screen";
 import {GenreType, ScreenType} from "../../mocks/const";
 import {getFilteredMovies, getGenresList} from "../../utils";
+import FullVideoPlayer from "../full-video-player/full-video-player";
+import withVideo from "../../hocs/with-video/with-video";
+
+const FullVideoPlayerWrapped = withVideo(FullVideoPlayer);
 
 const MAX_FILTERED_MOVIES = 4;
 
@@ -42,6 +46,15 @@ class App extends PureComponent {
             onMovieCardTitleClick={onMovieCardTitleClick}
           />
         );
+      case ScreenType.PLAYER:
+        return (
+          <FullVideoPlayerWrapped
+            isPlaying={true}
+            title={movies[1].title}
+            previewImgSrc={movies[1].previewImgSrc}
+            videoData={movies[1].fullVideo}
+          />
+        );
     }
 
     return null;
@@ -66,6 +79,14 @@ class App extends PureComponent {
               movie={movies[0]}
               movieComments={movieComments[0]}
               onMovieCardTitleClick={onMovieCardTitleClick}
+            />
+          </Route>
+          <Route exact path="/dev-player">
+            <FullVideoPlayerWrapped
+              isPlaying={true}
+              title={movies[1].title}
+              previewImgSrc={movies[1].previewImgSrc}
+              videoData={movies[1].fullVideo}
             />
           </Route>
         </Switch>

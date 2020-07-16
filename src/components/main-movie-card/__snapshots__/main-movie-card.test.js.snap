@@ -25,6 +25,7 @@ exports[`MainMovieCard component Render MainMovieCard 1`] = `
     >
       <a
         className="logo__link"
+        href="/"
       >
         <span
           className="logo__letter logo__letter--1"
@@ -101,6 +102,7 @@ exports[`MainMovieCard component Render MainMovieCard 1`] = `
         >
           <button
             className="btn btn--play movie-card__button"
+            onClick={[Function]}
             type="button"
           >
             <svg

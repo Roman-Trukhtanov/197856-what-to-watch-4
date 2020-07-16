@@ -13,22 +13,55 @@ const withVideo = (Component) => {
 
       this.state = {
         isPlaying: props.isPlaying,
+        percentProgress: 0,
+        timeElapsed: 0,
       };
 
-      this._onPlay = this._onPlay.bind(this);
-      this._onPause = this._onPause.bind(this);
+      this._handlePlay = this._handlePlay.bind(this);
+      this._handlePause = this._handlePause.bind(this);
+      this._handlePlayBtnClick = this._handlePlayBtnClick.bind(this);
+      this._handleTimeUpdate = this._handleTimeUpdate.bind(this);
+      this._setFullScreen = this._setFullScreen.bind(this);
     }
 
-    _onPlay() {
+    _handlePlay() {
       this.setState({
         isPlaying: true,
       });
     }
 
-    _onPause() {
+    _handlePause() {
       this.setState({
         isPlaying: false,
       });
+    }
+
+    _setTimeElapsed() {
+      const currentVideo = this._videoRef.current;
+
+      const duration = currentVideo.duration;
+      const currentTimeValue = currentVideo.currentTime;
+
+      this.setState({
+        timeElapsed: Math.floor(duration - currentTimeValue),
+        percentProgress: Math.floor(duration * currentTimeValue / 100),
+      });
+    }
+
+    _handlePlayBtnClick() {
+      this.setState((prevState) => ({
+        isPlaying: !prevState.isPlaying,
+      }));
+    }
+
+    _handleTimeUpdate() {
+      this._setTimeElapsed();
+    }
+
+    _setFullScreen() {
+      const video = this._videoRef.current;
+
+      video.requestFullscreen();
     }
 
     _getVideoStyles() {
@@ -40,13 +73,16 @@ const withVideo = (Component) => {
     }
 
     componentDidMount() {
-      const {isPlaying, isMute} = this.props;
+      const {isPlaying, videoData} = this.props;
+      const {isMute} = videoData;
+
       const video = this._videoRef.current;
 
       video.muted = isMute || false;
 
-      video.addEventListener(`play`, this._onPlay);
-      video.addEventListener(`pause`, this._onPause);
+      video.addEventListener(`play`, this._handlePlay);
+      video.addEventListener(`pause`, this._handlePause);
+      video.addEventListener(`timeupdate`, this._handleTimeUpdate);
 
       if (isPlaying) {
         this._timeout = setTimeout(() => {
@@ -58,8 +94,9 @@ const withVideo = (Component) => {
     componentWillUnmount() {
       const video = this._videoRef.current;
 
-      video.removeEventListener(`play`, this._onPlay);
-      video.removeEventListener(`pause`, this._onPause);
+      video.removeEventListener(`play`, this._handlePlay);
+      video.removeEventListener(`pause`, this._handlePause);
+      video.removeEventListener(`timeupdate`, this._handleTimeUpdate);
 
       clearTimeout(this._timeout);
     }
@@ -76,17 +113,34 @@ const withVideo = (Component) => {
 
     render() {
       const {
-        videoSrc,
-        videoType,
         previewImgSrc,
-        isLoop,
+        videoData,
       } = this.props;
+
+      const {
+        src: videoSrc,
+        type: videoType,
+        className,
+        isLoop,
+      } = videoData;
+
+      const {
+        isPlaying: isPlayingReal,
+        timeElapsed,
+        percentProgress,
+      } = this.state;
 
       return (
         <Component
           {...this.props}
+          onPlayBtnClick={this._handlePlayBtnClick}
+          onFullScreenBtnClick={this._setFullScreen}
+          isPlayingReal={isPlayingReal}
+          timeElapsed={timeElapsed}
+          percentProgress={percentProgress}
         >
           <video
+            className={className || ``}
             playsInline
             preload={`auto`}
             poster={previewImgSrc}
@@ -103,12 +157,15 @@ const withVideo = (Component) => {
   }
 
   WithVideo.propTypes = {
+    videoData: PropTypes.shape({
+      src: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      isLoop: PropTypes.bool.isRequired,
+      isMute: PropTypes.bool.isRequired,
+      className: PropTypes.string,
+    }).isRequired,
     isPlaying: PropTypes.bool.isRequired,
-    videoType: PropTypes.string.isRequired,
-    videoSrc: PropTypes.string.isRequired,
     previewImgSrc: PropTypes.string.isRequired,
-    isLoop: PropTypes.bool.isRequired,
-    isMute: PropTypes.bool.isRequired,
   };
 
   return WithVideo;
