@@ -1,9 +1,42 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import withVideoPlayer from "./with-video-player.js";
-import movies from "../../mocks/movies";
 
-const videoMock = movies[0];
+const mockMovieData = {
+  id: 1,
+  title: `Snatch`,
+  genre: `Comedy`,
+  bgColor: `#FDFDFC`,
+  coverSrc: `https://some-link`,
+  bigPosterSrc: `https://some-link`,
+  previewImgSrc: `https://some-link`,
+  isFavorite: false,
+  fullVideo: {
+    className: `player__video`,
+    src: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`,
+    type: `video/mp4`,
+    isAutoPlay: true,
+    isLoop: false,
+    isMute: false,
+  },
+  previewVideo: {
+    src: `https://some-link`,
+    type: `video/mp4`,
+    isAutoPlay: true,
+    isLoop: true,
+    isMute: true,
+  },
+  details: {
+    rate: 3,
+    releaseYear: 2000,
+    ratingCount: 100,
+    level: `Bad`,
+    description: `Description`,
+    director: `Guy Ritchie`,
+    runTime: 104,
+    starring: [`Jason Statham`, `Brad Pitt`, `Benicio Del Toro`],
+  },
+};
 
 const MockComponent = () => {
   return (
@@ -14,11 +47,11 @@ const MockComponent = () => {
 const MockComponentWrapped = withVideoPlayer(MockComponent);
 
 it(`withVideoPlayer is rendered correctly`, () => {
-  const {previewVideo, previewImgSrc} = videoMock;
+  const {previewVideo, previewImgSrc} = mockMovieData;
 
   const tree = renderer.create((
     <MockComponentWrapped
-      isPlaying={true}
+      isStartPlaying={true}
       previewImgSrc={previewImgSrc}
       videoData={previewVideo}
     />

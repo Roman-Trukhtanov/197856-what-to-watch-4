@@ -7,25 +7,28 @@ const ReviewItem = (props) => {
   return (
     <div className="review">
       <blockquote className="review__quote">
-        <p className="review__text">{comment.description}</p>
+        <p className="review__text">{comment.comment}</p>
 
         <footer className="review__details">
-          <cite className="review__author">{comment.author}</cite>
-          <time className="review__date" dateTime="2016-12-20">{comment.date}</time>
+          <cite className="review__author">{comment.user.name}</cite>
+          <time className="review__date" dateTime="2016-12-20">{comment.dateText}</time>
         </footer>
       </blockquote>
 
-      <div className="review__rating">{comment.rate}</div>
+      <div className="review__rating">{comment.rating.toFixed(1)}</div>
     </div>
   );
 };
 
 ReviewItem.propTypes = {
   comment: PropTypes.shape({
-    rate: PropTypes.number.isRequired,
-    author: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    user: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    }),
+    comment: PropTypes.string.isRequired,
+    dateText: PropTypes.string.isRequired,
   }).isRequired,
 };
 

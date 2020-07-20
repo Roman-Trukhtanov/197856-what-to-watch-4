@@ -18,7 +18,7 @@ exports[`DetailsTab component Render DetailsTab 1`] = `
       <span
         className="movie-card__details-value"
       >
-        Wes Andreson
+        Guy Ritchie
       </span>
     </p>
     <p
@@ -32,29 +32,11 @@ exports[`DetailsTab component Render DetailsTab 1`] = `
       <span
         className="movie-card__details-value"
       >
-        Bill Murray
+        Jason Statham
         <br />
-        Edward Norton
+        Brad Pitt
         <br />
-        Jude Law
-        <br />
-        Willem Dafoe
-        <br />
-        Saoirse Ronan
-        <br />
-        Tony Revoloru
-        <br />
-        Tilda Swinton
-        <br />
-        Tom Wilkinson
-        <br />
-        Owen Wilkinson
-        <br />
-        Adrien Brody
-        <br />
-        Ralph Fiennes
-        <br />
-        Jeff Goldblum
+        Benicio Del Toro
       </span>
     </p>
   </div>
@@ -72,7 +54,7 @@ exports[`DetailsTab component Render DetailsTab 1`] = `
       <span
         className="movie-card__details-value"
       >
-        1h 39m
+        1h 44m
       </span>
     </p>
     <p
@@ -86,7 +68,7 @@ exports[`DetailsTab component Render DetailsTab 1`] = `
       <span
         className="movie-card__details-value"
       >
-        Fantasy
+        Comedy
       </span>
     </p>
     <p
@@ -100,7 +82,7 @@ exports[`DetailsTab component Render DetailsTab 1`] = `
       <span
         className="movie-card__details-value"
       >
-        2014
+        2000
       </span>
     </p>
   </div>

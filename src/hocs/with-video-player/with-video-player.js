@@ -27,13 +27,11 @@ const withVideoPlayer = (Component) => {
     }
 
     _renderVideo(movie, videoData) {
-      const {activePlayerId} = this.state;
-
-      const {id, previewImgSrc} = movie;
+      const {previewImgSrc} = movie;
 
       return (
         <VideoPlayerWrapped
-          isPlaying={id === activePlayerId}
+          isStartPlaying={false}
           previewImgSrc={previewImgSrc}
           videoData={videoData}
         />

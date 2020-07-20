@@ -7,7 +7,7 @@ const ReviewsTab = (props) => {
 
   const getReviewItem = (comment, index) => (
     <ReviewItem
-      key={`comment_${movieComments.id}_${index}`}
+      key={`comment_${index}_${Math.floor(Math.random() * 1000)}`}
       comment={comment}
     />
   );
@@ -15,8 +15,8 @@ const ReviewsTab = (props) => {
   return (
     <div className="movie-card__reviews movie-card__row">
       <div className="movie-card__reviews-col">
-        {movieComments.comments.map((comment, index) => {
-          if (index % 2 !== 0) {
+        {movieComments.map((comment, index) => {
+          if (index % 2 !== 0 || !comment.id) {
             return null;
           }
 
@@ -25,8 +25,8 @@ const ReviewsTab = (props) => {
       </div>
 
       <div className="movie-card__reviews-col">
-        {movieComments.comments.map((comment, index) => {
-          if (index % 2 === 0) {
+        {movieComments.map((comment, index) => {
+          if (index % 2 === 0 || !comment.id) {
             return null;
           }
 
@@ -38,10 +38,7 @@ const ReviewsTab = (props) => {
 };
 
 ReviewsTab.propTypes = {
-  movieComments: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    comments: PropTypes.arrayOf(PropTypes.object).isRequired,
-  }).isRequired,
+  movieComments: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ReviewsTab;

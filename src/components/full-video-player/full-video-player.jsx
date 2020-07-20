@@ -2,8 +2,9 @@ import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import {getStringTime} from "../../utils";
 import {connect} from "react-redux";
-import {ScreenType} from "../../mocks/const";
-import {ActionCreator} from "../../reducer";
+import {ScreenType} from "../../const";
+import {ActionCreator as ScreenActionCreator} from "../../reducer/screen/screen";
+import {getPrevScreen} from "../../reducer/screen/selectors";
 
 const FullVideoPlayer = (props) => {
   const {
@@ -96,12 +97,12 @@ FullVideoPlayer.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  prevScreen: state.prevScreen,
+  prevScreen: getPrevScreen(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onPlayerExitBtnClick(prevScreen = ScreenType.MAIN) {
-    dispatch(ActionCreator.changeScreen(prevScreen));
+    dispatch(ScreenActionCreator.changeScreen(prevScreen));
   }
 });
 

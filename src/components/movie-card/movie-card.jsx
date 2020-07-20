@@ -1,5 +1,6 @@
 import React, {memo} from "react";
 import PropTypes from "prop-types";
+import {getImgBgStyle, scrollToTop} from "../../utils";
 
 const MovieCard = (props) => {
   const {
@@ -13,6 +14,14 @@ const MovieCard = (props) => {
 
   const {previewVideo} = movie;
 
+  const goToSelectedMovie = (evt) => {
+    evt.preventDefault();
+
+    scrollToTop();
+
+    onMovieCardTitleClick(movie.id);
+  };
+
   return (
     <article
       className="small-movie-card catalog__movies-card"
@@ -21,14 +30,19 @@ const MovieCard = (props) => {
       }}
       onMouseLeave={onMouseLeave}
     >
-      <div className="small-movie-card__image" onClick={onMovieCardTitleClick}>
+      <div className="small-movie-card__image" onClick={goToSelectedMovie}>
         {activePlayerId === movie.id
           ? renderVideo(movie, previewVideo)
-          : <img src={movie.previewImgSrc} alt={movie.title} width="280" height="175"/>
+          : <img
+            src={movie.previewImgSrc}
+            alt={movie.title}
+            width="280" height="175"
+            style={getImgBgStyle(movie.bgColor)}
+          />
         }
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html" onClick={onMovieCardTitleClick}>{movie.title}</a>
+        <a className="small-movie-card__link" href="movie-page.html" onClick={goToSelectedMovie}>{movie.title}</a>
       </h3>
     </article>
   );
@@ -43,6 +57,7 @@ MovieCard.propTypes = {
     title: PropTypes.string.isRequired,
     previewImgSrc: PropTypes.string.isRequired,
     previewVideo: PropTypes.object.isRequired,
+    bgColor: PropTypes.string,
   }).isRequired,
   renderVideo: PropTypes.func.isRequired,
   activePlayerId: PropTypes.number.isRequired,

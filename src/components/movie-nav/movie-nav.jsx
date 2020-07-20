@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {TabType} from "../../mocks/const";
+import {TabType} from "../../const";
 
 const MovieNav = (props) => {
   const {

@@ -6,15 +6,16 @@ import MovieList from "../movie-list/movie-list";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
 import Header from "../header/header";
 import Footer from "../footer/footer";
-import {TabType} from "../../mocks/const";
+import {TabType} from "../../const";
 import PlayBtn from "../play-btn/play-btn";
+import {getImgBgStyle} from "../../utils";
 
 const MovieListWrapped = withVideoPlayer(MovieList);
 const TabsWrapped = withActiveItem(Tabs);
 
 const MovieScreen = (props) => {
   const {
-    movies,
+    moreMovies,
     movie,
     movieComments,
     onMovieCardTitleClick,
@@ -25,7 +26,7 @@ const MovieScreen = (props) => {
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src={movie.coverSrc} alt="The Grand Budapest Hotel"/>
+            <img src={movie.coverSrc} alt={movie.title} style={getImgBgStyle(movie.bgColor)}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -62,6 +63,7 @@ const MovieScreen = (props) => {
                 alt={movie.title}
                 width="218"
                 height="327"
+                style={getImgBgStyle(movie.bgColor)}
               />
             </div>
 
@@ -80,12 +82,10 @@ const MovieScreen = (props) => {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <div className="catalog__movies-list">
-            <MovieListWrapped
-              movies={movies}
-              onMovieCardTitleClick={onMovieCardTitleClick}
-            />
-          </div>
+          <MovieListWrapped
+            movies={moreMovies}
+            onMovieCardTitleClick={onMovieCardTitleClick}
+          />
         </section>
 
         <Footer/>
@@ -95,18 +95,19 @@ const MovieScreen = (props) => {
 };
 
 MovieScreen.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  moreMovies: PropTypes.arrayOf(PropTypes.object).isRequired,
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     coverSrc: PropTypes.string.isRequired,
     bigPosterSrc: PropTypes.string.isRequired,
+    bgColor: PropTypes.string,
     details: PropTypes.shape({
       releaseYear: PropTypes.number.isRequired,
     }).isRequired,
   }).isRequired,
-  movieComments: PropTypes.object.isRequired,
+  movieComments: PropTypes.arrayOf(PropTypes.object).isRequired,
   onMovieCardTitleClick: PropTypes.func.isRequired,
 };
 

@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer";
+import {ActionCreator as AppStateActionCreator} from "../../reducer/app-state/app-state";
+import {getCurrentGenre} from "../../reducer/app-state/selectors";
 
 const GenresList = (props) => {
   const {
@@ -36,7 +37,7 @@ GenresList.propTypes = {
 GenresList.propTypes = {};
 
 const mapStateToProps = (state) => ({
-  currentGenre: state.currentGenre,
+  currentGenre: getCurrentGenre(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -45,9 +46,8 @@ const mapDispatchToProps = (dispatch) => ({
       return;
     }
 
-    dispatch(ActionCreator.changeGenre(genre));
-    dispatch(ActionCreator.setFilteredMovies(genre));
-    dispatch(ActionCreator.resetCollectionNumber());
+    dispatch(AppStateActionCreator.changeGenre(genre));
+    dispatch(AppStateActionCreator.resetCollectionNumber());
   },
 });
 

@@ -1,33 +1,55 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from "./components/app/app";
-import promoMovie from "./mocks/promo-movie";
-import moviesData from './mocks/movies';
-import {createStore} from "redux";
-import {reducer} from "./reducer";
+import {createStore, applyMiddleware} from "redux";
+import {composeWithDevTools} from "redux-devtools-extension";
 import {Provider} from "react-redux";
-import {
-  movieComments
-} from "./mocks/movie-comments";
+import thunk from "redux-thunk";
+import {createAPI} from "./api";
+import reducer from "./reducer/reducer";
+import {Operation as DataOperation} from "./reducer/data/data";
 
 const rootElement = document.querySelector(`#root`);
 
+const api = createAPI(() => {});
+
+window.api = api;
+
 const store = createStore(
     reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api))
+    )
 );
 
-const init = () => {
+const initApp = () => {
   ReactDOM.render(
       <Provider store={store}>
-        <App
-          promoMovieData={promoMovie}
-          movies={moviesData}
-          movieComments={movieComments}
-        />
+        <App/>
       </Provider>,
       rootElement
   );
 };
 
-init();
+const showError = (err) => {
+  ReactDOM.render(
+      <div>
+        <p><b>Произошла ошибка.</b> Попробуйте обновить страницу...</p>
+        <p><b>Текст ошибки:</b> {err.toString().replace(`Error: `, ``)}</p>
+      </div>,
+      rootElement
+  );
+};
+
+const loadedData = [
+  store.dispatch(DataOperation.loadPromoMovie()),
+  store.dispatch(DataOperation.loadMovies())
+];
+
+Promise.all(loadedData).then(() => {
+  initApp();
+}).catch((err) => {
+  showError(err);
+  throw err;
+});
+

@@ -7,7 +7,7 @@ exports[`withAudio is rendered correctly 1`] = `
     controls={false}
     loop={true}
     playsInline={true}
-    poster="http://placeimg.com/280/175/any/0"
+    poster="https://some-link"
     preload="auto"
     style={
       Object {
@@ -18,7 +18,7 @@ exports[`withAudio is rendered correctly 1`] = `
     }
   >
     <source
-      src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+      src="https://some-link"
       type="video/mp4"
     />
   </video>

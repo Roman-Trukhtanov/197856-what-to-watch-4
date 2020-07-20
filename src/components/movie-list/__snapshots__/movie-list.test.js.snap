@@ -3,6 +3,11 @@
 exports[`MovieList component Render MovieList 1`] = `
 <div
   className="catalog__movies-list"
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
 >
   <article
     className="small-movie-card catalog__movies-card"
@@ -12,32 +17,17 @@ exports[`MovieList component Render MovieList 1`] = `
     <div
       className="small-movie-card__image"
       onClick={[Function]}
-    />
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[Function]}
-      >
-        Фантастические твари
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-      onClick={[Function]}
     >
       <img
-        alt="Форсаж"
+        alt="Snatch"
         height="175"
-        src="http://placeimg.com/280/175/any/1"
+        src="https://some-link"
+        style={
+          Object {
+            "backgroundColor": "#FDFDFC",
+            "display": "block",
+          }
+        }
         width="280"
       />
     </div>
@@ -49,231 +39,7 @@ exports[`MovieList component Render MovieList 1`] = `
         href="movie-page.html"
         onClick={[Function]}
       >
-        Форсаж
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-      onClick={[Function]}
-    >
-      <img
-        alt="Жажда скорости"
-        height="175"
-        src="http://placeimg.com/280/175/any/2"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[Function]}
-      >
-        Жажда скорости
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-      onClick={[Function]}
-    >
-      <img
-        alt="Гарри Поттер"
-        height="175"
-        src="http://placeimg.com/280/175/any/3"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[Function]}
-      >
-        Гарри Поттер
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-      onClick={[Function]}
-    >
-      <img
-        alt="Спецназ"
-        height="175"
-        src="http://placeimg.com/280/175/any/4"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[Function]}
-      >
-        Спецназ
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-      onClick={[Function]}
-    >
-      <img
-        alt="Игра престолов"
-        height="175"
-        src="http://placeimg.com/280/175/any/5"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[Function]}
-      >
-        Игра престолов
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-      onClick={[Function]}
-    >
-      <img
-        alt="Стрела"
-        height="175"
-        src="http://placeimg.com/280/175/any/6"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[Function]}
-      >
-        Стрела
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-      onClick={[Function]}
-    >
-      <img
-        alt="Флэш"
-        height="175"
-        src="http://placeimg.com/280/175/any/7"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[Function]}
-      >
-        Флэш
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-      onClick={[Function]}
-    >
-      <img
-        alt="Шерлок"
-        height="175"
-        src="http://placeimg.com/280/175/any/8"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[Function]}
-      >
-        Шерлок
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-      onClick={[Function]}
-    >
-      <img
-        alt="Доктор Хаус"
-        height="175"
-        src="http://placeimg.com/280/175/any/9"
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-        onClick={[Function]}
-      >
-        Доктор Хаус
+        Snatch
       </a>
     </h3>
   </article>

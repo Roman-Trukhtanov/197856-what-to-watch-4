@@ -4,7 +4,7 @@ import OverviewTab from "../overview-tab/overview-tab";
 import DetailsTab from "../details-tab/details-tab";
 import ReviewsTab from "../reviews-tab/reviews-tab";
 import MovieNav from "../movie-nav/movie-nav";
-import {TabType} from "../../mocks/const";
+import {TabType} from "../../const";
 
 const Tabs = (props) => {
   const {
@@ -53,7 +53,7 @@ const Tabs = (props) => {
 
 Tabs.propTypes = {
   movie: PropTypes.object.isRequired,
-  movieComments: PropTypes.object.isRequired,
+  movieComments: PropTypes.arrayOf(PropTypes.object).isRequired,
   onItemClick: PropTypes.func.isRequired,
   activeItem: PropTypes.string.isRequired,
 };

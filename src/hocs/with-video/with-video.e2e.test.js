@@ -3,9 +3,42 @@ import PropTypes from "prop-types";
 import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import withVideo from "./with-video.js";
-import moviesData from "../../mocks/movies";
 
-const videoMock = moviesData[0];
+const mockMovieData = {
+  id: 1,
+  title: `Snatch`,
+  genre: `Comedy`,
+  bgColor: `#FDFDFC`,
+  coverSrc: `https://some-link`,
+  bigPosterSrc: `https://some-link`,
+  previewImgSrc: `https://some-link`,
+  isFavorite: false,
+  fullVideo: {
+    className: `player__video`,
+    src: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`,
+    type: `video/mp4`,
+    isAutoPlay: false,
+    isLoop: false,
+    isMute: false,
+  },
+  previewVideo: {
+    src: `https://some-link`,
+    type: `video/mp4`,
+    isAutoPlay: true,
+    isLoop: true,
+    isMute: true,
+  },
+  details: {
+    rate: 3,
+    releaseYear: 2000,
+    ratingCount: 100,
+    level: `Bad`,
+    description: `Description`,
+    director: `Guy Ritchie`,
+    runTime: 104,
+    starring: [`Jason Statham`, `Brad Pitt`, `Benicio Del Toro`],
+  },
+};
 
 configure({adapter: new Adapter()});
 
@@ -27,15 +60,15 @@ Player.propTypes = {
   ]).isRequired,
 };
 
-it(`Checks that after 1 second the video started`, () => {
+it(`Checks that after 1 second the video started (with autoplay)`, () => {
   jest.useFakeTimers();
 
   const PlayerWrapped = withVideo(Player);
 
-  const {previewVideo, previewImgSrc} = videoMock;
+  const {previewVideo, previewImgSrc} = mockMovieData;
 
   const wrapper = mount(<PlayerWrapped
-    isPlaying={true}
+    isStartPlaying={false}
     previewImgSrc={previewImgSrc}
     videoData={previewVideo}
   />);
@@ -51,17 +84,17 @@ it(`Checks that after 1 second the video started`, () => {
   expect(_videoRef.current.play).toHaveBeenCalledTimes(1);
 });
 
-it(`Checks that after 1 second the video did not play`, () => {
+it(`Checks that after 1 second the video did not play (without autoplay)`, () => {
   jest.useFakeTimers();
 
   const PlayerWrapped = withVideo(Player);
 
-  const {previewVideo, previewImgSrc} = videoMock;
+  const {fullVideo, previewImgSrc} = mockMovieData;
 
   const wrapper = mount(<PlayerWrapped
-    isPlaying={false}
+    isStartPlaying={false}
     previewImgSrc={previewImgSrc}
-    videoData={previewVideo}
+    videoData={fullVideo}
   />);
 
   window.HTMLMediaElement.prototype.play = () => {};
@@ -78,10 +111,10 @@ it(`Checks that after 1 second the video did not play`, () => {
 it(`Checks that HOC's callback turn on video (play)`, () => {
   const PlayerWrapped = withVideo(Player);
 
-  const {previewVideo, previewImgSrc} = videoMock;
+  const {previewVideo, previewImgSrc} = mockMovieData;
 
   const wrapper = mount(<PlayerWrapped
-    isPlaying={false}
+    isStartPlaying={false}
     previewImgSrc={previewImgSrc}
     videoData={previewVideo}
   />);
@@ -92,8 +125,6 @@ it(`Checks that HOC's callback turn on video (play)`, () => {
 
   jest.spyOn(_videoRef.current, `play`);
 
-  wrapper.instance().componentDidMount();
-
   wrapper.find(`button`).simulate(`click`);
 
   expect(_videoRef.current.play).toHaveBeenCalledTimes(1);
@@ -102,15 +133,16 @@ it(`Checks that HOC's callback turn on video (play)`, () => {
 it(`Checks that HOC's callback turn off video (pause)`, () => {
   const PlayerWrapped = withVideo(Player);
 
-  const {previewVideo, previewImgSrc} = videoMock;
+  const {previewVideo, previewImgSrc} = mockMovieData;
+
+  window.HTMLMediaElement.prototype.play = () => {};
+  window.HTMLMediaElement.prototype.pause = () => {};
 
   const wrapper = mount(<PlayerWrapped
-    isPlaying={true}
+    isStartPlaying={true}
     previewImgSrc={previewImgSrc}
     videoData={previewVideo}
   />);
-
-  window.HTMLMediaElement.prototype.pause = () => {};
 
   const {_videoRef} = wrapper.instance();
 

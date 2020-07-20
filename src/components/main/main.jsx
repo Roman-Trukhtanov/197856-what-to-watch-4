@@ -11,16 +11,18 @@ import Footer from "../footer/footer";
 const MovieListWrapped = withVideoPlayer(MovieList);
 
 const Main = (props) => {
-  const {filteredMovies, movieCollectionNumber, genres} = props;
-  const {title, genre, year} = props.promoMovieData;
+  const {
+    promoMovieData,
+    filteredMovies,
+    movieCollectionNumber,
+    genres,
+  } = props;
   const onMovieCardTitleClick = props.onMovieCardTitleClick;
 
   return (
     <React.Fragment>
       <MainMovieCard
-        title={title}
-        genre={genre}
-        year={year}
+        promoMovieData={promoMovieData}
       />
 
       <div className="page-content">
@@ -44,12 +46,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  promoMovieData:
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      genre: PropTypes.string.isRequired,
-      year: PropTypes.number.isRequired,
-    }),
+  promoMovieData: PropTypes.object.isRequired,
   movieCollectionNumber: PropTypes.number.isRequired,
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   filteredMovies: PropTypes.arrayOf(PropTypes.object).isRequired,

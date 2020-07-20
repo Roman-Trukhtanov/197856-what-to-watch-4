@@ -1,42 +1,34 @@
-import {extend, getFilteredMovies} from "./utils";
-import allMovies from "./mocks/movies";
-import {GenreType, ScreenType} from "./mocks/const";
-
-const DEFAULT_COLLECTION_NUMBER = 1;
+import {extend} from "../../utils";
+import {
+  DEFAULT_GENRE,
+  DEFAULT_COLLECTION_NUMBER,
+  DEFAULT_SELECTED_MOVIE_ID,
+} from "../../const";
 
 const initialState = {
-  prevScreen: ``,
-  screen: ScreenType.MAIN,
-  currentGenre: GenreType.ALL_GENRES,
-  filteredMovies: allMovies,
+  selectedMovieID: DEFAULT_SELECTED_MOVIE_ID,
+  currentGenre: DEFAULT_GENRE,
   movieCollectionNumber: DEFAULT_COLLECTION_NUMBER,
 };
 
 const ActionType = {
-  CHANGE_GENRE: `CHANGE_GENRE`,
-  SET_FILTERED_MOVIES: `SET_FILTERED_MOVIES`,
+  SET_SELECTED_MOVIE_ID: `SET_SELECTED_MOVIE_ID`,
   INCREMENT_COLLECTION: `INCREMENT_COLLECTION`,
   RESET_COLLECTION_NUMBER: `RESET_COLLECTION_NUMBER`,
-  CHANGE_SCREEN: `CHANGE_SCREEN`,
+  CHANGE_GENRE: `CHANGE_GENRE`,
 };
 
 const ActionCreator = {
-  changeScreen(screen = ScreenType.MAIN) {
+  setSelectedMovieID(movieID = DEFAULT_SELECTED_MOVIE_ID) {
     return {
-      type: ActionType.CHANGE_SCREEN,
-      payload: screen,
+      type: ActionType.SET_SELECTED_MOVIE_ID,
+      payload: movieID,
     };
   },
-  changeGenre(genre = GenreType.ALL_GENRES) {
+  changeGenre(genre = DEFAULT_GENRE) {
     return {
       type: ActionType.CHANGE_GENRE,
       payload: genre,
-    };
-  },
-  setFilteredMovies(genre = GenreType.ALL_GENRES, movies = allMovies) {
-    return {
-      type: ActionType.SET_FILTERED_MOVIES,
-      payload: getFilteredMovies(genre, movies),
     };
   },
   incrementCollection() {
@@ -55,13 +47,13 @@ const ActionCreator = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionType.SET_SELECTED_MOVIE_ID:
+      return extend(state, {
+        selectedMovieID: action.payload,
+      });
     case ActionType.CHANGE_GENRE:
       return extend(state, {
         currentGenre: action.payload,
-      });
-    case ActionType.SET_FILTERED_MOVIES:
-      return extend(state, {
-        filteredMovies: action.payload,
       });
     case ActionType.INCREMENT_COLLECTION:
       return extend(state, {
@@ -70,11 +62,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.RESET_COLLECTION_NUMBER:
       return extend(state, {
         movieCollectionNumber: action.payload,
-      });
-    case ActionType.CHANGE_SCREEN:
-      return extend(state, {
-        prevScreen: state.screen,
-        screen: action.payload,
       });
   }
 
