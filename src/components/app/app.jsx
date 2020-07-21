@@ -17,58 +17,95 @@ import {getScreen} from "../../reducer/screen/selectors";
 import {ActionCreator as AppStateActionCreator} from "../../reducer/app-state/app-state";
 import {ActionCreator as ScreenActionCreator} from "../../reducer/screen/screen";
 import {Operation as DataOperation} from "../../reducer/data/data";
+import SignIn from "../sign-in/sign-in";
+import {AuthorizationStatus} from "../../const";
+import {getAuthStatus} from "../../reducer/user/selector";
 
 const FullVideoPlayerWrapped = withVideo(FullVideoPlayer);
 
 class App extends PureComponent {
   _renderScreen() {
+    const {screen} = this.props;
+
+    switch (screen) {
+      case ScreenType.MAIN:
+        return this._renderMainScreen();
+      case ScreenType.MOVIE:
+        return this._renderMovieScreen();
+      case ScreenType.PLAYER:
+        return this._renderFullVideoPlayer();
+      case ScreenType.SIGN_IN:
+        return this._renderSignInScreen();
+    }
+
+    return null;
+  }
+
+  _getCurrentMovie() {
     const {
-      screen,
-      promoMovieData,
-      selectedMovieID,
-      randomMovies,
       movies,
+      selectedMovieID
+    } = this.props;
+
+    return movies.find((movie) => movie.id === selectedMovieID);
+  }
+
+  _renderMainScreen() {
+    const {
+      promoMovieData,
       genres,
-      movieComments,
       filteredMovies,
       movieCollectionNumber,
       onMovieCardTitleClick,
     } = this.props;
 
-    const currentMovie = movies.find((movie) => movie.id === selectedMovieID);
+    return (
+      <Main
+        promoMovieData={promoMovieData}
+        genres={genres}
+        filteredMovies={filteredMovies}
+        movieCollectionNumber={movieCollectionNumber}
+        onMovieCardTitleClick={onMovieCardTitleClick}
+      />
+    );
+  }
 
-    switch (screen) {
-      case ScreenType.MAIN:
-        return (
-          <Main
-            promoMovieData={promoMovieData}
-            genres={genres}
-            filteredMovies={filteredMovies}
-            movieCollectionNumber={movieCollectionNumber}
-            onMovieCardTitleClick={onMovieCardTitleClick}
-          />
-        );
-      case ScreenType.MOVIE:
-        return (
-          <MovieScreen
-            moreMovies={randomMovies}
-            movie={currentMovie}
-            movieComments={movieComments}
-            onMovieCardTitleClick={onMovieCardTitleClick}
-          />
-        );
-      case ScreenType.PLAYER:
-        return (
-          <FullVideoPlayerWrapped
-            isStartPlaying={false}
-            title={currentMovie.title}
-            previewImgSrc={currentMovie.previewImgSrc}
-            videoData={currentMovie.fullVideo}
-          />
-        );
-    }
+  _renderMovieScreen() {
+    const {
+      randomMovies,
+      movieComments,
+      onMovieCardTitleClick,
+    } = this.props;
 
-    return null;
+    return (
+      <MovieScreen
+        moreMovies={randomMovies}
+        movie={this._getCurrentMovie()}
+        movieComments={movieComments}
+        onMovieCardTitleClick={onMovieCardTitleClick}
+      />
+    );
+  }
+
+  _renderFullVideoPlayer() {
+    const currentMovie = this._getCurrentMovie();
+
+    return (
+      <FullVideoPlayerWrapped
+        isStartPlaying={false}
+        title={currentMovie.title}
+        previewImgSrc={currentMovie.previewImgSrc}
+        videoData={currentMovie.fullVideo}
+      />
+    );
+  }
+
+  _renderSignInScreen() {
+    const {authorizationStatus} = this.props;
+
+    return authorizationStatus === AuthorizationStatus.NO_AUTH
+      ? <SignIn/>
+      : this._renderMainScreen();
   }
 
   render() {
@@ -100,6 +137,9 @@ class App extends PureComponent {
               videoData={movies[0].fullVideo}
             />
           </Route>
+          <Route exact path="/sign-in">
+            <SignIn/>
+          </Route>
         </Switch>
       </BrowserRouter>
     );
@@ -116,6 +156,7 @@ App.propTypes = {
   movieComments: PropTypes.arrayOf(PropTypes.object).isRequired,
   filteredMovies: PropTypes.arrayOf(PropTypes.object).isRequired,
   movieCollectionNumber: PropTypes.number.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
   onMovieCardTitleClick: PropTypes.func.isRequired,
 };
 
@@ -128,6 +169,7 @@ const mapStateToProps = (state) => ({
   promoMovieData: getPromoMovie(state),
   filteredMovies: getFilteredMovies(state),
   movieCollectionNumber: getMovieCollectionNumber(state),
+  authorizationStatus: getAuthStatus(state),
   movieComments: getMovieComments(state),
 });
 

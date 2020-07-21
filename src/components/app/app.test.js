@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {App} from "./app.jsx";
-import {ScreenType} from "../../const";
+import {AuthorizationStatus, ScreenType} from "../../const";
 import NameSpace from "../../reducer/name-space";
 
 const mockStore = configureStore([]);
@@ -72,6 +72,9 @@ describe(`App component`, () => {
       [NameSpace.SCREEN]: {
         prevScreen: ``,
         screen: ScreenType.MAIN,
+      },
+      [NameSpace.USER]: {
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
       }
     });
 
@@ -89,6 +92,7 @@ describe(`App component`, () => {
               filteredMovies={mockMovieData}
               movieCollectionNumber={1}
               onMovieCardTitleClick={() => {}}
+              authorizationStatus={AuthorizationStatus.NO_AUTH}
             />
           </Provider>
       ).toJSON();

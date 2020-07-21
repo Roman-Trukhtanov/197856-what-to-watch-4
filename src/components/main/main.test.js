@@ -4,6 +4,7 @@ import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import Main from "./main";
 import NameSpace from "../../reducer/name-space";
+import {AuthorizationStatus, ScreenType} from "../../const";
 
 const mockStore = configureStore([]);
 
@@ -50,6 +51,12 @@ describe(`Main component`, () => {
     const store = mockStore({
       [NameSpace.APP_STATE]: {
         currentGenre: `All Genres`,
+      },
+      [NameSpace.SCREEN]: {
+        screen: ScreenType.MAIN,
+      },
+      [NameSpace.USER]: {
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
       },
     });
 

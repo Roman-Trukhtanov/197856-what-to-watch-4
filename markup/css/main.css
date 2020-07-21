@@ -1126,6 +1126,7 @@ main {
   padding-bottom: 20px;
   padding-right: 75px;
   position: relative;
+  word-break: break-word;
   margin-bottom: 10px; }
   .review:last-child {
     margin-bottom: 0px;

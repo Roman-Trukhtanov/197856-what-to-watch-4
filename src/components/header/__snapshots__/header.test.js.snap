@@ -9,7 +9,7 @@ exports[`Header component Render Header 1`] = `
   >
     <a
       className="logo__link"
-      href="/"
+      href={null}
     >
       <span
         className="logo__letter logo__letter--1"
@@ -31,16 +31,13 @@ exports[`Header component Render Header 1`] = `
   <div
     className="user-block"
   >
-    <div
-      className="user-block__avatar"
+    <a
+      className="user-block__link"
+      href="/sign-in"
+      onClick={[Function]}
     >
-      <img
-        alt="User avatar"
-        height="63"
-        src="img/avatar.jpg"
-        width="63"
-      />
-    </div>
+      Sign in
+    </a>
   </div>
 </header>
 `;

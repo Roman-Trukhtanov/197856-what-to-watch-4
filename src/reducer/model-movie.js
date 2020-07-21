@@ -1,4 +1,6 @@
-import {DEFAULT_VIDEO_TYPE} from "../const";
+import {DEFAULT_VIDEO_TYPE, VideoType} from "../const";
+
+const VIDEO_TYPE_REGEXP = /webm|mp4$/;
 
 export default class ModelMovie {
   constructor(data) {
@@ -15,14 +17,14 @@ export default class ModelMovie {
     this.fullVideo = {
       className: `player__video`,
       src: data[`video_link`],
-      type: DEFAULT_VIDEO_TYPE,
+      type: ModelMovie.getVideoType(data[`video_link`]),
       isAutoPlay: true,
       isLoop: false,
       isMute: false,
     };
     this.previewVideo = {
       src: data[`preview_video_link`],
-      type: DEFAULT_VIDEO_TYPE,
+      type: ModelMovie.getVideoType(data[`video_link`]),
       isAutoPlay: true,
       isLoop: true,
       isMute: true,
@@ -53,6 +55,16 @@ export default class ModelMovie {
     }
 
     return `Bad`;
+  }
+
+  static getVideoType(link) {
+    const matchedVideoType = link.match(VIDEO_TYPE_REGEXP);
+
+    if (matchedVideoType) {
+      return VideoType[matchedVideoType[0].toUpperCase()];
+    }
+
+    return DEFAULT_VIDEO_TYPE;
   }
 
   static parseMovie(data) {
