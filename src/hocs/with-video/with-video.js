@@ -12,7 +12,7 @@ const withVideo = (Component) => {
       this._videoRef = createRef();
 
       this.state = {
-        isPlaying: props.isPlaying,
+        isPlaying: props.isStartPlaying || false,
         percentProgress: 0,
         timeElapsed: 0,
       };
@@ -41,10 +41,11 @@ const withVideo = (Component) => {
 
       const duration = currentVideo.duration;
       const currentTimeValue = currentVideo.currentTime;
+      const percentProgress = +(currentTimeValue * 100 / duration).toFixed(2);
 
       this.setState({
         timeElapsed: Math.floor(duration - currentTimeValue),
-        percentProgress: Math.floor(duration * currentTimeValue / 100),
+        percentProgress,
       });
     }
 
@@ -73,8 +74,8 @@ const withVideo = (Component) => {
     }
 
     componentDidMount() {
-      const {isPlaying, videoData} = this.props;
-      const {isMute} = videoData;
+      const {isStartPlaying, videoData} = this.props;
+      const {isMute, isAutoPlay} = videoData;
 
       const video = this._videoRef.current;
 
@@ -84,7 +85,13 @@ const withVideo = (Component) => {
       video.addEventListener(`pause`, this._handlePause);
       video.addEventListener(`timeupdate`, this._handleTimeUpdate);
 
-      if (isPlaying) {
+      if (isStartPlaying) {
+        video.play();
+
+        return;
+      }
+
+      if (isAutoPlay) {
         this._timeout = setTimeout(() => {
           video.play();
         }, this.START_TIMEOUT);
@@ -160,11 +167,12 @@ const withVideo = (Component) => {
     videoData: PropTypes.shape({
       src: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
+      isAutoPlay: PropTypes.bool.isRequired,
       isLoop: PropTypes.bool.isRequired,
       isMute: PropTypes.bool.isRequired,
       className: PropTypes.string,
     }).isRequired,
-    isPlaying: PropTypes.bool.isRequired,
+    isStartPlaying: PropTypes.bool.isRequired,
     previewImgSrc: PropTypes.string.isRequired,
   };
 

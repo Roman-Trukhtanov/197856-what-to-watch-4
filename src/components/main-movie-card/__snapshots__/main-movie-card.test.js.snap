@@ -8,8 +8,14 @@ exports[`MainMovieCard component Render MainMovieCard 1`] = `
     className="movie-card__bg"
   >
     <img
-      alt="The Grand Budapest Hotel"
-      src="img/bg-the-grand-budapest-hotel.jpg"
+      alt="Snatch"
+      src="https://some-link"
+      style={
+        Object {
+          "backgroundColor": "#FDFDFC",
+          "display": "block",
+        }
+      }
     />
   </div>
   <h1
@@ -69,9 +75,15 @@ exports[`MainMovieCard component Render MainMovieCard 1`] = `
         className="movie-card__poster"
       >
         <img
-          alt="The Grand Budapest Hotel poster"
+          alt="Snatch"
           height="327"
-          src="img/the-grand-budapest-hotel-poster.jpg"
+          src="https://some-link"
+          style={
+            Object {
+              "backgroundColor": "#FDFDFC",
+              "display": "block",
+            }
+          }
           width="218"
         />
       </div>
@@ -81,7 +93,7 @@ exports[`MainMovieCard component Render MainMovieCard 1`] = `
         <h2
           className="movie-card__title"
         >
-          The Grand Budapest Hotel
+          Snatch
         </h2>
         <p
           className="movie-card__meta"
@@ -89,12 +101,12 @@ exports[`MainMovieCard component Render MainMovieCard 1`] = `
           <span
             className="movie-card__genre"
           >
-            Thrillers
+            Comedy
           </span>
           <span
             className="movie-card__year"
           >
-            2020
+            2000
           </span>
         </p>
         <div

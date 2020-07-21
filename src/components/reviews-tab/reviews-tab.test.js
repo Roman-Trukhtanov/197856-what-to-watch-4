@@ -1,13 +1,23 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import ReviewsTab from "./reviews-tab";
-import {movieComments} from "../../mocks/movie-comments";
+
+const mockCommentData = [{
+  id: 1,
+  user: {
+    id: 2,
+    name: `Other user`,
+  },
+  rating: 7.2,
+  comment: `Other comment`,
+  dateText: `June 20, 2020`,
+}];
 
 describe(`ReviewsTab component`, () => {
   it(`Render ReviewsTab`, () => {
     const tree = renderer
       .create(<ReviewsTab
-        movieComments={movieComments[0]}
+        movieComments={mockCommentData}
       />)
       .toJSON();
 

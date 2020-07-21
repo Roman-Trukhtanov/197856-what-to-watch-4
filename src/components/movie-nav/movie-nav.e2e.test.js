@@ -2,7 +2,7 @@ import React from "react";
 import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import MovieNav from "./movie-nav";
-import {TabType} from "../../mocks/const";
+import {TabType} from "../../const";
 
 configure({
   adapter: new Adapter(),

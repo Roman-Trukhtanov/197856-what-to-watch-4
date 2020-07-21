@@ -10,7 +10,7 @@ exports[`ReviewItem component Render ReviewItem 1`] = `
     <p
       className="review__text"
     >
-      Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.
+      Other comment
     </p>
     <footer
       className="review__details"
@@ -18,20 +18,20 @@ exports[`ReviewItem component Render ReviewItem 1`] = `
       <cite
         className="review__author"
       >
-        Kate Muir
+        Other user
       </cite>
       <time
         className="review__date"
         dateTime="2016-12-20"
       >
-        December 24, 2016
+        June 20, 2020
       </time>
     </footer>
   </blockquote>
   <div
     className="review__rating"
   >
-    8.9
+    7.2
   </div>
 </div>
 `;

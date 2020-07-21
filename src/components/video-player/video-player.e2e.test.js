@@ -2,23 +2,55 @@ import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import VideoPlayer from "./video-player";
-import movies from "../../mocks/movies";
 import withVideo from "../../hocs/with-video/with-video";
 
 const VideoPlayerWrapped = withVideo(VideoPlayer);
 
 Enzyme.configure({adapter: new Adapter()});
 
-const videoMock = movies[0];
+const mockMovieData = {
+  id: 1,
+  title: `Snatch`,
+  genre: `Comedy`,
+  bgColor: `#FDFDFC`,
+  coverSrc: `https://some-link`,
+  bigPosterSrc: `https://some-link`,
+  previewImgSrc: `https://some-link`,
+  isFavorite: false,
+  fullVideo: {
+    className: `player__video`,
+    src: `http://media.xiph.org/mango/tears_of_steel_1080p.webm`,
+    type: `video/mp4`,
+    isAutoPlay: true,
+    isLoop: false,
+    isMute: false,
+  },
+  previewVideo: {
+    src: `https://some-link`,
+    type: `video/mp4`,
+    isAutoPlay: true,
+    isLoop: true,
+    isMute: true,
+  },
+  details: {
+    rate: 3,
+    releaseYear: 2000,
+    ratingCount: 100,
+    level: `Bad`,
+    description: `Description`,
+    director: `Guy Ritchie`,
+    runTime: 104,
+    starring: [`Jason Statham`, `Brad Pitt`, `Benicio Del Toro`],
+  },
+};
 
 describe(`VideoPlayer component`, () => {
   it(`should contain the playback state`, () => {
-
-    const {previewVideo} = videoMock;
+    const {previewVideo} = mockMovieData;
 
     const VideoPlayerMount = shallow(<VideoPlayerWrapped
-      isPlaying={true}
-      previewImgSrc={videoMock.previewImgSrc}
+      isStartPlaying={true}
+      previewImgSrc={mockMovieData.previewImgSrc}
       videoData={previewVideo}
     />, {
       disableLifecycleMethods: true,
@@ -28,11 +60,11 @@ describe(`VideoPlayer component`, () => {
   });
 
   it(`should contain the pause state`, () => {
-    const {previewVideo} = videoMock;
+    const {previewVideo} = mockMovieData;
 
     const VideoPlayerMount = shallow(<VideoPlayerWrapped
-      isPlaying={false}
-      previewImgSrc={videoMock.previewImgSrc}
+      isStartPlaying={false}
+      previewImgSrc={mockMovieData.previewImgSrc}
       videoData={previewVideo}
     />, {
       disableLifecycleMethods: true,

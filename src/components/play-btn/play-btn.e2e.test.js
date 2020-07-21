@@ -7,6 +7,10 @@ configure({
   adapter: new Adapter(),
 });
 
+const mockEvent = {
+  preventDefault() {}
+};
+
 describe(`PlayBtn component`, () => {
   it(`Click function should be called`, () => {
     const onPlayBtnClick = jest.fn();
@@ -19,7 +23,7 @@ describe(`PlayBtn component`, () => {
 
     const playButton = PlayBtnItem.find(`button`);
 
-    playButton.props().onClick();
+    playButton.simulate(`click`, mockEvent);
 
     expect(onPlayBtnClick).toHaveBeenCalledTimes(1);
   });

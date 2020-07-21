@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer";
+import {ActionCreator as AppStateActionCreator} from "../../reducer/app-state/app-state";
 
 const ShowMore = (props) => {
   const {onShowMoreBtnClick} = props;
@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => ({
   onShowMoreBtnClick(evt) {
     evt.preventDefault();
 
-    dispatch(ActionCreator.incrementCollection());
+    dispatch(AppStateActionCreator.incrementCollection());
   },
 });
 

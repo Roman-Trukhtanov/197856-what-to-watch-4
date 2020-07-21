@@ -9,8 +9,14 @@ Array [
       className="movie-card__bg"
     >
       <img
-        alt="The Grand Budapest Hotel"
-        src="img/bg-the-grand-budapest-hotel.jpg"
+        alt="Snatch"
+        src="https://some-link"
+        style={
+          Object {
+            "backgroundColor": "#FDFDFC",
+            "display": "block",
+          }
+        }
       />
     </div>
     <h1
@@ -70,9 +76,15 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="The Grand Budapest Hotel poster"
+            alt="Snatch"
             height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
+            src="https://some-link"
+            style={
+              Object {
+                "backgroundColor": "#FDFDFC",
+                "display": "block",
+              }
+            }
             width="218"
           />
         </div>
@@ -82,7 +94,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            The Grand Budapest Hotel
+            Snatch
           </h2>
           <p
             className="movie-card__meta"
@@ -90,12 +102,12 @@ Array [
             <span
               className="movie-card__genre"
             >
-              drama
+              Comedy
             </span>
             <span
               className="movie-card__year"
             >
-              2014
+              2000
             </span>
           </p>
           <div
@@ -191,6 +203,11 @@ Array [
       </ul>
       <div
         className="catalog__movies-list"
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
       >
         <article
           className="small-movie-card catalog__movies-card"
@@ -202,9 +219,15 @@ Array [
             onClick={[Function]}
           >
             <img
-              alt="Фантастические твари"
+              alt="Snatch"
               height="175"
-              src="http://placeimg.com/280/175/any/0"
+              src="https://some-link"
+              style={
+                Object {
+                  "backgroundColor": "#FDFDFC",
+                  "display": "block",
+                }
+              }
               width="280"
             />
           </div>
@@ -216,217 +239,10 @@ Array [
               href="movie-page.html"
               onClick={[Function]}
             >
-              Фантастические твари
+              Snatch
             </a>
           </h3>
         </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <img
-              alt="Форсаж"
-              height="175"
-              src="http://placeimg.com/280/175/any/1"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[Function]}
-            >
-              Форсаж
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <img
-              alt="Жажда скорости"
-              height="175"
-              src="http://placeimg.com/280/175/any/2"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[Function]}
-            >
-              Жажда скорости
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <img
-              alt="Гарри Поттер"
-              height="175"
-              src="http://placeimg.com/280/175/any/3"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[Function]}
-            >
-              Гарри Поттер
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <img
-              alt="Спецназ"
-              height="175"
-              src="http://placeimg.com/280/175/any/4"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[Function]}
-            >
-              Спецназ
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <img
-              alt="Игра престолов"
-              height="175"
-              src="http://placeimg.com/280/175/any/5"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[Function]}
-            >
-              Игра престолов
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <img
-              alt="Стрела"
-              height="175"
-              src="http://placeimg.com/280/175/any/6"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[Function]}
-            >
-              Стрела
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <img
-              alt="Флэш"
-              height="175"
-              src="http://placeimg.com/280/175/any/7"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-              onClick={[Function]}
-            >
-              Флэш
-            </a>
-          </h3>
-        </article>
-      </div>
-      <div
-        className="catalog__more"
-      >
-        <button
-          className="catalog__button"
-          onClick={[Function]}
-          type="button"
-        >
-          Show more
-        </button>
       </div>
     </section>
     <footer
@@ -459,7 +275,7 @@ Array [
         className="copyright"
       >
         <p>
-          © 2019 What to watch Ltd.
+          © 2020 What to watch Ltd.
         </p>
       </div>
     </footer>

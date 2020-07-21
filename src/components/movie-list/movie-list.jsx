@@ -13,7 +13,7 @@ const MovieList = (props) => {
   } = props;
 
   return (
-    <div className="catalog__movies-list">
+    <div className="catalog__movies-list" style={{width: `100%`}}>
       {movies.map((movie) => {
         return (
           <MovieCard

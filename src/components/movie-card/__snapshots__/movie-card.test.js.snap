@@ -9,7 +9,20 @@ exports[`MovieCard component Render MovieCard 1`] = `
   <div
     className="small-movie-card__image"
     onClick={[Function]}
-  />
+  >
+    <img
+      alt="Snatch"
+      height="175"
+      src="https://some-link"
+      style={
+        Object {
+          "backgroundColor": "#FDFDFC",
+          "display": "block",
+        }
+      }
+      width="280"
+    />
+  </div>
   <h3
     className="small-movie-card__title"
   >
@@ -18,7 +31,7 @@ exports[`MovieCard component Render MovieCard 1`] = `
       href="movie-page.html"
       onClick={[Function]}
     >
-      Фантастические твари
+      Snatch
     </a>
   </h3>
 </article>

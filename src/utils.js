@@ -1,37 +1,12 @@
 import {
-  GenreType,
-  MAX_GENRES_AMOUNT,
+  DEFAULT_BG_COLOR,
   MAX_VISIBLE_MOVIES_COUNT,
   MINUTES_IN_HOUR,
   SECONDS_IN_MINUTE
-} from "./mocks/const";
+} from "./const";
 
 export const extend = (currentObject, newObject) => {
   return Object.assign({}, currentObject, newObject);
-};
-
-export const getFilteredMovies = (genre = GenreType.ALL_GENRES, movies, maxMoviesAmount) => {
-  if (genre === GenreType.ALL_GENRES) {
-    return movies;
-  }
-
-  if (maxMoviesAmount) {
-    return movies.filter((movie) => genre === movie.genre).slice(0, maxMoviesAmount);
-  }
-
-  return movies.filter((movie) => genre === movie.genre);
-};
-
-export const getGenresList = (movies) => {
-  const genresSetList = new Set([GenreType.ALL_GENRES, ...movies.map((movie) => movie.genre)]);
-
-  const genresList = [...genresSetList];
-
-  if (genresList.length >= MAX_GENRES_AMOUNT) {
-    return genresList.slice(0, MAX_GENRES_AMOUNT);
-  }
-
-  return genresList;
 };
 
 export const spliceMovies = (
@@ -62,4 +37,28 @@ export const getStringTime = (secValue = 0) => {
   }
 
   return `${hours}:${minutes}:${seconds}`;
+};
+
+export const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: `smooth`
+  });
+};
+
+export const getImgBgStyle = (bgColor) => ({
+  display: `block`,
+  backgroundColor: bgColor || DEFAULT_BG_COLOR,
+});
+
+export const shuffleArray = (array) => {
+  const copiedArray = [...array];
+
+  for (let i = copiedArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = copiedArray[j];
+    copiedArray[j] = copiedArray[i];
+    copiedArray[i] = temp;
+  }
+  return copiedArray;
 };
