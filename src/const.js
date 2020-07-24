@@ -21,6 +21,12 @@ export const ScreenType = {
   MAIN: `main`,
   MOVIE: `movie`,
   PLAYER: `player`,
+  SIGN_IN: `sign-in`,
+};
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
 };
 
 export const DEFAULT_GENRE = `All Genres`;

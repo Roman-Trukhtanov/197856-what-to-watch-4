@@ -8,10 +8,19 @@ import thunk from "redux-thunk";
 import {createAPI} from "./api";
 import reducer from "./reducer/reducer";
 import {Operation as DataOperation} from "./reducer/data/data";
+import {
+  ActionCreator as UserActionCreator,
+  Operation as UserOperation,
+} from "./reducer/user/user";
+import {AuthorizationStatus} from "./const";
 
 const rootElement = document.querySelector(`#root`);
 
-const api = createAPI(() => {});
+const onUnauthorized = () => {
+  store.dispatch(UserActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+};
+
+const api = createAPI(onUnauthorized);
 
 window.api = api;
 
@@ -41,12 +50,13 @@ const showError = (err) => {
   );
 };
 
-const loadedData = [
+const asyncOperations = [
   store.dispatch(DataOperation.loadPromoMovie()),
-  store.dispatch(DataOperation.loadMovies())
+  store.dispatch(DataOperation.loadMovies()),
+  store.dispatch(UserOperation.checkAuth())
 ];
 
-Promise.all(loadedData).then(() => {
+Promise.all(asyncOperations).then(() => {
   initApp();
 }).catch((err) => {
   showError(err);

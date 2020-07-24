@@ -2,13 +2,17 @@ import axios from "axios";
 
 const REQUEST_TIMEOUT = 1000 * 5;
 
-const Error = {
-  UNAUTHORIZED: 401
+const ENTRY_POINT = `https://4.react.pages.academy/wtw`;
+
+const RequestCodes = {
+  SUCCESS: 200,
+  UNAUTHORIZED: 401,
+  BAD_REQUEST: 400,
 };
 
 export const createAPI = (onUnauthorized) => {
   const api = axios.create({
-    baseURL: `https://4.react.pages.academy/wtw`,
+    baseURL: ENTRY_POINT,
     timeout: REQUEST_TIMEOUT,
     withCredentials: true,
   });
@@ -20,7 +24,7 @@ export const createAPI = (onUnauthorized) => {
   const onFail = (err) => {
     const {response} = err;
 
-    if (response.status === Error.UNAUTHORIZED) {
+    if (response.status === RequestCodes.UNAUTHORIZED) {
       onUnauthorized();
 
       // Бросаем ошибку, т.к. важно прервать цепочку промисов после запроса авторизации.
