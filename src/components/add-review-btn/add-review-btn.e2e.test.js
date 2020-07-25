@@ -15,15 +15,15 @@ describe(`AddReviewBtn component`, () => {
   it(`Click function should be called`, () => {
     const onAddReviewBtnClick = jest.fn();
 
-    const PlayBtnItem = shallow(
+    const AddReviewItem = shallow(
         <AddReviewBtn
           onAddReviewBtnClick={onAddReviewBtnClick}
         />
     );
 
-    const playButton = PlayBtnItem.find(`.btn`);
+    const addReviewButton = AddReviewItem.find(`.btn`);
 
-    playButton.simulate(`click`, mockEvent);
+    addReviewButton.simulate(`click`, mockEvent);
 
     expect(onAddReviewBtnClick).toHaveBeenCalledTimes(1);
   });
