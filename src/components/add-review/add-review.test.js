@@ -1,10 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Provider} from "react-redux";
+import AddReview from "./add-review";
 import configureStore from "redux-mock-store";
-import MovieScreen from "./movie-screen";
 import NameSpace from "../../reducer/name-space";
+import {Provider} from "react-redux";
 import {AuthorizationStatus, ScreenType} from "../../const";
+
+const mockStore = configureStore([]);
 
 const mockMovieData = [{
   id: 1,
@@ -42,24 +44,12 @@ const mockMovieData = [{
   },
 }];
 
-const mockCommentData = [{
-  id: 1,
-  user: {
-    id: 2,
-    name: `Other user`,
-  },
-  rating: 7.2,
-  comment: `Other comment`,
-  dateText: `June 20, 2020`,
-}];
-
-const mockStore = configureStore([]);
-
-describe(`MovieScreen component`, () => {
-  it(`Render MovieScreen`, () => {
+describe(`AddReview component`, () => {
+  it(`Render AddReview`, () => {
     const store = mockStore({
       [NameSpace.SCREEN]: {
-        screen: ScreenType.MAIN,
+        prevScreen: ScreenType.MOVIE,
+        screen: ScreenType.ADD_REVIEW,
       },
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.AUTH,
@@ -70,20 +60,31 @@ describe(`MovieScreen component`, () => {
           avatarSrc: ``,
         },
       },
+      [NameSpace.REVIEW]: {
+        isSendingReview: false,
+        isSendReviewError: false,
+        isSendReviewSuccess: false,
+      }
     });
 
     const tree = renderer
       .create(
           <Provider store={store}>
-            <MovieScreen
-              authorizationStatus={AuthorizationStatus.AUTH}
-              moreMovies={mockMovieData}
+            <AddReview
+              rating={5}
+              comment={``}
               movie={mockMovieData[0]}
-              movieComments={mockCommentData}
-              onMovieCardTitleClick={() => {}}
+              onReviewSubmit={() => {}}
+              onReviewInput={() => {}}
+              onStarChange={() => {}}
+              isValidReview={false}
+              isSendingReview={false}
+              isSendReviewError={false}
+              isSendReviewSuccess={false}
             />
           </Provider>
-      ).toJSON();
+      )
+      .toJSON();
 
     expect(tree).toMatchSnapshot();
   });

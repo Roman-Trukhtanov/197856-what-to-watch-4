@@ -20,8 +20,12 @@ import {Operation as DataOperation} from "../../reducer/data/data";
 import SignIn from "../sign-in/sign-in";
 import {AuthorizationStatus} from "../../const";
 import {getAuthStatus} from "../../reducer/user/selector";
+import AddReview from "../add-review/add-review";
+import withReview from "../../hocs/with-review/with-review";
 
 const FullVideoPlayerWrapped = withVideo(FullVideoPlayer);
+
+const AddReviewWrapped = withReview(AddReview);
 
 class App extends PureComponent {
   _renderScreen() {
@@ -34,6 +38,8 @@ class App extends PureComponent {
         return this._renderMovieScreen();
       case ScreenType.PLAYER:
         return this._renderFullVideoPlayer();
+      case ScreenType.ADD_REVIEW:
+        return this._renderAddReviewScreen();
       case ScreenType.SIGN_IN:
         return this._renderSignInScreen();
     }
@@ -72,6 +78,7 @@ class App extends PureComponent {
 
   _renderMovieScreen() {
     const {
+      authorizationStatus,
       randomMovies,
       movieComments,
       onMovieCardTitleClick,
@@ -79,6 +86,7 @@ class App extends PureComponent {
 
     return (
       <MovieScreen
+        authorizationStatus={authorizationStatus}
         moreMovies={randomMovies}
         movie={this._getCurrentMovie()}
         movieComments={movieComments}
@@ -107,6 +115,13 @@ class App extends PureComponent {
       ? <SignIn/>
       : this._renderMainScreen();
   }
+  _renderAddReviewScreen() {
+    return (
+      <AddReviewWrapped
+        movie={this._getCurrentMovie()}
+      />
+    );
+  }
 
   render() {
     const {
@@ -123,6 +138,7 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/dev-component">
             <MovieScreen
+              authorizationStatus={AuthorizationStatus.AUTH}
               moreMovies={movies.slice(0, 4)}
               movie={movies[0]}
               movieComments={movieComments}
@@ -135,6 +151,11 @@ class App extends PureComponent {
               title={movies[0].title}
               previewImgSrc={movies[0].previewImgSrc}
               videoData={movies[0].fullVideo}
+            />
+          </Route>
+          <Route exact path="/dev-review">
+            <AddReviewWrapped
+              movie={movies[0]}
             />
           </Route>
           <Route exact path="/sign-in">

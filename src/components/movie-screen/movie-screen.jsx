@@ -6,15 +6,17 @@ import MovieList from "../movie-list/movie-list";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
 import Header from "../header/header";
 import Footer from "../footer/footer";
-import {TabType} from "../../const";
+import {AuthorizationStatus, TabType} from "../../const";
 import PlayBtn from "../play-btn/play-btn";
 import {getImgBgStyle} from "../../utils";
+import AddReviewBtn from "../add-review-btn/add-review-btn";
 
 const MovieListWrapped = withVideoPlayer(MovieList);
 const TabsWrapped = withActiveItem(Tabs);
 
 const MovieScreen = (props) => {
   const {
+    authorizationStatus,
     moreMovies,
     movie,
     movieComments,
@@ -49,7 +51,8 @@ const MovieScreen = (props) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
+
+                {authorizationStatus === AuthorizationStatus.AUTH && <AddReviewBtn/>}
               </div>
             </div>
           </div>
@@ -107,6 +110,7 @@ MovieScreen.propTypes = {
       releaseYear: PropTypes.number.isRequired,
     }).isRequired,
   }).isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
   movieComments: PropTypes.arrayOf(PropTypes.object).isRequired,
   onMovieCardTitleClick: PropTypes.func.isRequired,
 };
