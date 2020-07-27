@@ -179,6 +179,8 @@ class App extends PureComponent {
           <Route exact path={AppRoute.PLAYER} render={this._renderFullVideoPlayer}/>
           <PrivateRoute exact path={AppRoute.REVIEW} render={this._renderAddReviewScreen}/>
           <Route exact path={AppRoute.SIGN_IN} render={this._renderSignInScreen}/>
+
+          {/* TODO: В следующем модуле заменить на PrivateRoute */}
           <Route exact path={AppRoute.MY_LIST} render={this._renderMyListScreen}/>
           <Route render={this._renderErrorScreen}/>
         </Switch>
