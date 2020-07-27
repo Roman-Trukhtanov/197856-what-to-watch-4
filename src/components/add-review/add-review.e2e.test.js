@@ -1,11 +1,13 @@
 import React from "react";
+import {Router} from "react-router-dom";
 import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {AddReview} from "./add-review";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
-import {AuthorizationStatus, RATING_MULTIPLIER, ScreenType} from "../../const";
+import {AuthorizationStatus, RATING_MULTIPLIER} from "../../const";
 import {Provider} from "react-redux";
+import history from "../../history";
 
 const mockMovieData = [{
   id: 1,
@@ -50,10 +52,6 @@ configure({
 const mockStore = configureStore([]);
 
 const store = mockStore({
-  [NameSpace.SCREEN]: {
-    prevScreen: ScreenType.MOVIE,
-    screen: ScreenType.ADD_REVIEW,
-  },
   [NameSpace.USER]: {
     authorizationStatus: AuthorizationStatus.AUTH,
     user: {
@@ -85,18 +83,22 @@ describe(`AddReview component`, () => {
 
     const AddReviewWrap = mount(
         <Provider store={store}>
-          <AddReview
-            movie={selectedMovie}
-            rating={mockReview.rating}
-            comment={mockReview.comment}
-            onReviewSubmit={onReviewSubmit}
-            onStarChange={onStarChange}
-            onReviewInput={onReviewInput}
-            isValidReview={true}
-            isSendingReview={false}
-            isSendReviewError={false}
-            isSendReviewSuccess={false}
-          />
+          <Router
+            history={history}
+          >
+            <AddReview
+              movie={selectedMovie}
+              rating={mockReview.rating}
+              comment={mockReview.comment}
+              onReviewSubmit={onReviewSubmit}
+              onStarChange={onStarChange}
+              onReviewInput={onReviewInput}
+              isValidReview={true}
+              isSendingReview={false}
+              isSendReviewError={false}
+              isSendReviewSuccess={false}
+            />
+          </Router>
         </Provider>
     );
 

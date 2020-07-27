@@ -1,5 +1,5 @@
-import React, {Fragment} from 'react';
-import PropTypes from 'prop-types';
+import React, {Fragment} from "react";
+import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
 import MovieList from "../movie-list/movie-list";
@@ -10,6 +10,7 @@ import {AuthorizationStatus, TabType} from "../../const";
 import PlayBtn from "../play-btn/play-btn";
 import {getImgBgStyle} from "../../utils";
 import AddReviewBtn from "../add-review-btn/add-review-btn";
+import MyListBtn from "../my-list-btn/my-list-btn";
 
 const MovieListWrapped = withVideoPlayer(MovieList);
 const TabsWrapped = withActiveItem(Tabs);
@@ -19,7 +20,6 @@ const MovieScreen = (props) => {
     authorizationStatus,
     moreMovies,
     movie,
-    movieComments,
     onMovieCardTitleClick,
   } = props;
 
@@ -33,7 +33,9 @@ const MovieScreen = (props) => {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <Header/>
+          <Header
+            isMovieScreen={true}
+          />
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
@@ -44,15 +46,14 @@ const MovieScreen = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <PlayBtn/>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <PlayBtn movieData={movie}/>
 
-                {authorizationStatus === AuthorizationStatus.AUTH && <AddReviewBtn/>}
+                <MyListBtn movie={movie}/>
+
+                {
+                  authorizationStatus === AuthorizationStatus.AUTH &&
+                  <AddReviewBtn movie={movie}/>
+                }
               </div>
             </div>
           </div>
@@ -73,7 +74,6 @@ const MovieScreen = (props) => {
             <div className="movie-card__desc">
               <TabsWrapped
                 movie={movie}
-                movieComments={movieComments}
                 defaultItem={TabType.OVERVIEW}
               />
             </div>
@@ -111,7 +111,6 @@ MovieScreen.propTypes = {
     }).isRequired,
   }).isRequired,
   authorizationStatus: PropTypes.string.isRequired,
-  movieComments: PropTypes.arrayOf(PropTypes.object).isRequired,
   onMovieCardTitleClick: PropTypes.func.isRequired,
 };
 

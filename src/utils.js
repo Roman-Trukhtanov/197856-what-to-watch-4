@@ -62,3 +62,7 @@ export const shuffleArray = (array) => {
   }
   return copiedArray;
 };
+
+export const reloadPage = () => {
+  window.location.reload();
+};

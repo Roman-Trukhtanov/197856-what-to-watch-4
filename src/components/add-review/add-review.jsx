@@ -95,6 +95,7 @@ const AddReview = (props) => {
         <h1 className="visually-hidden">WTW</h1>
 
         <Header
+          isReview={true}
           movie={movie}
         />
 

@@ -1,10 +1,12 @@
 import React from "react";
+import {Router} from "react-router-dom";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import MovieScreen from "./movie-screen";
 import NameSpace from "../../reducer/name-space";
-import {AuthorizationStatus, ScreenType} from "../../const";
+import {AuthorizationStatus} from "../../const";
+import history from "../../history";
 
 const mockMovieData = [{
   id: 1,
@@ -58,8 +60,8 @@ const mockStore = configureStore([]);
 describe(`MovieScreen component`, () => {
   it(`Render MovieScreen`, () => {
     const store = mockStore({
-      [NameSpace.SCREEN]: {
-        screen: ScreenType.MAIN,
+      [NameSpace.DATA]: {
+        promoMovie: mockMovieData[0],
       },
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.AUTH,
@@ -75,13 +77,17 @@ describe(`MovieScreen component`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <MovieScreen
-              authorizationStatus={AuthorizationStatus.AUTH}
-              moreMovies={mockMovieData}
-              movie={mockMovieData[0]}
-              movieComments={mockCommentData}
-              onMovieCardTitleClick={() => {}}
-            />
+            <Router
+              history={history}
+            >
+              <MovieScreen
+                authorizationStatus={AuthorizationStatus.AUTH}
+                moreMovies={mockMovieData}
+                movie={mockMovieData[0]}
+                movieComments={mockCommentData}
+                onMovieCardTitleClick={() => {}}
+              />
+            </Router>
           </Provider>
       ).toJSON();
 

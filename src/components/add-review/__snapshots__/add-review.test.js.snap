@@ -28,8 +28,6 @@ exports[`AddReview component Render AddReview 1`] = `
       >
         <a
           className="logo__link"
-          href="/"
-          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
@@ -59,7 +57,7 @@ exports[`AddReview component Render AddReview 1`] = `
           >
             <a
               className="breadcrumbs__link"
-              href="#"
+              href="/films/1"
               onClick={[Function]}
             >
               Snatch
@@ -82,12 +80,18 @@ exports[`AddReview component Render AddReview 1`] = `
         <div
           className="user-block__avatar"
         >
-          <img
-            alt=""
-            height="63"
-            src=""
-            width="63"
-          />
+          <a
+            className="user-block__avatar-link"
+            href="/mylist"
+            onClick={[Function]}
+          >
+            <img
+              alt=""
+              height="63"
+              src=""
+              width="63"
+            />
+          </a>
         </div>
       </div>
     </header>

@@ -1,8 +1,7 @@
 import modelUser from "../model-user";
 import {extend} from "../../utils";
 import {AuthorizationStatus} from '../../const.js';
-import {ActionCreator as ScreenActionCreator} from "../screen/screen";
-import {getPrevScreen} from "../screen/selectors";
+import {historyGoBack} from "../../history";
 
 const initialState = {
   authorizationError: false,
@@ -63,8 +62,8 @@ const Operation = {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setUserData(modelUser(response.data)));
 
-        // Возвращаем пользователя на экран, с которого был осуществлен переход на страницу с регистрацией
-        dispatch(ScreenActionCreator.changeScreen(getPrevScreen(getState())));
+        // Возвращаем пользователя на тот экран, с которого был осуществлен переход на страницу с регистрацией
+        historyGoBack();
       })
       .catch((err) => {
         dispatch(ActionCreator.errorAuthorization(true));

@@ -15,3 +15,13 @@ export const getFavoriteMovies = (state) => {
 export const getMovieComments = (state) => {
   return state[NameSpace.DATA].movieComments;
 };
+
+export const getUpdatedMovies = (movies, newMovie) => {
+  const copiedMovies = [...movies];
+
+  const prevMovieIndex = copiedMovies.findIndex((movie) => movie.id === newMovie.id);
+
+  copiedMovies[prevMovieIndex] = newMovie;
+
+  return copiedMovies;
+};

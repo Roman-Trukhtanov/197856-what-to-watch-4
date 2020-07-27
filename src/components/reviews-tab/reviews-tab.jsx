@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ReviewItem from "../review-item/review-item";
+import {connect} from "react-redux";
+import {getMovieComments} from "../../reducer/data/selectors";
 
 const ReviewsTab = (props) => {
   const {movieComments} = props;
@@ -41,4 +43,9 @@ ReviewsTab.propTypes = {
   movieComments: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default ReviewsTab;
+const mapStateToProps = (state) => ({
+  movieComments: getMovieComments(state),
+});
+
+export {ReviewsTab};
+export default connect(mapStateToProps)(ReviewsTab);

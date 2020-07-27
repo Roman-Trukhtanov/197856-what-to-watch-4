@@ -1,38 +1,53 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {AuthorizationStatus, ScreenType} from '../../const.js';
-import {getAuthStatus, getUserData} from '../../reducer/user/selector.js';
-import {getScreen} from "../../reducer/screen/selectors";
-import {ActionCreator as ScreenActionCreator} from "../../reducer/screen/screen";
+import React, {Fragment} from "react";
+import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {AuthorizationStatus} from "../../const.js";
+import {getAuthStatus, getUserData} from "../../reducer/user/selector.js";
+import {AppRoute, ScreenType} from "../../const";
+import history from "../../history";
 
 const Header = (props) => {
   const {
     authorizationStatus,
     movie,
-    screen,
+    isReview,
     user,
-    onSignInClick,
-    onBreadcrumbsClick,
-    onMainLogoClick,
+    isMyListScreen,
+    isMovieScreen,
   } = props;
+
+  const isRootScreen = history.location.pathname === AppRoute.ROOT;
+
+  const getMyListTitle = () => {
+    return (
+      <h1 className="page-title user-page__title">My list</h1>
+    );
+  };
+
+  const getUserAvatar = () => {
+    const linkToScreen = isMyListScreen
+      ? AppRoute.ROOT
+      : AppRoute.MY_LIST;
+
+    return (
+      <Link to={linkToScreen} className="user-block__avatar-link">
+        <img src={user.avatarSrc} alt={user.name} width="63" height="63" />
+      </Link>
+    );
+  };
 
   const getUserItem = () => (
     <div className="user-block">
       <div className="user-block__avatar">
-        <img src={user.avatarSrc} alt={user.name} width="63" height="63" />
+        {getUserAvatar()}
       </div>
     </div>
   );
 
   const getSignInItem = () => (
     <div className="user-block">
-      <a href="/sign-in" className="user-block__link"
-        onClick={(evt) => {
-          evt.preventDefault();
-          onSignInClick();
-        }}
-      >Sign in</a>
+      <Link to={AppRoute.SIGN_IN} className="user-block__link">Sign in</Link>
     </div>
   );
 
@@ -40,10 +55,12 @@ const Header = (props) => {
     <nav className="breadcrumbs">
       <ul className="breadcrumbs__list">
         <li className="breadcrumbs__item">
-          <a href="#" className="breadcrumbs__link" onClick={(evt) => {
-            evt.preventDefault();
-            onBreadcrumbsClick();
-          }}>{movie.title}</a>
+          <Link
+            to={`/${ScreenType.FILMS}/${movie.id}`}
+            className="breadcrumbs__link"
+          >
+            {movie.title}
+          </Link>
         </li>
         <li className="breadcrumbs__item">
           <a className="breadcrumbs__link">Add review</a>
@@ -52,28 +69,50 @@ const Header = (props) => {
     </nav>
   );
 
-  const linkOnMain = screen !== ScreenType.MAIN ? `/` : null;
+  const getLogo = () => {
+    const logoItems = (
+      <Fragment>
+        <span className="logo__letter logo__letter--1">W</span>
+        <span className="logo__letter logo__letter--2">T</span>
+        <span className="logo__letter logo__letter--3">W</span>
+      </Fragment>
+    );
+
+    if (isRootScreen) {
+      return (
+        <a className="logo__link">
+          {logoItems}
+        </a>
+      );
+    } else {
+      return (
+        <Link to={AppRoute.ROOT} className="logo__link">
+          {logoItems}
+        </Link>
+      );
+    }
+  };
 
   const isSignIn = authorizationStatus === AuthorizationStatus.AUTH ?
     getUserItem() : getSignInItem();
 
-  const isReview = screen === ScreenType.ADD_REVIEW ? getBreadCrumbs(movie) : null;
+  const getHeaderClassName = () => {
+    if (isMovieScreen || isRootScreen) {
+      return `movie-card__head`;
+    } else {
+      return `user-page__head`;
+    }
+  };
 
   return (
-    <header className="page-header movie-card__head">
+    <header className={`page-header ${getHeaderClassName()}`}>
       <div className="logo">
-        <a href={linkOnMain} className="logo__link" onClick={(evt) => {
-          evt.preventDefault();
-
-          onMainLogoClick();
-        }}>
-          <span className="logo__letter logo__letter--1">W</span>
-          <span className="logo__letter logo__letter--2">T</span>
-          <span className="logo__letter logo__letter--3">W</span>
-        </a>
+        {getLogo()}
       </div>
 
-      {isReview}
+      {isReview ? getBreadCrumbs(movie) : null}
+
+      {isMyListScreen ? getMyListTitle() : null}
 
       {isSignIn}
     </header>
@@ -82,37 +121,25 @@ const Header = (props) => {
 
 Header.propTypes = {
   movie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
   }),
+  isReview: PropTypes.bool,
   authorizationStatus: PropTypes.string.isRequired,
-  screen: PropTypes.string.isRequired,
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     avatarSrc: PropTypes.string.isRequired,
   }),
-  onSignInClick: PropTypes.func.isRequired,
-  onBreadcrumbsClick: PropTypes.func.isRequired,
-  onMainLogoClick: PropTypes.func.isRequired,
+  isMyListScreen: PropTypes.bool,
+  isMovieScreen: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthStatus(state),
-  screen: getScreen(state),
   user: getUserData(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onSignInClick() {
-    dispatch(ScreenActionCreator.changeScreen(ScreenType.SIGN_IN));
-  },
-  onMainLogoClick() {
-    dispatch(ScreenActionCreator.changeScreen(ScreenType.MAIN));
-  },
-  onBreadcrumbsClick() {
-    dispatch(ScreenActionCreator.changeScreen(ScreenType.MOVIE));
-  }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export {Header};
+export default connect(mapStateToProps)(Header);
