@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import ReviewsTab from "./reviews-tab";
+import {ReviewsTab} from "./reviews-tab";
 
 const mockCommentData = [{
   id: 1,

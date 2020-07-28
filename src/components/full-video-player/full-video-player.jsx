@@ -1,20 +1,15 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
 import {getStringTime} from "../../utils";
-import {connect} from "react-redux";
-import {ScreenType} from "../../const";
-import {ActionCreator as ScreenActionCreator} from "../../reducer/screen/screen";
-import {getPrevScreen} from "../../reducer/screen/selectors";
+import {historyGoBack} from "../../history";
 
 const FullVideoPlayer = (props) => {
   const {
-    prevScreen,
     children,
     title,
     isPlayingReal,
     onPlayBtnClick,
     onFullScreenBtnClick,
-    onPlayerExitBtnClick,
     timeElapsed,
     percentProgress,
   } = props;
@@ -25,11 +20,7 @@ const FullVideoPlayer = (props) => {
   });
 
   const exitPlayer = () => {
-    if (!prevScreen) {
-      return;
-    }
-
-    onPlayerExitBtnClick(prevScreen);
+    historyGoBack();
   };
 
   return (
@@ -82,13 +73,11 @@ const FullVideoPlayer = (props) => {
 };
 
 FullVideoPlayer.propTypes = {
-  prevScreen: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   isPlayingReal: PropTypes.bool.isRequired,
   timeElapsed: PropTypes.number.isRequired,
   percentProgress: PropTypes.number.isRequired,
   onPlayBtnClick: PropTypes.func.isRequired,
-  onPlayerExitBtnClick: PropTypes.func.isRequired,
   onFullScreenBtnClick: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -96,16 +85,4 @@ FullVideoPlayer.propTypes = {
   ]).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  prevScreen: getPrevScreen(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onPlayerExitBtnClick(prevScreen = ScreenType.MAIN) {
-    dispatch(ScreenActionCreator.changeScreen(prevScreen));
-  }
-});
-
-export {FullVideoPlayer};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FullVideoPlayer);
+export default FullVideoPlayer;

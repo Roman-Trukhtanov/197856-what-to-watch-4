@@ -1,7 +1,6 @@
 import {extend} from "../../utils";
-import {ActionCreator as ScreenActionCreator} from "../screen/screen";
 import {Operation as DataOperation} from "../data/data";
-import {getPrevScreen} from "../screen/selectors";
+import {historyGoBack} from "../../history";
 
 const initialState = {
   isSendingReview: false,
@@ -55,7 +54,7 @@ const Operation = {
         dispatch(DataOperation.loadMovieComments(movieID));
 
         // Возвращаем на предыдущий экран
-        dispatch(ScreenActionCreator.changeScreen(getPrevScreen(getState())));
+        historyGoBack();
 
         // Сброс на начальное состояние после успешной отправки
         dispatch(ActionCreator.resetReviewState());

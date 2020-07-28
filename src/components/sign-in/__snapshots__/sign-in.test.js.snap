@@ -13,6 +13,7 @@ exports[`SignIn component Render, is error authorization 1`] = `
       <a
         className="logo__link"
         href="/"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"
@@ -112,6 +113,8 @@ exports[`SignIn component Render, is error authorization 1`] = `
     >
       <a
         className="logo__link logo__link--light"
+        href="/"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"
@@ -154,6 +157,7 @@ exports[`SignIn component Render, no error authorization 1`] = `
       <a
         className="logo__link"
         href="/"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"
@@ -247,6 +251,8 @@ exports[`SignIn component Render, no error authorization 1`] = `
     >
       <a
         className="logo__link logo__link--light"
+        href="/"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"

@@ -1,6 +1,7 @@
 import {extend} from "../../utils.js";
 import ModelMovie from "../model-movie";
 import ModelComment from "../model-comment";
+import {getUpdatedMovies} from "./selectors";
 
 const initialState = {
   movies: [],
@@ -14,6 +15,8 @@ const ActionType = {
   LOAD_PROMO_MOVIE: `LOAD_PROMO_MOVIE`,
   LOAD_FAVORITE_MOVIES: `LOAD_FAVORITE_MOVIES`,
   LOAD_MOVIE_COMMENTS: `LOAD_MOVIE_COMMENTS`,
+  UPDATE_MOVIE: `UPDATE_MOVIE`,
+  UPDATE_PROMO_MOVIE: `UPDATE_PROMO_MOVIE`,
 };
 
 const ActionCreator = {
@@ -39,6 +42,18 @@ const ActionCreator = {
     return {
       type: ActionType.LOAD_MOVIE_COMMENTS,
       payload: comments,
+    };
+  },
+  updateMovie: (movie) => {
+    return {
+      type: ActionType.UPDATE_MOVIE,
+      payload: movie,
+    };
+  },
+  updatePromoMovie: (movie) => {
+    return {
+      type: ActionType.UPDATE_PROMO_MOVIE,
+      payload: movie,
     };
   },
 };
@@ -68,6 +83,24 @@ const Operation = {
         dispatch(ActionCreator.loadMovieComments(ModelComment.parseComments(response.data)));
       });
   },
+  postFavoriteMovie: (film, status, isPromoMovie) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${film.id}/${status}`)
+      .then((response) => {
+        const updatedMovie = ModelMovie.parseMovie(response.data);
+
+        if (isPromoMovie) {
+          dispatch(ActionCreator.updatePromoMovie(updatedMovie));
+        }
+
+        dispatch(ActionCreator.updateMovie(updatedMovie));
+
+        // Получаем обновленный список всех избранных фильмов
+        dispatch(Operation.loadFavoriteMovies());
+      })
+      .catch((err) => {
+        throw err;
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -87,6 +120,14 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_MOVIE_COMMENTS:
       return extend(state, {
         movieComments: action.payload,
+      });
+    case ActionType.UPDATE_MOVIE:
+      return extend(state, {
+        movies: getUpdatedMovies(state.movies, action.payload),
+      });
+    case ActionType.UPDATE_PROMO_MOVIE:
+      return extend(state, {
+        promoMovie: action.payload,
       });
   }
 

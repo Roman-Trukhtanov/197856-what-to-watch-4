@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import {App} from "./app.jsx";
-import {AuthorizationStatus, ScreenType} from "../../const";
+import {AuthorizationStatus} from "../../const";
 import NameSpace from "../../reducer/name-space";
 
 const mockStore = configureStore([]);
@@ -26,7 +26,7 @@ const mockMovieData = [{
     isMute: false,
   },
   previewVideo: {
-    src: `https://some-link`,
+    src: `https://some-link.mp4`,
     type: `video/mp4`,
     isAutoPlay: true,
     isLoop: true,
@@ -69,10 +69,6 @@ describe(`App component`, () => {
         favoriteMovies: mockMovieData,
         movieComments: mockCommentData,
       },
-      [NameSpace.SCREEN]: {
-        prevScreen: ``,
-        screen: ScreenType.MAIN,
-      },
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
       }
@@ -82,7 +78,6 @@ describe(`App component`, () => {
       .create(
           <Provider store={store}>
             <App
-              screen={ScreenType.MAIN}
               promoMovieData={mockMovieData[0]}
               selectedMovieID={1}
               randomMovies={mockMovieData}
@@ -93,6 +88,7 @@ describe(`App component`, () => {
               movieCollectionNumber={1}
               onMovieCardTitleClick={() => {}}
               authorizationStatus={AuthorizationStatus.NO_AUTH}
+              loadAllMovieComments={() => {}}
             />
           </Provider>
       ).toJSON();

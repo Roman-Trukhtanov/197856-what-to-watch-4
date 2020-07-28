@@ -13,8 +13,8 @@ const fakeFilmData = {
   "preview_image": `img/the-grand-budapest-hotel.jpg`,
   "background_image": `img/the-grand-budapest-hotel-bg.jpg`,
   "background_color": `#ffffff`,
-  "video_link": `https://some-link`,
-  "preview_video_link": `https://some-link`,
+  "video_link": `http://media.xiph.org/mango/tears_of_steel_1080p.webm`,
+  "preview_video_link": `https://some-link.mp4`,
   "description": `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
   "rating": 8.9,
   "scores_count": 240,
@@ -55,7 +55,7 @@ const mockMovieData = [{
     isMute: false,
   },
   previewVideo: {
-    src: `https://some-link`,
+    src: `https://some-link.mp4`,
     type: `video/mp4`,
     isAutoPlay: true,
     isLoop: true,
@@ -137,6 +137,28 @@ it(`Reducer should update movies by load favorite movies`, () => {
   });
 });
 
+it(`Reducer should update promo movie`, () => {
+  expect(reducer({
+    promoMovie: {},
+  }, {
+    type: ActionType.UPDATE_PROMO_MOVIE,
+    payload: mockMovieData[0],
+  })).toEqual({
+    promoMovie: mockMovieData[0],
+  });
+});
+
+it(`Reducer should update movie`, () => {
+  expect(reducer({
+    movies: mockMovieData,
+  }, {
+    type: ActionType.UPDATE_MOVIE,
+    payload: mockMovieData[0],
+  })).toEqual({
+    movies: mockMovieData,
+  });
+});
+
 describe(`Operation work correctly`, () => {
   it(`Should make a correct API call to /films`, function () {
     const apiMock = new MockAdapter(api);
@@ -210,6 +232,26 @@ describe(`Operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_FAVORITE_MOVIES,
           payload: ModelMovie.parseMovies([fakeFilmData]),
+        });
+      });
+  });
+
+  it(`Should make a correct API call to post /favorite/filmID/status`, function () {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const status = 1;
+    const postFavoriteMovie = Operation.postFavoriteMovie(mockMovieData[0], status);
+
+    apiMock
+      .onPost(`favorite/1/1`)
+      .reply(200, fakeFilmData);
+
+    return postFavoriteMovie(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.UPDATE_MOVIE,
+          payload: ModelMovie.parseMovie(fakeFilmData),
         });
       });
   });

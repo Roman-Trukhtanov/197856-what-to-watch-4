@@ -3,7 +3,7 @@
 exports[`AddReviewBtn component Render AddReviewBtn 1`] = `
 <a
   className="btn movie-card__button"
-  href="/"
+  href="/films/1/review"
   onClick={[Function]}
 >
   Add review

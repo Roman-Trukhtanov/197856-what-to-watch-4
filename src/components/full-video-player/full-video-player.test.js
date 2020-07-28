@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {FullVideoPlayer} from "./full-video-player";
+import FullVideoPlayer from "./full-video-player";
 
 describe(`FullVideoPlayer component`, () => {
   it(`Render FullVideoPlayer`, () => {

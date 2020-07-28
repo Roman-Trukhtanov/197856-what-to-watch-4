@@ -9,7 +9,6 @@ import {TabType} from "../../const";
 const Tabs = (props) => {
   const {
     movie,
-    movieComments,
     onItemClick,
     activeItem,
   } = props;
@@ -30,9 +29,7 @@ const Tabs = (props) => {
         );
       case TabType.REVIEWS:
         return (
-          <ReviewsTab
-            movieComments={movieComments}
-          />
+          <ReviewsTab/>
         );
     }
 
@@ -53,7 +50,6 @@ const Tabs = (props) => {
 
 Tabs.propTypes = {
   movie: PropTypes.object.isRequired,
-  movieComments: PropTypes.arrayOf(PropTypes.object).isRequired,
   onItemClick: PropTypes.func.isRequired,
   activeItem: PropTypes.string.isRequired,
 };

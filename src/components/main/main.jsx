@@ -39,7 +39,9 @@ const Main = (props) => {
           {checkVisibleMovies(filteredMovies, movieCollectionNumber) && <ShowMore/>}
         </section>
 
-        <Footer/>
+        <Footer
+          isRootScreen={true}
+        />
       </div>
     </React.Fragment>
   );

@@ -1,10 +1,12 @@
 import React from "react";
+import {Router} from "react-router-dom";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import Main from "./main";
 import NameSpace from "../../reducer/name-space";
-import {AuthorizationStatus, ScreenType} from "../../const";
+import {AuthorizationStatus} from "../../const";
+import history from "../../history";
 
 const mockStore = configureStore([]);
 
@@ -49,11 +51,11 @@ const genres = [`All Genres`, `Fantasy`, `Thrillers`];
 describe(`Main component`, () => {
   it(`Render Main`, () => {
     const store = mockStore({
+      [NameSpace.DATA]: {
+        promoMovie: mockMovieData[0],
+      },
       [NameSpace.APP_STATE]: {
         currentGenre: `All Genres`,
-      },
-      [NameSpace.SCREEN]: {
-        screen: ScreenType.MAIN,
       },
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -63,13 +65,17 @@ describe(`Main component`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <Main
-              filteredMovies={mockMovieData}
-              promoMovieData={mockMovieData[0]}
-              genres={genres}
-              movieCollectionNumber={1}
-              onMovieCardTitleClick={() => {}}
-            />
+            <Router
+              history={history}
+            >
+              <Main
+                filteredMovies={mockMovieData}
+                promoMovieData={mockMovieData[0]}
+                genres={genres}
+                movieCollectionNumber={1}
+                onMovieCardTitleClick={() => {}}
+              />
+            </Router>
           </Provider>
       ).toJSON();
 

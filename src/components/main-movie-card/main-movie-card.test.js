@@ -1,10 +1,12 @@
 import React from "react";
+import {Router} from "react-router-dom";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import renderer from "react-test-renderer";
 import MainMovieCard from "./main-movie-card";
 import NameSpace from "../../reducer/name-space";
-import {AuthorizationStatus, ScreenType} from "../../const";
+import {AuthorizationStatus} from "../../const";
+import history from "../../history";
 
 const mockStore = configureStore([]);
 
@@ -47,8 +49,8 @@ const mockMovieData = [{
 describe(`MainMovieCard component`, () => {
   it(`Render MainMovieCard`, () => {
     const store = mockStore({
-      [NameSpace.SCREEN]: {
-        screen: ScreenType.MAIN,
+      [NameSpace.DATA]: {
+        promoMovie: mockMovieData[0],
       },
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -58,9 +60,13 @@ describe(`MainMovieCard component`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <MainMovieCard
-              promoMovieData={mockMovieData[0]}
-            />
+            <Router
+              history={history}
+            >
+              <MainMovieCard
+                promoMovieData={mockMovieData[0]}
+              />
+            </Router>
           </Provider>
       ).toJSON();
 

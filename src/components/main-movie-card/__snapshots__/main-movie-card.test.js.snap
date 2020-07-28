@@ -31,8 +31,6 @@ exports[`MainMovieCard component Render MainMovieCard 1`] = `
     >
       <a
         className="logo__link"
-        href={null}
-        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"
@@ -56,7 +54,7 @@ exports[`MainMovieCard component Render MainMovieCard 1`] = `
     >
       <a
         className="user-block__link"
-        href="/sign-in"
+        href="/login"
         onClick={[Function]}
       >
         Sign in
@@ -130,6 +128,7 @@ exports[`MainMovieCard component Render MainMovieCard 1`] = `
           </button>
           <button
             className="btn btn--list movie-card__button"
+            onClick={[Function]}
             type="button"
           >
             <svg

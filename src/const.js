@@ -24,11 +24,25 @@ export const DEFAULT_BG_COLOR = `#250505`;
 export const DEFAULT_VIDEO_TYPE = `video/mp4`;
 
 export const ScreenType = {
-  MAIN: `main`,
-  MOVIE: `movie`,
+  FILMS: `films`,
   PLAYER: `player`,
-  SIGN_IN: `sign-in`,
-  ADD_REVIEW: `add-review`,
+  SIGN_IN: `login`,
+  REVIEW: `review`,
+  MY_LIST: `mylist`,
+};
+
+export const AppRoute = {
+  ROOT: `/`,
+  SIGN_IN: `/login`,
+  PLAYER: `/player/:id`,
+  MOVIE: `/films/:id`,
+  REVIEW: `/films/:id/review`,
+  MY_LIST: `/mylist`,
+};
+
+export const HistoryAction = {
+  POP: `POP`,
+  PUSH: `PUSH`,
 };
 
 export const AuthorizationStatus = {
@@ -74,3 +88,5 @@ export const ReviewMessage = {
   SUCCESS: `Your comment has been posted successfully`,
   ERROR: `An error occurred while posting a comment, please try again ...`,
 };
+
+export const PAGE_NOT_FOUND_TEXT = `404: Page not found...`;

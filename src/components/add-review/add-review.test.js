@@ -1,10 +1,12 @@
 import React from "react";
+import {Router} from "react-router-dom";
 import renderer from "react-test-renderer";
 import AddReview from "./add-review";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
 import {Provider} from "react-redux";
-import {AuthorizationStatus, ScreenType} from "../../const";
+import {AuthorizationStatus} from "../../const";
+import history from "../../history";
 
 const mockStore = configureStore([]);
 
@@ -47,10 +49,6 @@ const mockMovieData = [{
 describe(`AddReview component`, () => {
   it(`Render AddReview`, () => {
     const store = mockStore({
-      [NameSpace.SCREEN]: {
-        prevScreen: ScreenType.MOVIE,
-        screen: ScreenType.ADD_REVIEW,
-      },
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.AUTH,
         user: {
@@ -70,18 +68,22 @@ describe(`AddReview component`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <AddReview
-              rating={5}
-              comment={``}
-              movie={mockMovieData[0]}
-              onReviewSubmit={() => {}}
-              onReviewInput={() => {}}
-              onStarChange={() => {}}
-              isValidReview={false}
-              isSendingReview={false}
-              isSendReviewError={false}
-              isSendReviewSuccess={false}
-            />
+            <Router
+              history={history}
+            >
+              <AddReview
+                rating={5}
+                comment={``}
+                movie={mockMovieData[0]}
+                onReviewSubmit={() => {}}
+                onReviewInput={() => {}}
+                onStarChange={() => {}}
+                isValidReview={false}
+                isSendingReview={false}
+                isSendReviewError={false}
+                isSendReviewSuccess={false}
+              />
+            </Router>
           </Provider>
       )
       .toJSON();

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Header from "../header/header";
 import PlayBtn from "../play-btn/play-btn";
 import {getImgBgStyle} from "../../utils";
+import MyListBtn from "../my-list-btn/my-list-btn";
 
 const MainMovieCard = (props) => {
   const {promoMovieData} = props;
@@ -19,7 +20,9 @@ const MainMovieCard = (props) => {
 
       <h1 className="visually-hidden">WTW</h1>
 
-      <Header/>
+      <Header
+        movie={promoMovieData}
+      />
 
       <div className="movie-card__wrap">
         <div className="movie-card__info">
@@ -41,12 +44,7 @@ const MainMovieCard = (props) => {
 
             <div className="movie-card__buttons">
               <PlayBtn movieData={promoMovieData}/>
-              <button className="btn btn--list movie-card__button" type="button">
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"/>
-                </svg>
-                <span>My list</span>
-              </button>
+              <MyListBtn movie={promoMovieData}/>
             </div>
           </div>
         </div>

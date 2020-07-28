@@ -1,19 +1,18 @@
 import React from "react";
+import {Router} from "react-router-dom";
 import renderer from "react-test-renderer";
 import Header from "./header";
 import NameSpace from "../../reducer/name-space";
-import {AuthorizationStatus, ScreenType} from "../../const";
+import {AuthorizationStatus} from "../../const";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
+import history from "../../history";
 
 const mockStore = configureStore([]);
 
 describe(`Header component`, () => {
   it(`Render Header`, () => {
     const store = mockStore({
-      [NameSpace.SCREEN]: {
-        screen: ScreenType.MAIN,
-      },
       [NameSpace.USER]: {
         authorizationStatus: AuthorizationStatus.NO_AUTH,
         user: {
@@ -28,7 +27,11 @@ describe(`Header component`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
-            <Header/>
+            <Router
+              history={history}
+            >
+              <Header/>
+            </Router>
           </Provider>)
       .toJSON();
 

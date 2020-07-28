@@ -1,19 +1,17 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import {Provider} from 'react-redux';
-import configureStore from 'redux-mock-store';
-import NameSpace from '../../reducer/name-space.js';
-import SighIn from './sign-in';
-import {ScreenType} from "../../const";
+import React from "react";
+import {Router} from "react-router-dom";
+import renderer from "react-test-renderer";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
+import SighIn from "./sign-in";
+import history from "../../history";
 
 const mockStore = configureStore([]);
 
 describe(`SignIn component`, () => {
   it(`Render, no error authorization`, () => {
     const store = mockStore({
-      [NameSpace.SCREEN]: {
-        screen: `/sign-in`,
-      },
       [NameSpace.USER]: {
         authorizationStatus: `NO_AUTH`,
         authorizationError: false,
@@ -22,7 +20,11 @@ describe(`SignIn component`, () => {
 
     const tree = renderer.create(
         <Provider store={store}>
-          <SighIn />
+          <Router
+            history={history}
+          >
+            <SighIn />
+          </Router>
         </Provider>, {
           createNodeMock: () => {
             return {};
@@ -35,9 +37,6 @@ describe(`SignIn component`, () => {
 
   it(`Render, is error authorization`, () => {
     const store = mockStore({
-      [NameSpace.SCREEN]: {
-        screen: ScreenType.SIGN_IN,
-      },
       [NameSpace.USER]: {
         authorizationStatus: `NO_AUTH`,
         authorizationError: true,
@@ -46,7 +45,11 @@ describe(`SignIn component`, () => {
 
     const tree = renderer.create(
         <Provider store={store}>
-          <SighIn />
+          <Router
+            history={history}
+          >
+            <SighIn />
+          </Router>
         </Provider>, {
           createNodeMock: () => {
             return {};

@@ -8,16 +8,16 @@ import thunk from "redux-thunk";
 import {createAPI} from "./api";
 import reducer from "./reducer/reducer";
 import {Operation as DataOperation} from "./reducer/data/data";
-import {
-  ActionCreator as UserActionCreator,
-  Operation as UserOperation,
-} from "./reducer/user/user";
-import {AuthorizationStatus} from "./const";
+import {ActionCreator as UserActionCreator} from "./reducer/user/user";
+import {AppRoute, AuthorizationStatus} from "./const";
+import history from "./history";
+import ShowError from "./components/show-error/show-error";
 
 const rootElement = document.querySelector(`#root`);
 
 const onUnauthorized = () => {
   store.dispatch(UserActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+  history.push(AppRoute.SIGN_IN);
 };
 
 const api = createAPI(onUnauthorized);
@@ -42,10 +42,7 @@ const initApp = () => {
 
 const showError = (err) => {
   ReactDOM.render(
-      <div>
-        <p><b>Произошла ошибка.</b> Попробуйте обновить страницу...</p>
-        <p><b>Текст ошибки:</b> {err.toString().replace(`Error: `, ``)}</p>
-      </div>,
+      <ShowError errorMessage={err}/>,
       rootElement
   );
 };
@@ -53,7 +50,7 @@ const showError = (err) => {
 const asyncOperations = [
   store.dispatch(DataOperation.loadPromoMovie()),
   store.dispatch(DataOperation.loadMovies()),
-  store.dispatch(UserOperation.checkAuth())
+  store.dispatch(DataOperation.loadFavoriteMovies()),
 ];
 
 Promise.all(asyncOperations).then(() => {
