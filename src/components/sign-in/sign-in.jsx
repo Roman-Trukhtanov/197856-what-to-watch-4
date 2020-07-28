@@ -2,10 +2,12 @@ import React, {PureComponent, Fragment, createRef} from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+
+import {AppRoute} from "../../const";
 import {getAuthError} from "../../reducer/user/selector.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
+
 import Footer from "../footer/footer";
-import {AppRoute} from "../../const";
 
 class SignIn extends PureComponent {
   constructor(props) {

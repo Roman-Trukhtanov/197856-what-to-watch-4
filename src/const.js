@@ -21,8 +21,6 @@ export const RATING_MULTIPLIER = 2;
 
 export const DEFAULT_BG_COLOR = `#250505`;
 
-export const DEFAULT_VIDEO_TYPE = `video/mp4`;
-
 export const ScreenType = {
   FILMS: `films`,
   PLAYER: `player`,
@@ -73,11 +71,12 @@ export const monthsNames = [
   `December`,
 ];
 
+export const DEFAULT_VIDEO_TYPE = `video/mp4`;
+
 export const VideoType = {
   MP4: `video/mp4`,
   WEBM: `video/webm`,
 };
-
 
 export const ReviewTextLimit = {
   MIN: 50,

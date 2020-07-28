@@ -1,16 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from "./components/app/app";
+import React from "react";
+import ReactDOM from "react-dom";
 import {createStore, applyMiddleware} from "redux";
-import {composeWithDevTools} from "redux-devtools-extension";
 import {Provider} from "react-redux";
+import {composeWithDevTools} from "redux-devtools-extension";
 import thunk from "redux-thunk";
+
 import {createAPI} from "./api";
+import {AppRoute, AuthorizationStatus} from "./const";
 import reducer from "./reducer/reducer";
 import {Operation as DataOperation} from "./reducer/data/data";
 import {ActionCreator as UserActionCreator} from "./reducer/user/user";
-import {AppRoute, AuthorizationStatus} from "./const";
+
 import history from "./history";
+import App from "./components/app/app";
 import ShowError from "./components/show-error/show-error";
 
 const rootElement = document.querySelector(`#root`);

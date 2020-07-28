@@ -1,29 +1,38 @@
 import React, {PureComponent} from "react";
-import {Router, Switch, Route, Redirect} from "react-router-dom";
+import {Router, Switch, Route} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import Main from "../main/main";
-import MovieScreen from "../movie-screen/movie-screen";
-import {AppRoute, PAGE_NOT_FOUND_TEXT, ScreenType} from "../../const";
-import FullVideoPlayer from "../full-video-player/full-video-player";
-import withVideo from "../../hocs/with-video/with-video";
+
+import {
+  AppRoute,
+  PAGE_NOT_FOUND_TEXT,
+  ScreenType,
+  AuthorizationStatus,
+} from "../../const";
+
 import {getFavoriteMovies, getMovies, getPromoMovie} from "../../reducer/data/selectors";
+import {getAuthStatus} from "../../reducer/user/selector";
 import {
   getFilteredMovies,
   getMovieCollectionNumber,
   getGenresList, getSelectedMovieID, getRandomMovies,
 } from "../../reducer/app-state/selectors";
+
 import {ActionCreator as AppStateActionCreator} from "../../reducer/app-state/app-state";
 import {Operation as DataOperation} from "../../reducer/data/data";
-import SignIn from "../sign-in/sign-in";
-import {AuthorizationStatus} from "../../const";
-import {getAuthStatus} from "../../reducer/user/selector";
-import AddReview from "../add-review/add-review";
-import withReview from "../../hocs/with-review/with-review";
 import history from "../../history";
+
+import withReview from "../../hocs/with-review/with-review";
+import withVideo from "../../hocs/with-video/with-video";
+
 import PrivateRoute from "../private-route/private-route";
-import ShowError from "../show-error/show-error";
+import Main from "../main/main";
+import MovieScreen from "../movie-screen/movie-screen";
+import FullVideoPlayer from "../full-video-player/full-video-player";
+import AddReview from "../add-review/add-review";
+import SignIn from "../sign-in/sign-in";
 import MyList from "../my-list/my-list";
+import ShowError from "../show-error/show-error";
 
 const FullVideoPlayerWrapped = withVideo(FullVideoPlayer);
 
@@ -152,12 +161,7 @@ class App extends PureComponent {
     const {
       favoriteMovies,
       onMovieCardTitleClick,
-      authorizationStatus,
     } = this.props;
-
-    if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
-      return <Redirect to={AppRoute.SIGN_IN} />;
-    }
 
     return (
       <MyList
@@ -179,9 +183,7 @@ class App extends PureComponent {
           <Route exact path={AppRoute.PLAYER} render={this._renderFullVideoPlayer}/>
           <PrivateRoute exact path={AppRoute.REVIEW} render={this._renderAddReviewScreen}/>
           <Route exact path={AppRoute.SIGN_IN} render={this._renderSignInScreen}/>
-
-          {/* TODO: В следующем модуле заменить на PrivateRoute */}
-          <Route exact path={AppRoute.MY_LIST} render={this._renderMyListScreen}/>
+          <PrivateRoute exact path={AppRoute.MY_LIST} render={this._renderMyListScreen}/>
           <Route render={this._renderErrorScreen}/>
         </Switch>
       </Router>
