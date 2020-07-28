@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import Header from "../header/header";
 import Footer from "../footer/footer";
-import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
 import MovieList from "../movie-list/movie-list";
+import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
 
 const MovieListWrapped = withVideoPlayer(MovieList);
 

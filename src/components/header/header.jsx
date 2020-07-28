@@ -1,10 +1,9 @@
 import React, {Fragment} from "react";
 import {Link} from "react-router-dom";
-import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {AuthorizationStatus} from "../../const.js";
+import PropTypes from "prop-types";
+import {AppRoute, ScreenType, AuthorizationStatus} from "../../const";
 import {getAuthStatus, getUserData} from "../../reducer/user/selector.js";
-import {AppRoute, ScreenType} from "../../const";
 import history from "../../history";
 
 const Header = (props) => {

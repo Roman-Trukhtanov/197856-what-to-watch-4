@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ReviewItem from "../review-item/review-item";
 import {connect} from "react-redux";
+import ReviewItem from "../review-item/review-item";
 import {getMovieComments} from "../../reducer/data/selectors";
 
 const ReviewsTab = (props) => {

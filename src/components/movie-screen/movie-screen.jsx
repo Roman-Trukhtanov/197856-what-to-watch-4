@@ -1,16 +1,19 @@
 import React, {Fragment} from "react";
 import PropTypes from "prop-types";
+
 import Tabs from "../tabs/tabs";
-import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
 import MovieList from "../movie-list/movie-list";
-import withActiveItem from "../../hocs/with-active-item/with-active-item";
 import Header from "../header/header";
 import Footer from "../footer/footer";
-import {AuthorizationStatus, TabType} from "../../const";
 import PlayBtn from "../play-btn/play-btn";
-import {getImgBgStyle} from "../../utils";
 import AddReviewBtn from "../add-review-btn/add-review-btn";
 import MyListBtn from "../my-list-btn/my-list-btn";
+
+import withActiveItem from "../../hocs/with-active-item/with-active-item";
+import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
+
+import {AuthorizationStatus, TabType} from "../../const";
+import {getImgBgStyle} from "../../utils";
 
 const MovieListWrapped = withVideoPlayer(MovieList);
 const TabsWrapped = withActiveItem(Tabs);

@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import Header from "../header/header";
 import PlayBtn from "../play-btn/play-btn";
-import {getImgBgStyle} from "../../utils";
 import MyListBtn from "../my-list-btn/my-list-btn";
+import {getImgBgStyle} from "../../utils";
 
 const MainMovieCard = (props) => {
   const {promoMovieData} = props;
