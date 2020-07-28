@@ -9,9 +9,12 @@ import {ActionCreator as ScreenActionCreator} from "../../reducer/screen/screen"
 const Header = (props) => {
   const {
     authorizationStatus,
+    movie,
     screen,
-    onSignInClick,
     user,
+    onSignInClick,
+    onBreadcrumbsClick,
+    onMainLogoClick,
   } = props;
 
   const getUserItem = () => (
@@ -33,20 +36,44 @@ const Header = (props) => {
     </div>
   );
 
+  const getBreadCrumbs = () => (
+    <nav className="breadcrumbs">
+      <ul className="breadcrumbs__list">
+        <li className="breadcrumbs__item">
+          <a href="#" className="breadcrumbs__link" onClick={(evt) => {
+            evt.preventDefault();
+            onBreadcrumbsClick();
+          }}>{movie.title}</a>
+        </li>
+        <li className="breadcrumbs__item">
+          <a className="breadcrumbs__link">Add review</a>
+        </li>
+      </ul>
+    </nav>
+  );
+
   const linkOnMain = screen !== ScreenType.MAIN ? `/` : null;
 
   const isSignIn = authorizationStatus === AuthorizationStatus.AUTH ?
     getUserItem() : getSignInItem();
 
+  const isReview = screen === ScreenType.ADD_REVIEW ? getBreadCrumbs(movie) : null;
+
   return (
     <header className="page-header movie-card__head">
       <div className="logo">
-        <a href={linkOnMain} className="logo__link">
+        <a href={linkOnMain} className="logo__link" onClick={(evt) => {
+          evt.preventDefault();
+
+          onMainLogoClick();
+        }}>
           <span className="logo__letter logo__letter--1">W</span>
           <span className="logo__letter logo__letter--2">T</span>
           <span className="logo__letter logo__letter--3">W</span>
         </a>
       </div>
+
+      {isReview}
 
       {isSignIn}
     </header>
@@ -54,15 +81,20 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
+  movie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+  }),
   authorizationStatus: PropTypes.string.isRequired,
   screen: PropTypes.string.isRequired,
-  onSignInClick: PropTypes.func.isRequired,
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     avatarSrc: PropTypes.string.isRequired,
   }),
+  onSignInClick: PropTypes.func.isRequired,
+  onBreadcrumbsClick: PropTypes.func.isRequired,
+  onMainLogoClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -74,6 +106,12 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onSignInClick() {
     dispatch(ScreenActionCreator.changeScreen(ScreenType.SIGN_IN));
+  },
+  onMainLogoClick() {
+    dispatch(ScreenActionCreator.changeScreen(ScreenType.MAIN));
+  },
+  onBreadcrumbsClick() {
+    dispatch(ScreenActionCreator.changeScreen(ScreenType.MOVIE));
   }
 });
 

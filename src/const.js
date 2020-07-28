@@ -13,6 +13,12 @@ export const DEFAULT_COLLECTION_NUMBER = 1;
 export const MINUTES_IN_HOUR = 60;
 export const SECONDS_IN_MINUTE = 60;
 
+export const REVIEW_STARS_AMOUNT = 5;
+
+export const DEFAULT_RATING = 3;
+
+export const RATING_MULTIPLIER = 2;
+
 export const DEFAULT_BG_COLOR = `#250505`;
 
 export const DEFAULT_VIDEO_TYPE = `video/mp4`;
@@ -22,6 +28,7 @@ export const ScreenType = {
   MOVIE: `movie`,
   PLAYER: `player`,
   SIGN_IN: `sign-in`,
+  ADD_REVIEW: `add-review`,
 };
 
 export const AuthorizationStatus = {
@@ -55,4 +62,15 @@ export const monthsNames = [
 export const VideoType = {
   MP4: `video/mp4`,
   WEBM: `video/webm`,
+};
+
+
+export const ReviewTextLimit = {
+  MIN: 50,
+  MAX: 400,
+};
+
+export const ReviewMessage = {
+  SUCCESS: `Your comment has been posted successfully`,
+  ERROR: `An error occurred while posting a comment, please try again ...`,
 };
