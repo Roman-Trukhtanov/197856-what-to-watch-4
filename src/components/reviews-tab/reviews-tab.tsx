@@ -5,6 +5,7 @@ import {getMovieComments} from "../../reducer/data/selectors";
 import {NO_REVIEWS_TEXT} from "../../const";
 import {Comment} from "../../types";
 import {RootState} from "../../reducer/reducer";
+import {checkEven, checkOdd} from "../../utils";
 
 interface Props {
   movieComments: Comment[];
@@ -23,7 +24,7 @@ const ReviewsTab: React.FunctionComponent<Props> = (props: Props) => {
   const getReviewEvenCol = (comments: Comment[]): React.ReactNode => (
     <div className="movie-card__reviews-col">
       {comments.map((comment, index) => {
-        if (index % 2 !== 0 || !comment.id) {
+        if (checkOdd(index) || !comment.id) {
           return null;
         }
 
@@ -35,7 +36,7 @@ const ReviewsTab: React.FunctionComponent<Props> = (props: Props) => {
   const getReviewOddCol = (comments: Comment[]): React.ReactNode => (
     <div className="movie-card__reviews-col">
       {comments.map((comment, index) => {
-        if (index % 2 === 0 || !comment.id) {
+        if (checkEven(index) || !comment.id) {
           return null;
         }
 

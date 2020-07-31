@@ -75,3 +75,11 @@ export const shuffleMovies = (Movies: Movie[]): Movie[] => {
 export const reloadPage = (): void => {
   window.location.reload();
 };
+
+export const checkEven = (value: number): boolean => {
+  return value % 2 === 0;
+};
+
+export const checkOdd = (value: number): boolean => {
+  return value % 2 !== 0;
+};
