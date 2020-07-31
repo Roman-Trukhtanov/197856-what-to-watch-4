@@ -26,7 +26,7 @@ class SignIn extends PureComponent<Props, {}> {
     this._emailRef = createRef();
     this._passwordRef = createRef();
 
-    this._authSubmit = this._authSubmit.bind(this);
+    this._handleAuthSubmit = this._handleAuthSubmit.bind(this);
   }
 
   _getInvalidMessage(): React.ReactNode {
@@ -37,7 +37,7 @@ class SignIn extends PureComponent<Props, {}> {
     );
   }
 
-  _authSubmit(evt): void {
+  _handleAuthSubmit(evt): void {
     const {onAuthSubmit} = this.props;
 
     evt.preventDefault();
@@ -79,7 +79,7 @@ class SignIn extends PureComponent<Props, {}> {
 
           <div className="sign-in user-page__content">
             <form action="#" className="sign-in__form"
-              onSubmit={this._authSubmit}
+              onSubmit={this._handleAuthSubmit}
             >
               {isInvalidMessage}
 
