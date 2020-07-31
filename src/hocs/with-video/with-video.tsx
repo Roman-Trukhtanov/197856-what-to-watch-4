@@ -113,19 +113,6 @@ const withVideo = (Component) => {
       });
     }
 
-    _setTimeElapsed() {
-      const currentVideo = this._videoRef.current;
-
-      const duration = currentVideo.duration;
-      const currentTimeValue = currentVideo.currentTime;
-      const percentProgress = +(currentTimeValue * 100 / duration).toFixed(2);
-
-      this.setState({
-        timeElapsed: Math.floor(duration - currentTimeValue),
-        percentProgress,
-      });
-    }
-
     _handlePlayBtnClick() {
       if (document.fullscreenElement) {
         return;
@@ -146,6 +133,19 @@ const withVideo = (Component) => {
       const video = this._videoRef.current;
 
       video.controls = !!document.fullscreenElement;
+    }
+
+    _setTimeElapsed() {
+      const currentVideo = this._videoRef.current;
+
+      const duration = currentVideo.duration;
+      const currentTimeValue = currentVideo.currentTime;
+      const percentProgress = +(currentTimeValue * 100 / duration).toFixed(2);
+
+      this.setState({
+        timeElapsed: Math.floor(duration - currentTimeValue),
+        percentProgress,
+      });
     }
 
     _setFullScreen() {
