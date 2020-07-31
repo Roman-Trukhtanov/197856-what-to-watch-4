@@ -1,7 +1,8 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {connect} from "react-redux";
 import ReviewItem from "../review-item/review-item";
 import {getMovieComments} from "../../reducer/data/selectors";
+import {NO_REVIEWS_TEXT} from "../../const";
 import {Comment} from "../../types";
 import {RootState} from "../../reducer/reducer";
 
@@ -19,27 +20,48 @@ const ReviewsTab: React.FunctionComponent<Props> = (props: Props) => {
     />
   );
 
+  const getReviewEvenCol = (comments: Comment[]): React.ReactNode => (
+    <div className="movie-card__reviews-col">
+      {comments.map((comment, index) => {
+        if (index % 2 !== 0 || !comment.id) {
+          return null;
+        }
+
+        return getReviewItem(comment, index);
+      })}
+    </div>
+  );
+
+  const getReviewOddCol = (comments: Comment[]): React.ReactNode => (
+    <div className="movie-card__reviews-col">
+      {comments.map((comment, index) => {
+        if (index % 2 === 0 || !comment.id) {
+          return null;
+        }
+
+        return getReviewItem(comment, index);
+      })}
+    </div>
+  );
+
+  const getMovieCommentsList = (comments: Comment[]): React.ReactNode => {
+    if (!comments.length) {
+      return (
+        <p className="movie-card__text">{NO_REVIEWS_TEXT}</p>
+      );
+    }
+
+    return (
+      <Fragment>
+        {getReviewEvenCol(comments)}
+        {getReviewOddCol(comments)}
+      </Fragment>
+    );
+  };
+
   return (
     <div className="movie-card__reviews movie-card__row">
-      <div className="movie-card__reviews-col">
-        {movieComments.map((comment, index) => {
-          if (index % 2 !== 0 || !comment.id) {
-            return null;
-          }
-
-          return getReviewItem(comment, index);
-        })}
-      </div>
-
-      <div className="movie-card__reviews-col">
-        {movieComments.map((comment, index) => {
-          if (index % 2 === 0 || !comment.id) {
-            return null;
-          }
-
-          return getReviewItem(comment, index);
-        })}
-      </div>
+      {getMovieCommentsList(movieComments)}
     </div>
   );
 };

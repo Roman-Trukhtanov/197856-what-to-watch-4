@@ -88,3 +88,5 @@ export enum ReviewMessage {
 }
 
 export const PAGE_NOT_FOUND_TEXT = `404: Page not found...`;
+
+export const NO_REVIEWS_TEXT = `There are no reviews for this film yet...`;
