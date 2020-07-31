@@ -61,6 +61,51 @@ const withVideo = (Component) => {
       this._setFullScreen = this._setFullScreen.bind(this);
     }
 
+    componentDidMount() {
+      const {isStartPlaying, videoData} = this.props;
+      const {isMute, isAutoPlay} = videoData;
+
+      const video = this._videoRef.current;
+
+      video.muted = isMute || false;
+
+      video.addEventListener(`play`, this._handlePlay);
+      video.addEventListener(`pause`, this._handlePause);
+      video.addEventListener(`timeupdate`, this._handleTimeUpdate);
+
+      if (isStartPlaying) {
+        video.play();
+
+        return;
+      }
+
+      if (isAutoPlay) {
+        this._timeout = setTimeout(() => {
+          video.play();
+        }, this.START_TIMEOUT);
+      }
+    }
+
+    componentWillUnmount() {
+      const video = this._videoRef.current;
+
+      video.removeEventListener(`play`, this._handlePlay);
+      video.removeEventListener(`pause`, this._handlePause);
+      video.removeEventListener(`timeupdate`, this._handleTimeUpdate);
+
+      clearTimeout(this._timeout);
+    }
+
+    componentDidUpdate() {
+      const video = this._videoRef.current;
+
+      if (this.state.isPlaying) {
+        video.play();
+      } else {
+        video.pause();
+      }
+    }
+
     _handlePlay() {
       this.setState({
         isPlaying: true,
@@ -108,51 +153,6 @@ const withVideo = (Component) => {
         height: `100%`,
         objectFit: `cover`,
       };
-    }
-
-    componentDidMount() {
-      const {isStartPlaying, videoData} = this.props;
-      const {isMute, isAutoPlay} = videoData;
-
-      const video = this._videoRef.current;
-
-      video.muted = isMute || false;
-
-      video.addEventListener(`play`, this._handlePlay);
-      video.addEventListener(`pause`, this._handlePause);
-      video.addEventListener(`timeupdate`, this._handleTimeUpdate);
-
-      if (isStartPlaying) {
-        video.play();
-
-        return;
-      }
-
-      if (isAutoPlay) {
-        this._timeout = setTimeout(() => {
-          video.play();
-        }, this.START_TIMEOUT);
-      }
-    }
-
-    componentWillUnmount() {
-      const video = this._videoRef.current;
-
-      video.removeEventListener(`play`, this._handlePlay);
-      video.removeEventListener(`pause`, this._handlePause);
-      video.removeEventListener(`timeupdate`, this._handleTimeUpdate);
-
-      clearTimeout(this._timeout);
-    }
-
-    componentDidUpdate() {
-      const video = this._videoRef.current;
-
-      if (this.state.isPlaying) {
-        video.play();
-      } else {
-        video.pause();
-      }
     }
 
     render() {
