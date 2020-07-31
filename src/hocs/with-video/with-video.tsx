@@ -58,7 +58,9 @@ const withVideo = (Component) => {
       this._handlePause = this._handlePause.bind(this);
       this._handlePlayBtnClick = this._handlePlayBtnClick.bind(this);
       this._handleTimeUpdate = this._handleTimeUpdate.bind(this);
+      this._handleFullScreen = this._handleFullScreen.bind(this);
       this._setFullScreen = this._setFullScreen.bind(this);
+      this._toggleVideoState = this._toggleVideoState.bind(this);
     }
 
     componentDidMount() {
@@ -68,10 +70,12 @@ const withVideo = (Component) => {
       const video = this._videoRef.current;
 
       video.muted = isMute || false;
+      video.controls = false;
 
       video.addEventListener(`play`, this._handlePlay);
       video.addEventListener(`pause`, this._handlePause);
       video.addEventListener(`timeupdate`, this._handleTimeUpdate);
+      video.addEventListener(`fullscreenchange`, this._handleFullScreen);
 
       if (isStartPlaying) {
         video.play();
@@ -92,18 +96,9 @@ const withVideo = (Component) => {
       video.removeEventListener(`play`, this._handlePlay);
       video.removeEventListener(`pause`, this._handlePause);
       video.removeEventListener(`timeupdate`, this._handleTimeUpdate);
+      video.removeEventListener(`fullscreenchange`, this._handleFullScreen);
 
       clearTimeout(this._timeout);
-    }
-
-    componentDidUpdate() {
-      const video = this._videoRef.current;
-
-      if (this.state.isPlaying) {
-        video.play();
-      } else {
-        video.pause();
-      }
     }
 
     _handlePlay() {
@@ -132,6 +127,12 @@ const withVideo = (Component) => {
     }
 
     _handlePlayBtnClick() {
+      if (document.fullscreenElement) {
+        return;
+      }
+
+      this._toggleVideoState();
+
       this.setState((prevState) => ({
         isPlaying: !prevState.isPlaying,
       }));
@@ -141,10 +142,27 @@ const withVideo = (Component) => {
       this._setTimeElapsed();
     }
 
+    _handleFullScreen() {
+      const video = this._videoRef.current;
+
+      video.controls = !!document.fullscreenElement;
+    }
+
     _setFullScreen() {
       const video = this._videoRef.current;
 
       video.requestFullscreen();
+    }
+
+    _toggleVideoState() {
+      const video = this._videoRef.current;
+      const {isPlaying} = this.state;
+
+      if (isPlaying) {
+        video.pause();
+      } else {
+        video.play();
+      }
     }
 
     _getVideoStyles(): CSSProperties {
