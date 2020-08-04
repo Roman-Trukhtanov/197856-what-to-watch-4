@@ -35,7 +35,7 @@ const withReview = (Component) => {
       this._handleReviewInput = this._handleReviewInput.bind(this);
     }
 
-    _checkFormValid(rating, comment) {
+    _checkFormValid(rating: number, comment: string) {
       const isValidReview = !!(
         rating &&
         comment.length >= ReviewTextLimit.MIN &&

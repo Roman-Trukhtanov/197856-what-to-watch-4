@@ -36,7 +36,7 @@ const withVideoPlayer = (Component) => {
       this._renderVideo = this._renderVideo.bind(this);
     }
 
-    _changeActivePlayer(id) {
+    _changeActivePlayer(id: number) {
       const {activePlayerId} = this.state;
 
       this.setState({
@@ -44,7 +44,7 @@ const withVideoPlayer = (Component) => {
       });
     }
 
-    _renderVideo(movie, videoData) {
+    _renderVideo(movie: Movie, videoData: PreviewVideo | FullVideo) {
       const {previewImgSrc} = movie;
 
       return (
@@ -56,7 +56,7 @@ const withVideoPlayer = (Component) => {
       );
     }
 
-    _handleMovieMouseEnter(movie) {
+    _handleMovieMouseEnter(movie: Movie) {
       this._changeActivePlayer(movie.id);
     }
 
