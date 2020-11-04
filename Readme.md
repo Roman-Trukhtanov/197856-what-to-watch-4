@@ -1,4 +1,4 @@
-# React-проект «Что посмотреть» [![Build status][travis-image]][travis-url]
+# React-проект «Что посмотреть»
 
 * `start` — основная задача, запускает проект.
 * `build` — сборка проекта в режиме production
