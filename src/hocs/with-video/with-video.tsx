@@ -36,7 +36,7 @@ const withVideo = (Component) => {
   type T = Props & Subtract<P, InjectingProps>;
 
   class WithVideo extends PureComponent<T, State> {
-    public _videoRef: RefObject<HTMLVideoElement>;
+    private _videoRef: RefObject<HTMLVideoElement>;
     private START_TIMEOUT: number;
     private _timeout: ReturnType<typeof setTimeout>;
 
