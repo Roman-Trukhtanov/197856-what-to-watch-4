@@ -3,7 +3,7 @@ import {Noop} from "./types";
 
 const REQUEST_TIMEOUT: number = 1000 * 5;
 
-const ENTRY_POINT = `https://4.react.pages.academy/wtw`;
+const ENTRY_POINT = `https://5.react.pages.academy/wtw`;
 
 enum RequestCodes {
   UNAUTHORIZED = 401,
