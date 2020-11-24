@@ -1,4 +1,4 @@
-# React-проект «Что посмотреть»
+# React-project «WTW»
 
 * `start` — main task, start the project.
 * `build` — build the project in production mode
