@@ -1,6 +1,6 @@
 # React-проект «Что посмотреть»
 
-* `start` — основная задача, запускает проект.
-* `build` — сборка проекта в режиме production
-* `jest` — запускает все тесты и eslint
-* `eslint.ts` — запускает проверку ts/tsx-файлов
+* `start` — main task, start the project.
+* `build` — build the project in production mode
+* `jest` — run all tests and eslint
+* `eslint.ts` — check ts/tsx files
